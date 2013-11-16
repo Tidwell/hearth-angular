@@ -3,19 +3,29 @@ hearth-angular
 
 Requires:
   Node / NPM
-  Git
+  Yeoman
 
-By default, running:
+To install:
+  clone the repository
+  npm install
+
+To run:
   node app
 
-In the project directory will include the ./configs/local.js config
+**CLI Arguments**
 
-Passing --env (or -e) will all you to specify a specific config to load.
+--env (or -e) - config file to load.
 
-Config options include:
+Example:
+```bash
+  node app --env 'prod.js' //run with the config from ./app/config/prod.js
+```
+
+Config files in configs/ should contain:
+
 ```javascript
 module.exports = {
-	env: 'string-identifier',
+	env: 'local', // string-identifier for use in custom code
 	staticDirectory: './app' // ./dist in stage/production
 }
 ```
