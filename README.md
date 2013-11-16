@@ -21,7 +21,7 @@ Example:
   node app --env='prod.js' //run with the config from ./app/config/prod.js
 ```
 
-Config files in configs/ should contain:
+Config files in config/ should contain:
 
 ```javascript
 module.exports = {
