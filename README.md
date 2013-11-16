@@ -8,11 +8,11 @@ Requires
   * Yeoman
 
 Install:
-  Clone the repository
-  npm install in repository directory
+  * Clone the repository
+  * ```bash npm install``` in repository directory
 
 Run:
-  node app
+  ```bash node app```
 
 #CLI Arguments
 
