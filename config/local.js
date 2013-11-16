@@ -1,4 +1,5 @@
 module.exports = {
 	env: 'prod',
-	staticDirectory: './app'
-}
+	staticDirectory: './app',
+	port: 8081
+};

@@ -9,7 +9,7 @@ args.forEach(function(arg) {
 	switch (parts[0]) {
 	case '-e':
 	case '-env':
-		env = require('./config/' + parts[1]);
+		env = require('./config/' + parts[1] + '.js');
 		break;
 	}
 });
@@ -24,4 +24,4 @@ require('http').createServer(function(request, response) {
 		// Serve files
 		fileServer.serve(request, response);
 	}).resume();
-}).listen(8080);
+}).listen(env.port);

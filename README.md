@@ -17,19 +17,23 @@ Build:
 Run:
   * ```node app``` in ./
 
+View:
+	```http://localhost:8080```
+
 ##CLI Arguments
 
 **--env (-e)**
   config file to load.
   ```
-    node app --env='prod.js' //run with the config from ./app/config/prod.js
+    node app --env=prod //run with the config from ./app/config/prod.js
   ```
 
-##Config format in ./config/ contains:
+##Config files in ./config/ contains:
 
 ```javascript
 module.exports = {
 	env: 'local', // string-identifier for use in custom code
-	staticDirectory: './app' // ./dist in stage/production
+	staticDirectory: './app', // ./dist in stage/production
+	port: 8080
 }
 ```
