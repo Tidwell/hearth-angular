@@ -1,6 +1,6 @@
 'use strict';
 
-var staticDirectory = './dist';
+var staticDirectory = './app';
 
 var nStatic = require('node-static'); //require
 var fileServer = new nStatic.Server(staticDirectory); //create
