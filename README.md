@@ -9,10 +9,10 @@ Requires
 
 Install:
   * Clone the repository
-  * ```bash npm install``` in repository directory
+  * ```npm install``` in repository directory
 
 Run:
-  ```bash node app```
+  ```node app``` in repository directory
 
 #CLI Arguments
 
