@@ -14,7 +14,7 @@ To run:
 
 **CLI Arguments**
 
---env (or -e) - config file to load.
+*--env (-e)* - config file to load.
 
 Example:
 ```bash
