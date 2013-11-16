@@ -18,7 +18,7 @@ To run:
 
 Example:
 ```bash
-  node app --env 'prod.js' //run with the config from ./app/config/prod.js
+  node app --env='prod.js' //run with the config from ./app/config/prod.js
 ```
 
 Config files in configs/ should contain:
