@@ -2,18 +2,17 @@
 
 angular.module('hearthApp')
 	.service('cards', function cards($http) {
-		var cards = {
+		var cardList = {
 			cards: []
 		};
 
 		return {
 			get: function() {
-				console.log('call')
 				$http.get('/cards.json')
 					.success(function(data) {
-						cards.cards = data;
+						cardList.cards = data;
 					});
-				return cards;
+				return cardList;
 			}
 		};
 	});

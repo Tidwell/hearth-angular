@@ -1,9 +1,10 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="row-fluid">
+	<form class="form-inline" role="form">
+		<div class="form-group">
+			<label class="sr-only" for="card-size">Card Size</label>
+			<input type="range" id="card-size" ng-model="cardWidth" min="50" max="300">
+	</div></form>
+</div>
+<div class="row-fluid">
+	<img ng-repeat="card in cardList.cards" ng-src="{{card.image}}" width="{{cardWidth}}">
 </div>
