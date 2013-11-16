@@ -15,11 +15,12 @@ Build:
   * ```grunt build``` in ./
 
 Run:
-  ```node app``` in ./
+  * ```node app``` in ./
 
-#CLI Arguments
+##CLI Arguments
 
 **--env (-e)**
+
 config file to load.
 
  Example:
