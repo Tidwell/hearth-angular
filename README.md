@@ -1,6 +1,8 @@
 hearth-angular
 ==============
 
+A very basic angular application for getting/displaying hearthstone card data/images.  Node server with multiple configs.  Starting point for hearthstone sites built with Yeoman/angular.
+
 Requires
   * Node / NPM
   * Yeoman
@@ -22,7 +24,7 @@ config file to load.
   node app --env='prod.js' //run with the config from ./app/config/prod.js
 ```
 
-#Config files in config/ should contain:
+#Config format in ./config/ contains:
 
 ```javascript
 module.exports = {
