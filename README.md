@@ -9,10 +9,13 @@ Requires
 
 Install:
   * Clone the repository
-  * ```npm install``` in repository directory
+  * ```npm install``` in ./
+
+Build:
+  * ```grunt build``` in ./
 
 Run:
-  ```node app``` in repository directory
+  ```node app``` in ./
 
 #CLI Arguments
 
