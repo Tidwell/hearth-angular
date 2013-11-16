@@ -16,6 +16,6 @@ Config options include:
 ```javascript
 module.exports = {
 	env: 'string-identifier',
-	staticDirectory: './directory/to/grunt/built/files/'
+	staticDirectory: './app' // ./dist in stage/production
 }
 ```
