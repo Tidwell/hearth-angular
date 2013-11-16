@@ -20,8 +20,7 @@ Run:
 ##CLI Arguments
 
 **--env (-e)**
-
-config file to load.
+ * config file to load.
 
  Example:
 ```bash
