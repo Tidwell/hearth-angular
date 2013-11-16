@@ -20,7 +20,7 @@ Run:
 ##CLI Arguments
 
 **--env (-e)**
-  * config file to load.
+  config file to load.
   ```
     node app --env='prod.js' //run with the config from ./app/config/prod.js
   ```
