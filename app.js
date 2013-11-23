@@ -1,6 +1,9 @@
 'use strict';
 
 var env = require('./config/local.js');
+var path = require('path');
+
+var express = require('express');
 
 //process cmd-line args for environment
 var args = process.argv.splice(2);
@@ -14,14 +17,20 @@ args.forEach(function(arg) {
 	}
 });
 
-var nStatic = require('node-static'); //require
-var fileServer = new nStatic.Server(env.staticDirectory); //create
+var app = module.exports = express();
+var server = require('http').createServer(app);
 
-//use native node http and proxy the request and response to
-//the node static instance
-require('http').createServer(function(request, response) {
-	request.addListener('end', function() {
-		// Serve files
-		fileServer.serve(request, response);
-	}).resume();
-}).listen(env.port);
+app.configure(function() {
+	app.use(express.static(path.normalize(__dirname + env.staticDirectory)));
+	app.use(app.router);
+});
+
+function serveIndex(req, res) {
+	res.sendfile(path.normalize(__dirname + env.staticDirectory+'/index.html'));
+}
+
+app.get('/*', serveIndex);
+
+server.listen(env.port, function() {
+	console.log('Express server listening on port '+env.port);
+});

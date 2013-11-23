@@ -1,5 +1,5 @@
 module.exports = {
 	env: 'prod',
-	staticDirectory: './dist',
+	staticDirectory: '/dist',
 	port: 8080,
 };

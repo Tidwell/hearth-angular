@@ -2,7 +2,7 @@
     "name": "hearth",
     "version": "0.0.0",
     "dependencies": {
-        "node-static": "0.7.2"    
+        "express": "3.x"    
     },
     "devDependencies": {
         "grunt": "~0.4.1",

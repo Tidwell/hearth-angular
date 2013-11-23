@@ -3,7 +3,8 @@
 angular.module('hearthApp', [
 	'ngCookies',
 	'ngResource',
-	'ngSanitize'
+	'ngSanitize',
+	'angularLocalStorage'
 ])
 	.config(function($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);
@@ -11,6 +12,10 @@ angular.module('hearthApp', [
 			.when('/', {
 				templateUrl: 'views/main.html',
 				controller: 'MainCtrl'
+			})
+			.when('/owned', {
+				templateUrl: 'views/owned.html',
+				controller: 'OwnedCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'
