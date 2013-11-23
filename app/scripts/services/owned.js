@@ -2,25 +2,25 @@
 
 angular.module('hearthApp')
 	.service('owned', function owned(storage) {
-		var owned = {
+		var ownedCards = {
 			//get from local storage or default to empty object
 			cards: storage.get('cards') || {}
 		};
 
 		//saves to local storage
 		function save() {
-			storage.set('cards', owned.cards);
+			storage.set('cards', ownedCards.cards);
 		}
 
 		//resets to default and saves
 		function clear() {
-			owned.cards = {};
+			ownedCards.cards = {};
 			save();
 		}
 
 		return {
 			get: function() {
-				return owned;
+				return ownedCards;
 			},
 			save: save,
 			clear: clear
