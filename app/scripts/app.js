@@ -17,6 +17,10 @@ angular.module('hearthApp', [
 				templateUrl: 'views/owned.html',
 				controller: 'OwnedCtrl'
 			})
+.when('/links', {
+  templateUrl: 'views/links.html',
+  controller: 'LinksCtrl'
+})
 			.otherwise({
 				redirectTo: '/'
 			});
