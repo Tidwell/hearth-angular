@@ -1,36 +1,25 @@
 'use strict';
 
-var env = require('./config/local.js');
-var path = require('path');
+var server = require('./server/app');
 
-var express = require('express');
+var env = require('./server/config/local');
 
 //process cmd-line args for environment
 var args = process.argv.splice(2);
 args.forEach(function(arg) {
 	var parts = arg.split('=');
 	switch (parts[0]) {
-	case '-e':
-	case '-env':
-		env = require('./config/' + parts[1] + '.js');
-		break;
+		case '-e':
+		case '-env':
+			env = require('./server/config/' + parts[1]);
+			break;
 	}
 });
 
-var app = module.exports = express();
-var server = require('http').createServer(app);
+//sync to read the modules from the filesystem
+var s = server.createServer(env);
 
-app.configure(function() {
-	app.use(express.static(path.normalize(__dirname + env.staticDirectory)));
-	app.use(app.router);
-});
-
-function serveIndex(req, res) {
-	res.sendfile(path.normalize(__dirname + env.staticDirectory+'/index.html'));
-}
-
-app.get('/*', serveIndex);
-
-server.listen(env.port, function() {
-	console.log('Express server listening on port '+env.port);
+s.events.on('server:ready', function() {
+	s.modules.server.log('Server is ready');
+	s.modules.server.log(s);
 });
