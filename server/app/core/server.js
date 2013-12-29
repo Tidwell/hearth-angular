@@ -28,7 +28,7 @@ var Server = exports.Server = function(options, events) {
 
 	events.on('modules:loaded', function(){
 		//tell the other modules to configure the express app
-		events.emit('server:configure', app);
+		events.emit('server:configure', app, httpServer);
 
 		app.configure(function() {
 			app.use(app.router);

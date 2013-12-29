@@ -21,6 +21,10 @@ angular.module('hearthApp', [
   templateUrl: 'views/links.html',
   controller: 'LinksCtrl'
 })
+.when('/tournaments', {
+  templateUrl: 'views/tournaments.html',
+  controller: 'TournamentsCtrl'
+})
 			.otherwise({
 				redirectTo: '/'
 			});

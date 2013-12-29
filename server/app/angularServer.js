@@ -37,16 +37,14 @@ var AngularServer = exports.AngularServer = function(options, events) {
 util.inherits(AngularServer, Module);
 
 /*
-	Serves the admin angular app
+	Serves the angular app
 
 	If its just the uriPath route, redirect to index
 
 	If the file exists, serve it, otherwise serve the index.html
-		DANGER -- assumes single-point of entry and no 404 in admin
+		DANGER -- assumes single-point of entry and no 404
 */
 AngularServer.prototype.serve = function(req,res) {
-
-	console.log('ser')
 	var self = this;
 	var serverOptions = this.options.get('angularServer');
 
@@ -62,7 +60,6 @@ AngularServer.prototype.serve = function(req,res) {
 				root: serverOptions.staticPath
 			});
 		} else {
-			console.log('nope')
 			//otherwise serve the index
 			res.sendfile('index.html', {
 				root: serverOptions.staticPath

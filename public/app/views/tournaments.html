@@ -1,0 +1,49 @@
+<div class="container" ng-show="!loggedIn">
+	<div class="well">
+		<h2>Enter your BattleTag</h2>
+		<form class="form-horizontal">
+			<input type="text" ng-model="userName" />
+			<button class="btn" ng-click="login()">Start!</button>
+		</form>
+		<span class="alert alert-error" ng-show="error">{{error}}</span>
+	</div>
+</div>
+
+<div class="container" ng-show="loggedIn">
+	<h3>Logged In Users</h3>
+	<ul>
+		<li ng-repeat="(name,data) in userList">{{name}}</li>
+	</ul>
+</div>
+
+<div class="container" ng-show="loggedIn">
+	<h3>Active Tournaments</h3>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Bracket</th>
+				<th>Rules</th>
+				<th>Start Time</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="tournament in tournaments">
+				<td>{{tournament.name}}</td>
+				<td>{{tournament.rules}}</td>
+				<td>
+					<span ng-show="!tournament.started">
+						Not Started
+						<span class="badge badge pull-right">{{tournament.players}} / {{tournament.maxPlayers}}</span></td>
+					</span>
+				<td>
+					<span ng-show="!tournament.started">
+						Not Registered
+						<button class="pull-right btn btn-small btn-success"><i class="fa fa-plus"></i> Join</button>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	{{tournaments}}
+</div>
