@@ -9,7 +9,7 @@ angular.module('hearthApp', [
 	.config(function($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);
 		$routeProvider
-			.when('/', {
+			.when('/main', {
 				templateUrl: 'views/main.html',
 				controller: 'MainCtrl'
 			})
@@ -17,15 +17,15 @@ angular.module('hearthApp', [
 				templateUrl: 'views/owned.html',
 				controller: 'OwnedCtrl'
 			})
-.when('/links', {
-  templateUrl: 'views/links.html',
-  controller: 'LinksCtrl'
-})
-.when('/tournaments', {
-  templateUrl: 'views/tournaments.html',
-  controller: 'TournamentsCtrl'
-})
+			.when('/links', {
+			  templateUrl: 'views/links.html',
+			  controller: 'LinksCtrl'
+			})
+			.when('/tournaments', {
+			  templateUrl: 'views/tournaments.html',
+			  controller: 'TournamentsCtrl'
+			})
 			.otherwise({
-				redirectTo: '/'
+				redirectTo: '/tournaments'
 			});
 	});

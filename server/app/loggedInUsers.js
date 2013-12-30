@@ -5,10 +5,6 @@
 		socket:ready - adds socketio
 */
 var util = require('util');
-var path = require('path');
-var fs = require('fs');
-var express = require('express');
-var io = require('socket.io');
 
 var Module = require('./core/module').Module;
 
@@ -37,6 +33,7 @@ var LoggedInUsers = exports.LoggedInUsers = function(options, events) {
 			allUsers[data] = {auth: false};
 			socket.set('userName', data);
 			socketServer.sockets.emit('user:login', data);
+			events.emit('loggedInUsers:loggedIn', socket);
 		});
 
 		socket.on('disconnect', function(){

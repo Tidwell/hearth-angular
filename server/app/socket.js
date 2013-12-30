@@ -20,7 +20,7 @@ var Socket = exports.Socket = function(options, events) {
 	var socketOptions = self.options.get('socket');
 
 	events.on('server:configure', function(app, httpServer) {
-		var socketServer = io.listen(httpServer);
+		var socketServer = io.listen(httpServer, {log: socketOptions.log});
 		events.emit('socket:ready', socketServer);
 
 		socketServer.sockets.on('connection', function(socket) {

@@ -9,14 +9,14 @@
 	</div>
 </div>
 
-<div class="container" ng-show="loggedIn">
-	<h3>Logged In Users</h3>
-	<ul>
-		<li ng-repeat="(name,data) in userList">{{name}}</li>
-	</ul>
-</div>
+<div class="container" ng-show="!activeTournament">
+	<div class="container" ng-show="loggedIn">
+		<h3>Logged In Users</h3>
+		<ul>
+			<li ng-repeat="(name,data) in userList">{{name}}</li>
+		</ul>
+	</div>
 
-<div class="container" ng-show="loggedIn">
 	<h3>Active Tournaments</h3>
 	<table class="table table-bordered">
 		<thead>
@@ -28,22 +28,55 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="tournament in tournaments">
-				<td>{{tournament.name}}</td>
-				<td>{{tournament.rules}}</td>
+			<tr ng-repeat="tournament in tournaments" ng-show="isActive(tournament)">
 				<td>
-					<span ng-show="!tournament.started">
+					<a ng-show="tournament.tournament.state != 'pending'" href ng-click="view(tournament)">{{tournament.tournament.name}}</a>
+					<span ng-show="tournament.tournament.state == 'pending'">{{tournament.tournament.name}}</span>
+				</td>
+				<td>{{tournament.tournament.tournamentType}}</td>
+				<td>
+					<span ng-show="tournament.tournament.state == 'pending'">
 						Not Started
-						<span class="badge badge pull-right">{{tournament.players}} / {{tournament.maxPlayers}}</span></td>
+						<span class="badge badge pull-right">
+							{{tournament.tournament.participantsCount}} / {{tournament.tournament.signupCap}}
+						</span>
 					</span>
+					<span ng-show="tournament.tournament.state == 'underway'">
+						{{tournament.tournament.startedAt | date:'h:mm a'}}
+					</span>
+				</td>
 				<td>
-					<span ng-show="!tournament.started">
+					<span ng-show="tournament.tournament.state == 'pending' && loggedIn">
 						Not Registered
-						<button class="pull-right btn btn-small btn-success"><i class="fa fa-plus"></i> Join</button>
+						<button class="pull-right btn btn-small btn-success" ng-click="join(tournament)">
+							<i class="fa fa-plus"></i> Join
+						</button>
+					</span>
+					<span ng-show="tournament.tournament.state != 'pending' || !loggedIn">
+						{{tournament.tournament.state}}
 					</span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	{{tournaments}}
+	<div ng-show="activeBracket">
+		<button class="btn pull-right btn-small" ng-click="activeBracket=''">X</button>
+		<img ng-src="{{activeBracket}}" />
+	</div>
+</div>
+<div class="container" ng-show="activeTournament">
+	<h3>{{activeTournament.tournament.name}}</h3>
+	<strong>
+		{{activeTournament.tournament.state}}
+		<span class="badge badge pull-right">
+			{{activeTournament.tournament.participantsCount}} / {{activeTournament.tournament.signupCap}}
+		</span>
+	</strong>
+	<h4>Players</h4>
+	<ul>
+		<li ng-repeat="participant in activeTournament.tournament.participants">
+			{{participant.participant.name}}
+		</li>
+	</ul>
+	<img ng-src="{{activeTournament.tournament.liveImageUrl}}" ng-show="activeTournament.tournament.state=='underway'" />
 </div>
