@@ -120,6 +120,11 @@ Tournaments.prototype.checkCreate = function() {
 			callback: function(err,data){
 				if (err) { console.log(err); return; }
 				self.loadTournaments();
+				self.socketServer.sockets.in('generalChat').emit('chat:message', {
+					room: 'generalChat',
+					user: 'System',
+					msg: 'A new tournament has been created: '+tourneyName
+				});
 			}
 		});
 	}

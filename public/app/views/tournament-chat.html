@@ -1,8 +1,8 @@
 <div class="row-fluid">
-	<div class="span9">
+	<div class="span8">
 		<ul class="nav nav-tabs">
 			<li class="active">
-				<a>{{activeTournament.tournament.name}} Chat</a>
+				<a>Tournament Chat</a>
 			</li>
 		</ul>
 		<div class="tab-content chat-windows">
@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="span3">
+	<div class="span4">
 		<ul class="nav nav-tabs">
 			<li class="active">
 				<a href="">Users</a>
@@ -37,7 +37,7 @@
 		<form ng-submit="sendChat(activeTournament.tournament.url, tournamentChat); tournamentChat = ''">
 			<fieldset>
 				<input class="span9" type="text" ng-model="tournamentChat">
-				<button class="btn btn-primary pull-right" type="button">Send</button>
+				<input class="btn btn-primary pull-right" type="submit" value="Send">
 			</fieldset>
 		</form>
 	</div>

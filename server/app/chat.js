@@ -1,13 +1,17 @@
 /*
-	Depends on: Module, Server
+	Depends on: Module, Server, Socket, Tournament
 
 	SERVER EVENTS
 	Subscribes:
 		socket:connection - subscribes to general chat
+		tournaments:connect - subscribes to tournament chat room
+		tournaments:reconnect - subscribes to tournament chat room
 
 	SOCKET EVENTS (to the client)
 	Emits:
+		chat:message - forwarding a message back to other clients
 	Subscribes:
+		chat:message - client sending a message
 	
 */
 var util = require('util');
