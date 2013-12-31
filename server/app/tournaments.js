@@ -27,6 +27,8 @@ var Tournaments = exports.Tournaments = function(options, events) {
 	self.tournaments = [];
 	self.lastTourney = 0;
 
+	self.fullTournaments = {};
+
 	events.on('socket:ready', function(sServer){
 		self.socketServer = sServer;
 		self.loadTournaments();
@@ -39,10 +41,31 @@ var Tournaments = exports.Tournaments = function(options, events) {
 				self.joinTournament(tournamentId, name, socket);
 			});
 		});
+
+		socket.on('tournaments:drop', function(tournamentId){
+			socket.get('participant', function(err,p){
+				self.dropTournament(tournamentId, p.participant.id, socket);
+			});
+		});
 	});
 
+	//reconnect
 	events.on('loggedInUsers:loggedIn', function(socket){
-
+		socket.get('userName', function(err,name){
+			for (var url in self.fullTournaments){
+				var tournament = self.fullTournaments[url].tournament;
+				if (tournament.state === 'underway' || tournament.state === 'pending') {
+					tournament.participants.forEach(function(participant){
+						if (participant.participant.name === name) {
+							participant.participant.tournamentUrl = url;
+							socket.set('participant', participant);
+							socket.emit('tournaments:joined', participant);
+							self.updateSocketTournament(url);
+						}
+					});
+				}
+			}
+		});
 	});
 };
 
@@ -69,7 +92,6 @@ Tournaments.prototype.checkCreate = function() {
 			},
 			callback: function(err,data){
 				if (err) { console.log(err); return; }
-				console.log('created');
 				self.loadTournaments();
 			}
 		});
@@ -95,8 +117,8 @@ Tournaments.prototype.checkStart = function() {
 				}
 			});
 		}
-	});	
-}
+	});
+};
 
 Tournaments.prototype.updateSocketTournament = function(id) {
 	var self = this;
@@ -106,6 +128,7 @@ Tournaments.prototype.updateSocketTournament = function(id) {
 		id: id,
 		callback: function(err,data){
 			if (err) { console.log(err); return; }
+			self.fullTournaments[id] = data; //cache it
 			self.socketServer.sockets.clients().forEach(function(socket){
 				socket.get('participant', function(err,participant){
 					if (participant && participant.participant.tournamentUrl === id) {
@@ -128,6 +151,14 @@ Tournaments.prototype.loadTournaments = function() {
 			self.socketServer.sockets.emit('tournaments:list', self.tournaments);
 			self.checkCreate();
 			self.checkStart();
+
+			//get full data for active tournaments on first call
+			self.tournaments.forEach(function(tournament){
+				var t = tournament.tournament;
+				if (t.state === 'underway' || t.state === 'pending' && !self.fullTournaments[t.url]) {
+					self.updateSocketTournament(t.url);
+				}
+			});
 		}
 	});
 };
@@ -149,3 +180,18 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 		}
 	});
 };
+
+Tournaments.prototype.dropTournament = function(id, pid, socket) {
+	var self = this;
+	self.challongeClient.participants.destroy({
+		id: id,
+		participantId: pid,
+		callback: function(err,data){
+			if (err) { console.log(err); return; }
+			socket.emit('tournaments:dropped', data);
+			socket.set('participant', null);
+			self.loadTournaments();
+			self.updateSocketTournament(id);
+		}
+	});
+}

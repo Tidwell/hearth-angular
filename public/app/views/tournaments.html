@@ -65,18 +65,25 @@
 	</div>
 </div>
 <div class="container" ng-show="activeTournament">
-	<h3>{{activeTournament.tournament.name}}</h3>
-	<strong>
-		{{activeTournament.tournament.state}}
-		<span class="badge badge pull-right">
-			{{activeTournament.tournament.participantsCount}} / {{activeTournament.tournament.signupCap}}
-		</span>
-	</strong>
-	<h4>Players</h4>
-	<ul>
-		<li ng-repeat="participant in activeTournament.tournament.participants">
-			{{participant.participant.name}}
-		</li>
-	</ul>
-	<img ng-src="{{activeTournament.tournament.liveImageUrl}}" ng-show="activeTournament.tournament.state=='underway'" />
+	<div class="row-fluid">
+		<h3>{{activeTournament.tournament.name}}</h3>
+		<strong class="pull-left">
+			{{activeTournament.tournament.state}}
+			<span class="badge">
+				{{activeTournament.tournament.participantsCount}} / {{activeTournament.tournament.signupCap}}
+			</span>
+		</strong>
+		<button class="btn btn-danger pull-right" ng-click="drop()">
+			<i class="fa fa-minus-square" /> Drop
+		</button>
+	</div>
+	<div class="row-fluid">
+		<h4>Players</h4>
+		<ul>
+			<li ng-repeat="participant in activeTournament.tournament.participants">
+				{{participant.participant.name}}
+			</li>
+		</ul>
+		<img ng-src="{{activeTournament.tournament.liveImageUrl}}" ng-show="activeTournament.tournament.state=='underway'" />
+	</div>
 </div>

@@ -48,10 +48,17 @@ angular.module('hearthApp')
 			refreshUrl(url);
 		});
 
+		socket.on('tournaments:dropped', function(data){
+			$scope.activeTournament = null;
+			$scope.participant = null;
+			console.log('drop', data)
+		});
+
 		var refreshInterval;
 		function refreshUrl(url) {
 			clearInterval(refreshInterval);
 			refreshInterval = setInterval(function(){
+				if (!$scope.activeTournament) { clearInterval(refreshInterval); return; }
 				$scope.activeTournament.tournament.liveImageUrl = '';
 				$scope.$apply();
 				$scope.activeTournament.tournament.liveImageUrl = url;
@@ -72,5 +79,11 @@ angular.module('hearthApp')
 
 		$scope.join = function(tournament) {
 			socket.emit('tournaments:join', tournament.tournament.url);
+		};
+
+		$scope.drop = function() {
+			if (confirm('Do you want to drop from '+$scope.activeTournament.tournament.name)) {
+				socket.emit('tournaments:drop', $scope.activeTournament.tournament.url);
+			}
 		};
 	});
