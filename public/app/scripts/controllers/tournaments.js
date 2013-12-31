@@ -50,7 +50,7 @@ angular.module('hearthApp')
 
 		socket.on('tournaments:activeTournament', function(data){
 			$scope.activeTournament = data;
-			$('.active_iframe').challonge($scope.activeTournament.tournament.url, {subdomain: 'hs_tourney', theme: '1', multiplier: '1.0', match_width_multiplier: '1.0', show_final_results: '0', show_standings: '0'});
+			$('.active-iframe').challonge($scope.activeTournament.tournament.url, {subdomain: 'hs_tourney', theme: '2', multiplier: '1.0', match_width_multiplier: '1.0', show_final_results: '0', show_standings: '0'});
 			updateMatch();
 			if ($scope.activeTournament.tournament.state === 'complete') {
 				$scope.activeTournament = null;
@@ -111,7 +111,8 @@ angular.module('hearthApp')
 		};
 
 		$scope.view = function(tournament) {
-			$scope.activeBracket = tournament.tournament.liveImageUrl;
+			$scope.activeBracket = tournament.tournament.url;
+			$('.view-iframe').challonge(tournament.tournament.url, {subdomain: 'hs_tourney', theme: '2', multiplier: '1.0', match_width_multiplier: '1.0', show_final_results: '0', show_standings: '0'});
 		};
 
 		$scope.join = function(tournament) {

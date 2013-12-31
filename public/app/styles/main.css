@@ -5,7 +5,7 @@ body {
 	padding: 60px 0;
 }
 
-.active_iframe {
+.active-iframe, .view-iframe {
 	height: 500px;
 }
 
