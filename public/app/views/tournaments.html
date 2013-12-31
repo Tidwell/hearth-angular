@@ -18,10 +18,7 @@
 
 <div class="container" ng-show="!activeTournament">
 	<div class="container" ng-show="loggedIn">
-		<h3>Logged In Users</h3>
-		<ul>
-			<li ng-repeat="(name,data) in userList">{{name}}</li>
-		</ul>
+		<ng-include src="'views/general-chat.html'"></ng-include>
 	</div>
 
 	<h3>Active Tournaments</h3>
@@ -117,12 +114,7 @@
 			</div>
 		</div>
 		<div class="span4">
-			<h4>Players</h4>
-			<ul>
-				<li ng-repeat="participant in activeTournament.tournament.participants">
-					{{participant.participant.name}}
-				</li>
-			</ul>
+			<ng-include src="'views/tournament-chat.html'"></ng-include>
 		</div>
 		<div class="active_iframe" ng-show="activeTournament.tournament.state=='underway'">
 		</div>

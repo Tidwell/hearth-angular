@@ -12,6 +12,9 @@ angular.module('hearthApp')
 		$scope.winnerReport = '';
 		$scope.match = null;
 		$scope.matchError = null;
+		$scope.generalChat = '';
+		$scope.chatLog = [];
+		$scope.tournamentChatLog = [];
 
 		$scope.login = function() {
 			$scope.error = null;
@@ -71,7 +74,6 @@ angular.module('hearthApp')
 			$scope.activeTournament.tournament.matches.forEach(function(match){
 				if (match.match.state === 'open' && (match.match.player1Id === pid || match.match.player2Id === pid)) {
 					if ($scope.match && match.match.round !== $scope.match.match.round) {
-						console.log('clearing');
 						$scope.matchError = null;
 						$scope.winnerReport = '';
 					}
@@ -89,6 +91,16 @@ angular.module('hearthApp')
 		socket.on('tournaments:dropped', function(){
 			$scope.activeTournament = null;
 			$scope.participant = null;
+		});
+
+		socket.on('chat:message', function(obj){
+			var toAdd;
+			if (obj.room === 'generalChat') {
+				toAdd = $scope.chatLog;
+			} else {
+				toAdd = $scope.tournamentChatLog;
+			}
+			toAdd.push(obj);
 		});
 
 		$scope.isActive = function(tournament) {
@@ -118,5 +130,42 @@ angular.module('hearthApp')
 				matchId: $scope.match.match.id,
 				winnerId: $scope.winnerReport
 			});
-		}
+		};
+
+		$scope.sendChat = function(room, msg) {
+			if (!msg) { return; }
+			var toAdd;
+			if (room === 'generalChat') {
+				toAdd = $scope.chatLog;
+			} else {
+				toAdd = $scope.tournamentChatLog
+			}
+			socket.emit('chat:message', {
+				room: room,
+				msg: msg
+			});
+			toAdd.push({
+				msg: msg,
+				user: $scope.userName
+			});
+		};
+
+		$scope.$watch('chatLog.length', function(){
+			//TODO make directive
+			var objDiv = document.getElementById('general-chat');
+			if (!objDiv) { return; }
+			//next tick so it properly changes the height after the DOM is rerendered
+			setTimeout(function() {
+				objDiv.scrollTop = objDiv.scrollHeight;
+			},0)
+		});
+		$scope.$watch('tournamentChatLog.length', function(){
+			//TODO make directive
+			var objDiv = document.getElementById('tournament-chat');
+			if (!objDiv) { return; }
+			//next tick so it properly changes the height after the DOM is rerendered
+			setTimeout(function() {
+				objDiv.scrollTop = objDiv.scrollHeight;
+			},0)
+		});
 	});

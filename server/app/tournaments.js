@@ -2,6 +2,8 @@
 	Depends on: Module, Server
 
 	SERVER EVENTS
+	Emits:
+		tournaments:reconnect - when a player reconnects
 	Subscribes:
 		socket:ready - loads tournaments from challonge
 		socket:connection - emits list and listens for events from the client
@@ -29,6 +31,8 @@ var Tournaments = exports.Tournaments = function(options, events) {
 	//call parent constructor
 	Module.call(this, options);
 	var self = this;
+
+	self.events = events;
 
 	var tournamentsOptions = self.options.get('tournaments');
 
@@ -79,6 +83,10 @@ var Tournaments = exports.Tournaments = function(options, events) {
 							participant.participant.tournamentUrl = url;
 							socket.set('participant', participant);
 							socket.emit('tournaments:joined', participant);
+							events.emit('tournaments:reconnect', {
+								socket: socket,
+								tournamentId: url
+							});
 							self.updateSocketTournament(url);
 						}
 					});
@@ -211,6 +219,10 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 			data.participant.tournamentUrl = id;
 			socket.set('participant', data);
 			socket.emit('tournaments:joined', data);
+			self.events.emit('tournaments:connect', {
+				socket: socket,
+				tournamentId: id
+			});
 			self.loadTournaments();
 			self.updateSocketTournament(data.participant.tournamentUrl);
 		}
