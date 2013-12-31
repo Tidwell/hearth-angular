@@ -1,8 +1,23 @@
 /*
 	Depends on: Module, Server
 
+	SERVER EVENTS
 	Subscribes:
-		socket:ready - adds socketio
+		socket:ready - loads tournaments from challonge
+		socket:connection - emits list and listens for events from the client
+		loggedInUsers:loggedIn - does reconnect behavior
+
+	SOCKET EVENTS (to the client)
+	Emits:
+		tournaments:list - list of all tournaments
+		tournaments:joined - successfull join
+		tournaments:dropped - sucessfull drop
+		tournaments:activeTournament - updates a single user with their active tournament
+		tournaments:winnerConflict - reporting conflict between players
+	Subscribes:
+		tournaments:join - join request
+		tournaments:drop - drop request
+
 */
 var util = require('util');
 
@@ -46,6 +61,10 @@ var Tournaments = exports.Tournaments = function(options, events) {
 			socket.get('participant', function(err,p){
 				self.dropTournament(tournamentId, p.participant.id, socket);
 			});
+		});
+
+		socket.on('tournaments:report', function(obj){
+			self.report(obj, socket);
 		});
 	});
 
@@ -120,6 +139,22 @@ Tournaments.prototype.checkStart = function() {
 	});
 };
 
+Tournaments.prototype.checkFinalize = function() {
+	var self = this;
+	self.tournaments.forEach(function(tourney) {
+		if (tourney.tournament.state === 'awaiting_review') {
+			self.challongeClient.tournaments.finalize({
+				id: tourney.tournament.url,
+				callback: function(err,data){
+					if (err) { console.log(err); return; }
+					self.loadTournaments();
+					self.updateSocketTournament(tourney.tournament.url);
+				}
+			});
+		}
+	});
+};
+
 Tournaments.prototype.updateSocketTournament = function(id) {
 	var self = this;
 	self.challongeClient.tournaments.show({
@@ -151,6 +186,7 @@ Tournaments.prototype.loadTournaments = function() {
 			self.socketServer.sockets.emit('tournaments:list', self.tournaments);
 			self.checkCreate();
 			self.checkStart();
+			self.checkFinalize();
 
 			//get full data for active tournaments on first call
 			self.tournaments.forEach(function(tournament){
@@ -194,4 +230,56 @@ Tournaments.prototype.dropTournament = function(id, pid, socket) {
 			self.updateSocketTournament(id);
 		}
 	});
-}
+};
+
+var activeReports = {};
+
+Tournaments.prototype.report = function(obj, socket) {
+	var self = this;
+	socket.get('participant', function(err,participant){
+		if (!participant) { return; } //do nothing if they arent in a tourney
+		if (!activeReports[obj.tournamentId]) {
+			activeReports[obj.tournamentId] = {};
+		}
+		
+		if (!activeReports[obj.tournamentId][obj.matchId]) {
+			activeReports[obj.tournamentId][obj.matchId] = [];
+		}
+		var match = activeReports[obj.tournamentId][obj.matchId];
+		if (match.length) {
+			match.forEach(function(report, i){
+				if (report.user === participant.participant.id) {
+					match.splice(i,1);
+				}
+			});
+		}
+		match.push({
+			user: participant.participant.id,
+			winner: obj.winnerId
+		});
+
+		if (match.length === 2) {
+			if (match[0].winner === match[1].winner) {
+				self.challongeClient.matches.update({
+					id: obj.tournamentId,
+					matchId: obj.matchId,
+					match: {
+						scoresCsv: '3-0',
+						winnerId: match[0].winner
+					},
+					callback: function(err,data){
+						if (err) { console.log(err); return; }
+						self.loadTournaments();
+						self.updateSocketTournament(obj.tournamentId);
+					}
+				});
+			} else {
+				self.socketServer.sockets.emit('tournaments:winnerConflict', {
+					id: obj.tournamentId,
+					matchId: obj.matchId,
+					report: match
+				});
+			}
+		}
+	});
+};
