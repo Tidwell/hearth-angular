@@ -112,6 +112,7 @@ angular.module('hearthApp')
 
 		$scope.view = function(tournament) {
 			$scope.activeBracket = tournament.tournament.url;
+			$scope.viewedTournamentName = tournament.tournament.name;
 			$('.view-iframe').challonge(tournament.tournament.url, {subdomain: 'hs_tourney', theme: '2', multiplier: '1.0', match_width_multiplier: '1.0', show_final_results: '0', show_standings: '0'});
 		};
 
