@@ -28,7 +28,7 @@ angular.module('hearthApp', [
 			  controller: 'TournamentsCtrl'
 			})
 			.when('/spectate', {
-			  redirectTo: '/tournaments'
+			  redirectTo: '/browse'
 			})
 			.when('/spectate/:id', {
 			  templateUrl: 'views/spectate.html',
@@ -40,6 +40,10 @@ angular.module('hearthApp', [
 			.when('/play/:id', {
 			  templateUrl: 'views/play.html',
 			  controller: 'PlayCtrl'
+			})
+			.when('/browse', {
+			  templateUrl: 'views/browse.html',
+			  controller: 'BrowseCtrl'
 			})
 			.otherwise({
 				redirectTo: '/tournaments'

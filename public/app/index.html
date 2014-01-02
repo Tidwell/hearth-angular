@@ -58,6 +58,9 @@
 								<li ng-class="navClass('tournaments')">
 									<a href="/tournaments">Tournaments</a>
 								</li>
+								<li ng-class="navClass(['spectate', 'browse'])">
+									<a href="/browse">Browse</a>
+								</li>
 								<li ng-show="at.activeTournament" ng-class="navClass('play')">
 									<a href="/play/{{at.activeTournament.tournament.url}}">Current Tournament</a>
 								</li>
@@ -95,7 +98,7 @@
 			<div class="container">
 				<ul class="info">
 					<li>
-						<span style="line-height: 24px">
+						<span>
 							Players Online
 						</span>
 						<span class="user-count">{{countUsers()}}</span>
@@ -164,9 +167,10 @@
 	<script src="scripts/controllers/spectate.js"></script>
 	<script src="scripts/services/tournaments.js"></script>
 	<script src="scripts/services/user.js"></script>
-<script src="scripts/services/active-tournament.js"></script>
-<script src="scripts/controllers/play.js"></script>
-<script src="scripts/services/chat.js"></script>
+	<script src="scripts/services/active-tournament.js"></script>
+	<script src="scripts/controllers/play.js"></script>
+	<script src="scripts/services/chat.js"></script>
+<script src="scripts/controllers/browse.js"></script>
 	<!-- endbuild -->
 </body>
 </html>

@@ -15,6 +15,7 @@ angular.module('hearthApp')
 
 		$scope.$watch('at.participant', function() {
 			if (!$scope.at.participant) {
+				console.log('re')
 				$location.path('/tournaments');
 			}
 		});
