@@ -45,7 +45,6 @@ angular.module('hearthApp')
 
 		socket.on('tournaments:activeTournament', function(data){
 			at.activeTournament = data;
-			$('.active-iframe').challonge(at.activeTournament.tournament.url, {subdomain: 'hs_tourney', theme: '2', multiplier: '1.0', match_width_multiplier: '1.0', show_final_results: '0', show_standings: '0'});
 			updateMatch();
 			if (at.activeTournament.tournament.state === 'complete') {
 				at.activeTournament = null;
