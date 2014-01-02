@@ -7,5 +7,5 @@
   "scripts": {
   	"install": "cd server && npm install && cd ../public && npm install"
   },
-  "version": 1.0
+  "private": true
 }
