@@ -226,6 +226,10 @@ Tournaments.prototype.loadTournaments = function() {
 
 Tournaments.prototype.joinTournament = function(id, name, socket){
 	var self = this;
+
+	//TODO get participant, if exists (already in tournament) refuse join
+
+
 	self.challongeClient.participants.create({
 		id: id,
 		participant: {
