@@ -1,6 +1,6 @@
 <div class="container main-content">
 	<div class="view-match">
-		<div ng-show="!tournamentId || error">
+		<div ng-show="!tournamentId || error || !found">
 			<h3>{{error || 'No Tournament Found'}}</h3>
 		</div>
 		<div ng-show="tournamentId">
