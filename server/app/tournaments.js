@@ -298,8 +298,11 @@ Tournaments.prototype.report = function(obj, socket) {
 					},
 					callback: function(err,data){
 						if (err) { console.log(err); return; }
+
 						self.loadTournaments();
 						self.updateSocketTournament(obj.tournamentId);
+
+						delete activeReports[obj.tournamentId][obj.matchId];
 					}
 				});
 			} else {
