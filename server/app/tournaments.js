@@ -308,6 +308,11 @@ Tournaments.prototype.report = function(obj, socket) {
 					matchId: obj.matchId,
 					report: match
 				});
+				self.socketServer.sockets.in(obj.tournamentId).emit('chat:message', {
+					room: obj.tournamentId,
+					user: 'System',
+					msg: 'A reporting conflict has been detected.'
+				});
 			}
 		}
 	});
