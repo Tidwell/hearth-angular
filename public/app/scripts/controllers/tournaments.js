@@ -1,11 +1,9 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('TournamentsCtrl', function($scope, socket, tournaments) {
-		$scope.userList = {};
-		$scope.userName = '';
-		$scope.loggedIn = false;
-		$scope.error;
+	.controller('TournamentsCtrl', function($scope, socket, tournaments, user) {
+		$scope.user = user.get();
+
 		$scope.tournaments = tournaments.get();
 		$scope.activeTournament = null;
 		$scope.activeBracket;
@@ -18,31 +16,6 @@ angular.module('hearthApp')
 
 		$scope.showUsers = false;
 		
-		$scope.login = function() {
-			$scope.error = null;
-			socket.emit('login', $scope.userName);
-		};
-
-		socket.on('user:list', function(data){
-			$scope.userList = data;
-		});
-
-		socket.on('user:login', function(data){
-			$scope.userList[data] = {};
-			if ($scope.userName === data) {
-				$scope.loggedIn = true;
-				$('.hero-unit').addClass('loggedIn');
-			}
-		});
-
-		socket.on('user:loginerror', function(data){
-			$scope.error = data;
-		});
-
-		socket.on('user:logout', function(data){
-			delete $scope.userList[data];
-		});
-
 		socket.on('tournaments:joined', function(data){
 			$scope.participant = data;
 		});
@@ -62,6 +35,9 @@ angular.module('hearthApp')
 				$scope.matchError = data;
 			}
 		});
+
+		$scope.login = user.login;
+		$scope.countUsers = user.countUsers;
 
 		var idNameMap = $scope.idNameMap = {};
 		function updateMatch() {
@@ -150,14 +126,6 @@ angular.module('hearthApp')
 				msg: msg,
 				user: $scope.userName
 			});
-		};
-
-		$scope.countUsers = function() {
-			var c = 0;
-			for (var name in $scope.userList) {
-				c++;
-			}
-			return c;
 		};
 
 		$scope.$watch('chatLog.length', function(){

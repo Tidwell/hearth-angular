@@ -1,19 +1,19 @@
 <div class="container hero-unit">
 	<div class="container">
-		<div class="row-fluid" ng-show="!loggedIn">
+		<div class="row-fluid" ng-show="!user.loggedIn">
 			<div class="brandlogo span5">
 				<h1>Hearthstone Tournaments</h1>
 			</div>
-			<div class="span7" ng-show="!loggedIn">
+			<div class="span7" ng-show="!user.loggedIn">
 				<div class="row-fluid">
 					<div class="span2"></div>
 					<div class="begin well span8">
 						<h2>Enter your BattleTag</h2>
 						<form class="form-horizontal">
-							<input type="text" ng-model="userName" placeholder="YourName#1234" />
+							<input type="text" ng-model="user.userName" placeholder="YourName#1234" />
 							<button class="btn btn-primary" ng-click="login()">Start!</button>
 						</form>
-						<span class="alert alert-error" ng-show="error">{{error}}</span>
+						<span class="alert alert-error" ng-show="error">{{user.error}}</span>
 					</div>
 					<div class="span2"></div>
 				</div>
@@ -30,8 +30,8 @@
 				</span>
 				<span class="user-count">{{countUsers()}}</span>
 			</li>
-			<li class="pull-right" ng-show="loggedIn">
-				{{userName}}
+			<li class="pull-right" ng-show="user.loggedIn">
+				{{user.userName}}
 			</div>
 		</ul>
 	</div>
@@ -52,12 +52,12 @@
 						<div class="span3 info">
 							<div>{{tournament.tournament.tournamentType}}</div>
 							<div>
-								<span ng-show="tournament.tournament.state == 'pending' && loggedIn">
+								<span ng-show="tournament.tournament.state == 'pending' && user.loggedIn">
 									<span class="users{{tournament.tournament.participantsCount}}clr">
 										Not Registered
 									</span>
 								</span>
-								<span class="state" ng-show="tournament.tournament.state != 'pending' || !loggedIn">
+								<span class="state" ng-show="tournament.tournament.state != 'pending' || !user.loggedIn">
 									{{tournament.tournament.state}}
 								</span>
 							</div>
@@ -73,7 +73,7 @@
 									started: {{tournament.tournament.startedAt | date:'h:mm a'}}
 								</span>
 							</div>
-							<button ng-show="tournament.tournament.state == 'pending' && loggedIn" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
+							<button ng-show="tournament.tournament.state == 'pending' && user.loggedIn" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
 								<i class="fa fa-plus"></i> Join
 							</button>
 						</div>
