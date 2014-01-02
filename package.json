@@ -2,12 +2,9 @@
   "name": "hearth",
   "description": "Hearth app",
   "author": "Aaron Tiwell <aaron.tidwell@gmail.com>",
-  "dependencies": {
-  },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "engine": "node >= 0.10.x",
   "scripts": {
-  	"install": "cd server && npm install"
+  	"install": "cd server && npm install && cd ../public && npm install"
   }
 }
