@@ -26,4 +26,14 @@ angular.module('hearthApp')
 				$location.path('/tournaments');
 			}
 		});
+
+		$scope.$watch('chat.tournamentChatLog.length', function(){
+			//TODO make directive
+			var objDiv = document.getElementById('tournament-chat');
+			if (!objDiv) { return; }
+			//next tick so it properly changes the height after the DOM is rerendered
+			setTimeout(function() {
+				objDiv.scrollTop = objDiv.scrollHeight;
+			},0)
+		});
 	});

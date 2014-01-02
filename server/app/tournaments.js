@@ -79,7 +79,7 @@ var Tournaments = exports.Tournaments = function(options, events) {
 			if (self.fullTournaments[id]) {
 				socket.emit('tournaments:info', self.fullTournaments[id]);
 			} else {
-				socket.emit('tournaments:info', {error: 'No Tournament Found.'})
+				socket.emit('tournaments:info', {error: 'No Tournament Found.'});
 			}
 		});
 	});
@@ -91,8 +91,9 @@ var Tournaments = exports.Tournaments = function(options, events) {
 				var tournament = self.fullTournaments[url].tournament;
 				if (tournament.state === 'underway' || tournament.state === 'pending') {
 					tournament.participants.forEach(function(participant){
-						if (participant.participant.name === name) {
+						if (participant.participant.name === name && participant.participant.active) {
 							participant.participant.tournamentUrl = url;
+
 							socket.set('participant', participant);
 							socket.emit('tournaments:joined', participant);
 							events.emit('tournaments:reconnect', {
@@ -191,7 +192,7 @@ Tournaments.prototype.updateSocketTournament = function(id) {
 			self.fullTournaments[id] = data; //cache it
 			self.socketServer.sockets.clients().forEach(function(socket){
 				socket.get('participant', function(err,participant){
-					if (participant && participant.participant.tournamentUrl === id) {
+					if (participant && participant.participant.tournamentUrl === id && participant.participant.active) {
 						socket.emit('tournaments:activeTournament', data);
 						socket.set('tournament', data);
 					}
@@ -228,25 +229,30 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 	var self = this;
 
 	//TODO get participant, if exists (already in tournament) refuse join
-
-
-	self.challongeClient.participants.create({
-		id: id,
-		participant: {
-			name: name
-		},
-		callback: function(err,data){
-			if (err) { console.log(err); return; }
-			data.participant.tournamentUrl = id;
-			socket.set('participant', data);
-			socket.emit('tournaments:joined', data);
-			self.events.emit('tournaments:connect', {
-				socket: socket,
-				tournamentId: id
-			});
-			self.loadTournaments();
-			self.updateSocketTournament(data.participant.tournamentUrl);
+	socket.get('participant', function(err,participant){
+		if (participant) {
+			console.log('multi prevented');
+			socket.emit('tournaments:multijoin');
+			return;
 		}
+		self.challongeClient.participants.create({
+			id: id,
+			participant: {
+				name: name
+			},
+			callback: function(err,data){
+				if (err) { console.log(err); return; }
+				data.participant.tournamentUrl = id;
+				socket.set('participant', data);
+				socket.emit('tournaments:joined', data);
+				self.events.emit('tournaments:connect', {
+					socket: socket,
+					tournamentId: id
+				});
+				self.loadTournaments();
+				self.updateSocketTournament(data.participant.tournamentUrl);
+			}
+		});
 	});
 };
 
@@ -262,6 +268,19 @@ Tournaments.prototype.dropTournament = function(id, pid, socket) {
 			self.loadTournaments();
 			self.updateSocketTournament(id);
 		}
+	});
+};
+
+Tournaments.prototype.dropLoser = function(obj, match) {
+	var self = this;
+	self.socketServer.sockets.clients().forEach(function(socket){
+		socket.get('participant', function(err,participant){
+			if (participant && (participant.participant.id == match[0].user || participant.participant.id == match[1].user)) {
+				if (String(participant.participant.id) !== String(obj.winnerId)) {
+					self.dropTournament(obj.tournamentId, participant.participant.id, socket);
+				}
+			}
+		});
 	});
 };
 
@@ -303,8 +322,7 @@ Tournaments.prototype.report = function(obj, socket) {
 					callback: function(err,data){
 						if (err) { console.log(err); return; }
 
-						self.loadTournaments();
-						self.updateSocketTournament(obj.tournamentId);
+						self.dropLoser(obj, match);
 
 						delete activeReports[obj.tournamentId][obj.matchId];
 					}
