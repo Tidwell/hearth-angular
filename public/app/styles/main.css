@@ -230,10 +230,10 @@ table {
 	}
 
 	.hero-unit {
-		height: auto;
+		height: 300px;
 	}
 
-	.navbar .container {
+	.navbar .container .nav-container {
 		padding: 0 20px;
 	}
 
@@ -246,11 +246,17 @@ table {
 }
 
 @media (max-width: 767px) {
+	.navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+		margin-left: 0;
+		margin-right: 0;
+	}
 	.hero-unit {
 		background-image: url(/images/hdr-sqr.png);
+		height: 450px;
 	}
-	.hero-unit h1 {
+	.hero-unit .brandlogo h1 {
 		text-align: center;
+		font-size: 2em;
 	}
 
 	.hero-unit .begin {
