@@ -4,7 +4,9 @@ body {
 	color: #333;
 	padding: 60px 0;
 }
-
+.navbar-inverse .brand {
+	color: white;
+}
 .hero-unit {
 	width: 100%;
 	height: 250px;
@@ -211,6 +213,17 @@ table {
 	margin-left: 0;
 }
 
+.join-btn {
+	margin-top: 10px;
+}
+
+.round-content {
+	margin-top: 10px;
+}
+.round-info h3 {
+	margin: 0;
+}
+
 @media (max-width: 979px) {
 	body {
 		padding: 0;
@@ -233,6 +246,9 @@ table {
 }
 
 @media (max-width: 767px) {
+	.hero-unit {
+		background-image: url(/images/hdr-sqr.png);
+	}
 	.hero-unit h1 {
 		text-align: center;
 	}

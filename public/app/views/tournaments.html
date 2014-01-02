@@ -51,9 +51,6 @@
 									<span class="users{{tournament.tournament.participantsCount}}clr">
 										Not Registered
 									</span>
-									<button class="pull-right btn btn-small btn-success" ng-click="join(tournament)">
-										<i class="fa fa-plus"></i> Join
-									</button>
 								</span>
 								<span class="state" ng-show="tournament.tournament.state != 'pending' || !loggedIn">
 									{{tournament.tournament.state}}
@@ -61,7 +58,7 @@
 							</div>
 							<div>
 								<span ng-show="tournament.tournament.state == 'pending'">
-									<span class="badge badge users{{tournament.tournament.participantsCount}}">
+									<span class="badge users{{tournament.tournament.participantsCount}}">
 										{{tournament.tournament.participantsCount}} / {{tournament.tournament.signupCap}}
 									</span>
 								</span>
@@ -71,6 +68,9 @@
 									started: {{tournament.tournament.startedAt | date:'h:mm a'}}
 								</span>
 							</div>
+							<button ng-show="tournament.tournament.state == 'pending' && loggedIn" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
+								<i class="fa fa-plus"></i> Join
+							</button>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -88,20 +88,22 @@
 	<div class="view-iframe">
 	</div>
 </div>
-<div class="container" ng-show="activeTournament">
-	<div class="row-fluid">
-		<h3>{{activeTournament.tournament.name}}</h3>
-		<strong class="pull-left">
-			{{activeTournament.tournament.state}}
-			<span class="badge">
-				{{activeTournament.tournament.participantsCount}} / {{activeTournament.tournament.signupCap}}
-			</span>
-		</strong>
+<div class="container main-content {{activeTournament.tournament.state}}" ng-show="activeTournament">
+	<div class="row-fluid round-info">
+		<div class="pull-left">
+			<h3>{{activeTournament.tournament.name}}</h3>
+			<strong>
+				<span class="state">{{activeTournament.tournament.state}}</span>
+				<span class="badge users{{activeTournament.tournament.participantsCount}}">
+					{{activeTournament.tournament.participantsCount}} / {{activeTournament.tournament.signupCap}}
+				</span>
+			</strong>
+		</div>
 		<button class="btn btn-danger pull-right" ng-click="drop()">
 			<i class="fa fa-minus-square" /> Drop
 		</button>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid round-content">
 		<div class="span6 well">
 			<div ng-show="match" class="active-match">
 				<h3>Round {{match.match.round}}</h3>

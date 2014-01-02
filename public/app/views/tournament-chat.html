@@ -1,43 +1,54 @@
-<div class="row-fluid">
-	<div class="span8">
-		<ul class="nav nav-tabs">
-			<li class="active">
-				<a>Tournament Chat</a>
-			</li>
-		</ul>
-		<div class="tab-content chat-windows">
-			<div id="tournament-chat" class="tournament-chat chat">
-				<p ng-repeat="msg in tournamentChatLog">
-					<strong>{{msg.user}}</strong>: {{msg.msg}}
-				</p>
+<div class="chat-interface">
+	<div class="row-fluid">
+		<div class="span8">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a>Tournament Chat</a>
+				</li>
+			</ul>
+			<div class="tab-content chat-windows">
+				<div id="tournament-chat" class="tournament-chat chat">
+					<p ng-repeat="msg in tournamentChatLog">
+						<strong>{{msg.user}}</strong>: {{msg.msg}}
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="">Users</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="online">
+					<ul class="nav nav-pills nav-stacked">
+						<li ng-repeat="participant in activeTournament.tournament.participants">
+							<a> <i class="fa fa-user"></i>
+								{{participant.participant.name}}
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="span4">
-		<ul class="nav nav-tabs">
-			<li class="active">
-				<a href="">Users</a>
-			</li>
-		</ul>
-		<div class="tab-content">
-			<div class="online">
-				<ul class="nav nav-pills nav-stacked">
-					<li ng-repeat="participant in activeTournament.tournament.participants">
-						<a> <i class="fa fa-user"></i>
-							{{participant.participant.name}}
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row-fluid">
-	<div class="span12">
+	<div class="row-fluid">
 		<form ng-submit="sendChat(activeTournament.tournament.url, tournamentChat); tournamentChat = ''">
 			<fieldset>
-				<input class="span9" type="text" ng-model="tournamentChat">
-				<button class="btn btn-primary pull-right" type="submit"><i class="fa fa-comment" /> Send</button>
+				<div class="input-append hidden-phone">
+					<div class="span8">
+						<input class="input-block-level" type="text" ng-model="tournamentChat" ng-disabled="!loggedIn">
+					</div>
+					<button class="span4 btn btn-primary" type="submit"><i class="fa fa-comment" /> Send</button>
+				</div>
+
+				<div class="visible-phone">
+					
+					<input class="input-block-level" type="text" ng-model="tournamentChat" ng-disabled="!loggedIn">
+					
+					<button class="input-block-level btn btn-primary" type="submit"><i class="fa fa-comment" /> Send</button>
+				</div>
 			</fieldset>
 		</form>
 	</div>
