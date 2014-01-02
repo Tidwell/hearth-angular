@@ -42,25 +42,65 @@
 	<![endif]-->
 
 	<!-- Add your site or application content here -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<div class="nav-container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="brand" href="/tournaments">HS Tourney</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
-							<li class="active">
-								<a href="/tournaments">Tournaments</a>
-							</li>
-						</ul>
+	<div ng-controller="NavCtrl">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<div class="nav-container">
+						<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="brand" href="/tournaments">HS Tourney</a>
+						<div class="nav-collapse collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="/tournaments">Tournaments</a>
+								</li>
+							</ul>
+						</div>
+						<!--/.nav-collapse -->
 					</div>
-					<!--/.nav-collapse -->
 				</div>
+			</div>
+		</div>
+		<div class="container hero-unit">
+			<div class="container">
+				<div class="row-fluid" ng-show="!user.user.loggedIn">
+					<div class="brandlogo span5">
+						<h1>Hearthstone Tournaments</h1>
+					</div>
+					<div class="span7" ng-show="!user.user.loggedIn">
+						<div class="row-fluid">
+							<div class="span2"></div>
+							<div class="begin well span8">
+								<h2>Enter your BattleTag</h2>
+								<form class="form-horizontal">
+									<input type="text" ng-model="user.user.userName" placeholder="YourName#1234" />
+									<button class="btn btn-primary" ng-click="login()">Start!</button>
+								</form>
+								<span class="alert alert-error" ng-show="error">{{user.user.error}}</span>
+							</div>
+							<div class="span2"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sep">
+			<div class="container">
+				<ul class="info">
+					<li>
+						<span style="line-height: 24px">
+							Players Online
+						</span>
+						<span class="user-count">{{countUsers()}}</span>
+					</li>
+					<li class="pull-right" ng-show="user.user.loggedIn">
+						{{user.user.userName}}
+					</div>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -116,10 +156,11 @@
 
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="scripts/services/socket.js"></script>
+	<script src="scripts/controllers/nav.js"></script>
 	<script src="scripts/controllers/tournaments.js"></script>
 	<script src="scripts/controllers/spectate.js"></script>
-<script src="scripts/services/tournaments.js"></script>
-<script src="scripts/services/user.js"></script>
+	<script src="scripts/services/tournaments.js"></script>
+	<script src="scripts/services/user.js"></script>
 	<!-- endbuild -->
 </body>
 </html>

@@ -36,7 +36,6 @@ angular.module('hearthApp')
 			}
 		});
 
-		$scope.login = user.login;
 		$scope.countUsers = user.countUsers;
 
 		var idNameMap = $scope.idNameMap = {};
@@ -124,7 +123,7 @@ angular.module('hearthApp')
 			});
 			toAdd.push({
 				msg: msg,
-				user: $scope.userName
+				user: $scope.user.user.userName
 			});
 		};
 

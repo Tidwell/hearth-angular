@@ -23,7 +23,7 @@
 					<hr />
 				</div>
 				<ul class="nav nav-pills nav-stacked">
-					<li ng-repeat="(name,data) in user.userList">
+					<li ng-repeat="(name,data) in user.user.userList">
 						<a> <i class="fa fa-user"></i>
 							{{name}}
 						</a>
@@ -37,16 +37,16 @@
 			<fieldset>
 				<div class="input-append hidden-phone">
 					<div class="span8">
-						<input class="input-block-level" type="text" ng-model="generalChat" ng-disabled="!loggedIn">
+						<input class="input-block-level" type="text" ng-model="generalChat" ng-disabled="!user.user.loggedIn">
 					</div>
-					<button class="span4 btn btn-primary" type="submit" ng-disabled="!loggedIn"><i class="fa fa-comment" /> Say</button>
+					<button class="span4 btn btn-primary" type="submit" ng-disabled="!user.user.loggedIn"><i class="fa fa-comment" /> Say</button>
 				</div>
 
 				<div class="visible-phone">
 					
-					<input class="input-block-level" type="text" ng-model="generalChat" ng-disabled="!loggedIn">
+					<input class="input-block-level" type="text" ng-model="generalChat" ng-disabled="!user.user.loggedIn">
 					
-					<button class="input-block-level btn btn-primary" type="submit" ng-disabled="!loggedIn"><i class="fa fa-comment" /> Say</button>
+					<button class="input-block-level btn btn-primary" type="submit" ng-disabled="!user.user.loggedIn"><i class="fa fa-comment" /> Say</button>
 				</div>
 			</fieldset>
 		</form>

@@ -2,43 +2,46 @@
 angular.module('hearthApp')
 	.service('user', function User(socket) {
 		var user = {
-			userList: {},
-			userName: '',
-			loggedIn: false,
-			error: null,
+			user: {
+				userList: {},
+				userName: '',
+				loggedIn: false,
+				error: null
+			}
 		};
 
 		function login() {
-			user.error = null;
-			socket.emit('login', user.userName);
+			user.user.error = null;
+			socket.emit('login', user.user.userName);
 		}
 
 		function countUsers() {
 			var c = 0;
-			for (var name in user.userList) {
+			for (var name in user.user.userList) {
 				c++;
 			}
 			return c;
+
 		}
 
 		socket.on('user:list', function(data){
-			user.userList = data;
+			user.user.userList = data;
 		});
 
 		socket.on('user:login', function(data){
-			user.userList[data] = {};
-			if (user.userName === data) {
-				user.loggedIn = true;
+			user.user.userList[data] = {};
+			if (user.user.userName === data) {
+				user.user.loggedIn = true;
 				$('.hero-unit').addClass('loggedIn');
 			}
 		});
 
 		socket.on('user:loginerror', function(data){
-			user.error = data;
+			user.user.error = data;
 		});
 
 		socket.on('user:logout', function(data){
-			delete user.userList[data];
+			delete user.user.userList[data];
 		});
 
 		return {
