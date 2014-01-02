@@ -4,6 +4,7 @@ angular.module('hearthApp', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize',
+	'ngRoute',
 	'angularLocalStorage',
 	'ngAnimate'
 ])
