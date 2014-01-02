@@ -26,8 +26,13 @@ var LoggedInUsers = exports.LoggedInUsers = function(options, events) {
 		socket.emit('user:list', allUsers);
 
 		socket.on('login', function(data){
+
+			if (!data.length) {
+				socket.emit('user:loginerror', 'Invalid BattleTag.');
+				return;
+			}
 			if (allUsers[data]) {
-				socket.emit('user:loginerror', 'That user is already logged in.');
+				socket.emit('user:loginerror', 'That BattleTag is already logged in.');
 				return;
 			}
 			allUsers[data] = {auth: false};

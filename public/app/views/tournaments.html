@@ -1,6 +1,6 @@
-<div class="container hero-unit" ng-show="!loggedIn" ng-animate="'slide'">
+<div class="container hero-unit">
 	<div class="container">
-		<div class="row-fluid">
+		<div class="row-fluid" ng-show="!loggedIn">
 			<div class="brandlogo span5">
 				<h1>Hearthstone Tournaments</h1>
 			</div>
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 </div>
-<div class="sep" ng-show="!activeTournament">
+<div class="sep">
 	<div class="container">
 		<ul class="info">
 			<li>Players Online <span class="user-count">{{countUsers()}}</span></li>
@@ -31,14 +31,11 @@
 		</ul>
 	</div>
 </div>
-<div class="container">
+<div class="container main-content">
 	<div class="row-fluid" ng-show="!activeTournament">
-		<div class="span5">
-			<ng-include src="'views/general-chat.html'"></ng-include>
-		</div>
 		<div class="span7">
 			<ul class="tournament-list">
-				<li ng-repeat="tournament in tournaments" ng-show="isActive(tournament)" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
+				<li ng-animate="'animate'" ng-repeat="tournament in tournaments" ng-show="isActive(tournament)" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
 					<div class="row-fluid {{tournament.tournament.state}}">
 						<div class="span9">
 							<h4 class="name">
@@ -79,6 +76,9 @@
 					</div>
 				</li>
 			</ul>
+		</div>
+		<div class="span5">
+			<ng-include src="'views/general-chat.html'"></ng-include>
 		</div>
 	</div>
 </div>

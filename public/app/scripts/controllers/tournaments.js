@@ -29,6 +29,7 @@ angular.module('hearthApp')
 			$scope.userList[data] = {};
 			if ($scope.userName === data) {
 				$scope.loggedIn = true;
+				$('.hero-unit').addClass('loggedIn');
 			}
 		});
 
