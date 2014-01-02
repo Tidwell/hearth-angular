@@ -7,6 +7,10 @@ angular.module('hearthApp')
 		$scope.chat = chat.get();
 
 		$scope.sendChat = chat.sendChat;
+		$scope.countUsers = user.countUsers;
+
+		$scope.showUsers = false;
+
 		$scope.drop = activeTournament.drop;
 
 		$scope.$watch('at.participant', function() {

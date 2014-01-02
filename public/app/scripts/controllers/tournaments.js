@@ -3,15 +3,13 @@
 angular.module('hearthApp')
 	.controller('TournamentsCtrl', function($scope, $location, socket, tournaments, user, activeTournament, chat) {
 		$scope.user = user.get();
-		$scope.countUsers = user.countUsers;
 		$scope.tournaments = tournaments.get();
 		$scope.at = activeTournament.get();
-
-		$scope.join = activeTournament.join;
-
 		$scope.chat = chat.get();
 
 		$scope.sendChat = chat.sendChat;
+		$scope.join = activeTournament.join;
+		$scope.countUsers = user.countUsers;
 
 		$scope.showUsers = false;
 
