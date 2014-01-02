@@ -23,6 +23,9 @@ body {
 	background: linear-gradient(to bottom,  rgba(30,87,153,1) 0%,rgba(15,79,153,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#0f4f99',GradientType=0 ); /* IE6-9 */
 }
+.navbar-inverse .brand, .navbar-inverse .nav>li>a {
+	color: white;
+}
 
 
 /*HERO*/

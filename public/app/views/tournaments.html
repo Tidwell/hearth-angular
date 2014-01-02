@@ -15,8 +15,10 @@
 							<div>{{tournament.tournament.tournamentType}}</div>
 							<div>
 								<span ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn">
+									
 									<span class="users{{tournament.tournament.participantsCount}}clr">
-										Not Registered
+										<span ng-show="at.activeTournament.tournament.id==tournament.tournament.id">Registered</span>
+										<span ng-show="at.activeTournament.tournament.id!=tournament.tournament.id">Not Registered</span>
 									</span>
 								</span>
 								<span class="state" ng-show="tournament.tournament.state != 'pending' || !user.user.loggedIn">
@@ -35,7 +37,7 @@
 									started: {{tournament.tournament.startedAt | date:'h:mm a'}}
 								</span>
 							</div>
-							<button ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
+							<button ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn && !at.activeTournament" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
 								<i class="fa fa-plus"></i> Join
 							</button>
 						</div>
