@@ -16,6 +16,8 @@ angular.module('hearthApp')
 		$scope.chatLog = [];
 		$scope.tournamentChatLog = [];
 
+		$scope.showUsers = false;
+		
 		$scope.login = function() {
 			$scope.error = null;
 			socket.emit('login', $scope.userName);
