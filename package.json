@@ -6,5 +6,6 @@
   "engine": "node >= 0.10.x",
   "scripts": {
   	"install": "cd server && npm install && cd ../public && npm install"
-  }
+  },
+  "version": 1.0
 }
