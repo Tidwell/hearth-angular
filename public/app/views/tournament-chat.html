@@ -8,7 +8,7 @@
 			</ul>
 			<div class="tab-content chat-windows">
 				<div id="tournament-chat" class="tournament-chat chat">
-					<p ng-repeat="msg in tournamentChatLog">
+					<p ng-repeat="msg in chat.tournamentChatLog">
 						<strong>{{msg.user}}</strong>: {{msg.msg}}
 					</p>
 				</div>
@@ -23,7 +23,7 @@
 					<hr />
 				</div>
 				<ul class="nav nav-pills nav-stacked">
-					<li ng-repeat="participant in activeTournament.tournament.participants">
+					<li ng-repeat="participant in at.activeTournament.tournament.participants">
 						<a> <i class="fa fa-user"></i>
 							{{participant.participant.name}}
 						</a>
@@ -33,18 +33,18 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<form ng-submit="sendChat(activeTournament.tournament.url, tournamentChat); tournamentChat = ''">
+		<form ng-submit="sendChat(at.activeTournament.tournament.url, chat.tournamentChat); chat.tournamentChat = ''">
 			<fieldset>
 				<div class="input-append hidden-phone">
 					<div class="span8">
-						<input class="input-block-level" type="text" ng-model="tournamentChat" ng-disabled="!loggedIn">
+						<input class="input-block-level" type="text" ng-model="chat.tournamentChat">
 					</div>
 					<button class="span4 btn btn-primary" type="submit"><i class="fa fa-comment" /> Say</button>
 				</div>
 
 				<div class="visible-phone">
 					
-					<input class="input-block-level" type="text" ng-model="tournamentChat" ng-disabled="!loggedIn">
+					<input class="input-block-level" type="text" ng-model="chat.tournamentChat">
 					
 					<button class="input-block-level btn btn-primary" type="submit"><i class="fa fa-comment" /> Say</button>
 				</div>

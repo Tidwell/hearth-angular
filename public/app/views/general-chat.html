@@ -8,7 +8,7 @@
 			</ul>
 			<div class="tab-content chat-windows">
 				<div id="general-chat" class="general-chat chat">
-					<p ng-repeat="msg in chatLog">
+					<p ng-repeat="msg in chat.chatLog">
 						<strong>{{msg.user}}</strong>: {{msg.msg}}
 					</p>
 				</div>
@@ -33,18 +33,18 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<form ng-submit="sendChat('generalChat', generalChat); generalChat = ''">
+		<form ng-submit="sendChat('generalChat', chat.generalChat); chat.generalChat = ''">
 			<fieldset>
 				<div class="input-append hidden-phone">
 					<div class="span8">
-						<input class="input-block-level" type="text" ng-model="generalChat" ng-disabled="!user.user.loggedIn">
+						<input class="input-block-level" type="text" ng-model="chat.generalChat" ng-disabled="!user.user.loggedIn">
 					</div>
 					<button class="span4 btn btn-primary" type="submit" ng-disabled="!user.user.loggedIn"><i class="fa fa-comment" /> Say</button>
 				</div>
 
 				<div class="visible-phone">
 					
-					<input class="input-block-level" type="text" ng-model="generalChat" ng-disabled="!user.user.loggedIn">
+					<input class="input-block-level" type="text" ng-model="chat.generalChat" ng-disabled="!user.user.loggedIn">
 					
 					<button class="input-block-level btn btn-primary" type="submit" ng-disabled="!user.user.loggedIn"><i class="fa fa-comment" /> Say</button>
 				</div>
