@@ -1,0 +1,12 @@
+<div class="container main-content">
+	<div class="view-match">
+		<div ng-show="!tournamentId || error">
+			<h3>{{error || 'No Tournament Found'}}</h3>
+		</div>
+		<div ng-show="tournamentId">
+			<h3>{{activeTournament.tournament.name}}</h3>
+			<div class="view-iframe">
+			</div>
+		</div>
+	</div>
+</div>

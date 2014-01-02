@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('TournamentsCtrl', function($scope, socket) {
+	.controller('TournamentsCtrl', function($scope, socket, tournaments) {
 		$scope.userList = {};
 		$scope.userName = '';
 		$scope.loggedIn = false;
 		$scope.error;
-		$scope.tournaments = null;
+		$scope.tournaments = tournaments.get();
 		$scope.activeTournament = null;
 		$scope.activeBracket;
 		$scope.winnerReport = '';
@@ -41,10 +41,6 @@ angular.module('hearthApp')
 
 		socket.on('user:logout', function(data){
 			delete $scope.userList[data];
-		});
-
-		socket.on('tournaments:list', function(data){
-			$scope.tournaments = data;
 		});
 
 		socket.on('tournaments:joined', function(data){
@@ -107,6 +103,7 @@ angular.module('hearthApp')
 		});
 
 		$scope.isActive = function(tournament) {
+			if (!tournament || !tournament.tournament) { return false; }
 			if (tournament.tournament.state === 'pending' || tournament.tournament.state === 'underway') {
 				return true;
 			}

@@ -27,6 +27,10 @@ angular.module('hearthApp', [
 			  templateUrl: 'views/tournaments.html',
 			  controller: 'TournamentsCtrl'
 			})
+			.when('/spectate/:id', {
+			  templateUrl: 'views/spectate.html',
+			  controller: 'SpectateCtrl'
+			})
 			.otherwise({
 				redirectTo: '/tournaments'
 			});

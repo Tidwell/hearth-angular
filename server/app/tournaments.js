@@ -55,6 +55,10 @@ var Tournaments = exports.Tournaments = function(options, events) {
 	events.on('socket:connection', function(socket){
 		socket.emit('tournaments:list', self.tournaments);
 
+		socket.on('tournaments:list', function(){
+			socket.emit('tournaments:list', self.tournaments);
+		});
+
 		socket.on('tournaments:join', function(tournamentId){
 			socket.get('userName', function(err,name){
 				self.joinTournament(tournamentId, name, socket);
@@ -69,6 +73,14 @@ var Tournaments = exports.Tournaments = function(options, events) {
 
 		socket.on('tournaments:report', function(obj){
 			self.report(obj, socket);
+		});
+
+		socket.on('tournaments:info', function(id){
+			if (self.fullTournaments[id]) {
+				socket.emit('tournaments:info', self.fullTournaments[id]);
+			} else {
+				socket.emit('tournaments:info', {error: 'No Tournament Found.'})
+			}
 		});
 	});
 
