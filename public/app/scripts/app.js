@@ -4,7 +4,8 @@ angular.module('hearthApp', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize',
-	'angularLocalStorage'
+	'angularLocalStorage',
+	'ngAnimate'
 ])
 	.config(function($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);

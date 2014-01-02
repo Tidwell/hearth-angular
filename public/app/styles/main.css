@@ -37,46 +37,37 @@ body {
 	font-size: 1.5em;
 }
 
-.navbar-inverse .navbar-inner {
+.navbar-inverse .navbar-inner, .sep {
 	background: rgb(30,87,153); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(30,87,153,1) 0%, rgba(32,124,202,1) 99%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(99%,rgba(32,124,202,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(32,124,202,1) 99%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(32,124,202,1) 99%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(32,124,202,1) 99%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(30,87,153,1) 0%,rgba(32,124,202,1) 99%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#207cca',GradientType=0 ); /* IE6-9 */
-	border-color: : rgba(30,87,153,1);
-	border-bottom-width: 4px;
+	background: rgb(30,87,153); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(30,87,153,1) 0%, rgba(15,79,153,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(100%,rgba(15,79,153,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(15,79,153,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(15,79,153,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(30,87,153,1) 0%,rgba(15,79,153,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(30,87,153,1) 0%,rgba(15,79,153,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#0f4f99',GradientType=0 ); /* IE6-9 */
 }
 
 .sep {
-	background: rgb(30,87,153); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(32,124,202,1) 0%, rgba(30,87,153,1) 99%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(32,124,202,1)), color-stop(99%,rgba(30,87,153,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(32,124,202,1) 0%,rgba(30,87,153,1) 99%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(32,124,202,1) 0%,rgba(30,87,153,1) 99%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(32,124,202,1) 0%,rgba(30,87,153,1) 99%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(32,124,202,1) 0%,rgba(30,87,153,1) 99%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#207cca',GradientType=0 ); /* IE6-9 */
 	border-color: : rgba(30,87,153,1);
 	border-bottom-width: 4px;
 }
 
-.navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus {
+.navbarli {
 	color: #ffffff;
 	background-color: rgba(30,87,153,1);
 }
 .hero-unit .brandlogo h1 {
-	margin: 50px;
+	margin: 50px 0;
 	font-size: 3em;
 	color: white;
 }
 .hero-unit .begin {
-	margin: 50px auto;
-	width: 350px;
+	margin-top: 50px;
 	color: white;
-	background: rgb(30,87,153); /* Old browsers */
+	text-align: center;
+	background: rgba(30,87,153,1); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(30,87,153,.5) 0%, rgba(125,185,232,.5) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,.5)), color-stop(100%,rgba(125,185,232,.5))); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  rgba(30,87,153,.5) 0%,rgba(125,185,232,.5) 100%); /* Chrome10+,Safari5.1+ */
@@ -95,32 +86,127 @@ body {
 	margin-bottom: 20px;
 	border: 4px solid rgba(25,85,132,1);
 	border-top-color: rgba(30,87,153,1);
+	border-top-width: 2px;
 	border-left-width: 0;
 	border-right-width: 0;
+}
+
+
+.sep {
+	color: white;
+}
+.sep ul {
+	margin: 0;
+}
+.sep ul li {
+	list-style-type: none;
+	line-height: 22px;
+	font-size: 1em;
+	padding: 0 10px;
+	margin: 0;
+	display: inline-block;
+	border-right: 1px solid;
+}
+
+.sep .user-count {
+	font-size: 1.5em;
+	padding-left: 10px;
 }
 
 table {
 	border: 0;
 }
+.tournament-list {
+	margin: 0;
+}
 .tournament-list li {
 	background: rgb(76,76,76); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(76,76,76,1) 0%, rgba(0,0,0,1) 51%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(51%,rgba(0,0,0,1)), color-stop(60%,rgba(17,17,17,1)), color-stop(76%,rgba(43,43,43,1)), color-stop(91%,rgba(28,28,28,1)), color-stop(100%,rgba(19,19,19,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(76,76,76,1) 0%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
+	background: rgb(38,38,38); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(38,38,38,1) 0%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(38,38,38,1)), color-stop(76%,rgba(43,43,43,1)), color-stop(91%,rgba(28,28,28,1)), color-stop(100%,rgba(19,19,19,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(38,38,38,1) 0%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(38,38,38,1) 0%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#262626', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
 	color: white;
 	padding: 10px;
 	margin: 10px 0;
 	border-radius: 4px;
+	list-style-type: none;
+	border: 4px solid rgba(30,87,153,1);
 }
 
 .tournament-list img {
 	float: left;
 	margin: 0 10px 10px 0;
+	height: 50px;
 }
 .tournament-list .name {
-	font-size: 2.2em;
+	font-size: 1.5em;
+	line-height: 50px;
+}
+.tournament-list li.canJoin .name a {
+	color: white;
+}
+.tournament-list li:not(.canJoin) .name a {
+}
+.tournament-list li.canJoin {
+}
+
+.pending .state {
+	color: #468847;
+}
+.underway .state {
+	color: #D5B617;
+}
+.time {
+	color: #D5B617;
+}
+.users0 {}
+.users1, .users2, .users3, .users4 {
+	background: #468847;
+}
+.users5, .users6, .users7 {
+	background: #3a87ad;
+}
+.users8 {
+	background: #f89406;
+}
+
+.users0clr {}
+.users1clr, .users2clr, .users3clr, .users4clr {
+	color: #468847;
+}
+
+.users5clr, .users6clr, .users7clr {
+	color: #3a87ad;
+}
+.users8clr {
+	color: #f89406;
+}
+
+
+
+.slide-hide, .slide-show {
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+}
+.slide-hide {
+    position: relative;
+    top: 0;
+}
+.slide-hide.slide-hide-active {
+    position: absolute;
+    top: -100px;
+}
+.slide-show {
+    position: absolute;
+    top: 100px;
+}
+.slide-show.slide-show-active {
+    position: relative;
+    top: 0px;
 }

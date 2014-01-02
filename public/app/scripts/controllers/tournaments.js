@@ -152,6 +152,14 @@ angular.module('hearthApp')
 			});
 		};
 
+		$scope.countUsers = function() {
+			var c = 0;
+			for (var name in $scope.userList) {
+				c++;
+			}
+			return c;
+		};
+
 		$scope.$watch('chatLog.length', function(){
 			//TODO make directive
 			var objDiv = document.getElementById('general-chat');
