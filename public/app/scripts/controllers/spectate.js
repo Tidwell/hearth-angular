@@ -3,8 +3,8 @@
 angular.module('hearthApp')
 	.controller('SpectateCtrl', function($scope,$routeParams, socket, tournaments) {
 		$scope.tournamentId = $routeParams.id;
-
 		$scope.t = tournaments.get();
+		$scope.found = true;
 
 		function view() {
 			//$scope.tournamentName = tournament.tournament.name;

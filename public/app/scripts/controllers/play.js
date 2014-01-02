@@ -7,12 +7,11 @@ angular.module('hearthApp')
 		$scope.chat = chat.get();
 
 		$scope.sendChat = chat.sendChat;
-
 		$scope.drop = activeTournament.drop;
 
 		$scope.$watch('at.participant', function() {
 			if (!$scope.at.participant) {
 				$location.path('/tournaments');
 			}
-		})
+		});
 	});
