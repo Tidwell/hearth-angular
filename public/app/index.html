@@ -55,8 +55,11 @@
 						<a class="brand" href="/tournaments">HS Tourney</a>
 						<div class="nav-collapse collapse">
 							<ul class="nav">
-								<li class="active">
+								<li ng-class="navClass('tournaments')">
 									<a href="/tournaments">Tournaments</a>
+								</li>
+								<li ng-show="at.activeTournament" ng-class="navClass('play')">
+									<a href="/play/{{at.activeTournament.tournament.url}}">Current Tournament</a>
 								</li>
 							</ul>
 						</div>
