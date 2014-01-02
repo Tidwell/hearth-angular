@@ -11,10 +11,9 @@ angular.module('hearthApp')
 			idNameMap: {}
 		};
 
-		var idNameMap = at.idNameMap;
 		function updateMatch() {
 			at.activeTournament.tournament.participants.forEach(function(p) {
-				idNameMap[p.participant.id] = p.participant.name;
+				at.idNameMap[p.participant.id] = p.participant.name;
 			});
 			var pid = at.participant.participant.id;
 			var activeMatch = false;
@@ -25,8 +24,8 @@ angular.module('hearthApp')
 						at.winnerReport = '';
 					}
 					at.match = match;
-					at.match.player1Name = idNameMap[match.match.player1Id];
-					at.match.player2Name = idNameMap[match.match.player2Id];
+					at.match.player1Name = at.idNameMap[match.match.player1Id];
+					at.match.player2Name = at.idNameMap[match.match.player2Id];
 					activeMatch = true;
 				}
 			});

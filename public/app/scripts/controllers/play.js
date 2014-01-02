@@ -12,10 +12,10 @@ angular.module('hearthApp')
 		$scope.showUsers = false;
 
 		$scope.drop = activeTournament.drop;
+		$scope.sendResult = activeTournament.sendResult;
 
 		$scope.$watch('at.participant', function() {
 			if (!$scope.at.participant) {
-				console.log('re')
 				$location.path('/tournaments');
 			}
 		});

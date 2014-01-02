@@ -240,6 +240,9 @@ overflow: scroll; z-index: 5;
 .time {
 	color: #D5B617;
 }
+.complete .state {
+	color: #B84141;
+}
 .users0 {}
 .users1, .users2, .users3, .users4 {
 	background: #468847;

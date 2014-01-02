@@ -26,7 +26,7 @@
 				<h3>Results</h3>
 				<form class="form-horizontal">
 					<label>Winner</label>
-					<select ng-model="winnerReport" ng-change="sendResult()">
+					<select ng-model="at.winnerReport" ng-change="sendResult()">
 						<option value="">-still playing-</option>
 						<option value="{{at.match.match.player1Id}}">{{at.match.player1Name}}</option>
 						<option value="{{at.match.match.player2Id}}">{{at.match.player2Name}}</option>
@@ -34,10 +34,10 @@
 				</form>
 				<div ng-show="at.matchError">
 					<p>
-						<strong>{{at.idNameMap[matchError.report[0].user]}}</strong> reports <strong>{{at.idNameMap[matchError.report[0].winner]}}</strong> won.
+						<strong>{{at.idNameMap[at.matchError.report[0].user]}}</strong> reports <strong>{{at.idNameMap[at.matchError.report[0].winner]}}</strong> won.
 					</p>
 					<p>
-						<strong>{{at.idNameMap[matchError.report[1].user]}}</strong> reports <strong>{{at.idNameMap[matchError.report[1].winner]}}</strong> won.
+						<strong>{{at.idNameMap[at.matchError.report[1].user]}}</strong> reports <strong>{{at.idNameMap[at.matchError.report[1].winner]}}</strong> won.
 					</p>
 				</div>
 			</div>
