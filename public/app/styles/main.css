@@ -95,7 +95,7 @@ body {
 }
 
 .sep {
-	height: 22px;
+	height: 2em;
 	margin-bottom: 20px;
 	border: 4px solid rgba(25,85,132,1);
 	border-top-color: rgba(30,87,153,1);
@@ -113,16 +113,26 @@ body {
 }
 .sep ul li {
 	list-style-type: none;
-	line-height: 22px;
-	font-size: 1em;
 	padding: 0;
 	margin: 0;
 	display: inline-block;
 }
 
+.sep ul li span {
+	line-height: 1.5em;
+	font-size: 1em;
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .sep .user-count {
 	font-size: 1.5em;
 	padding-left: 10px;
+}
+
+.sep .user-name {
+	line-height: 2em;
+	font-size: 1em;
 }
 
 /*CHAT*/
