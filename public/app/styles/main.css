@@ -11,6 +11,7 @@ body {
 /*NAV*/
 .navbar-inverse .brand {
 	color: white;
+	font-family: 'Cantora One', sans-serif;
 }
 .navbar-inverse .navbar-inner, .sep {
 	background: rgb(30,87,153); /* Old browsers */
@@ -53,6 +54,7 @@ body {
 }
 
 .hero-unit .brandlogo h1 {
+	font-family: 'Cantora One', sans-serif;
 	margin: 50px 0;
 	font-size: 3em;
 	color: white;
