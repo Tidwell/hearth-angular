@@ -35,6 +35,7 @@ var Tournaments = exports.Tournaments = function(options, events) {
 	self.events = events;
 
 	var tournamentsOptions = self.options.get('tournaments');
+	self.tournamentsOptions = tournamentsOptions;
 
 	self.challongeClient = challonge.createClient({
 		apiKey: tournamentsOptions.key,
@@ -114,32 +115,47 @@ util.inherits(Tournaments, Module);
 Tournaments.prototype.checkCreate = function() {
 	var self = this;
 
-	var isWaiting = false;
+	var regions = self.tournamentsOptions.regions;
+	var regionPrefix = self.tournamentsOptions.regionPrefix;
+	var regionSuffix = self.tournamentsOptions.regionSuffix;
+	var regionMap = {};
+	regions.forEach(function(region){
+		regionMap[region] = false;
+	});
+
 	self.tournaments.forEach(function(tourney) {
 		if (tourney.tournament.state === 'pending') {
-			isWaiting = true;
+			var region;
+			regions.forEach(function(r){
+				var regionString = regionPrefix+r+regionSuffix
+				if (tourney.tournament.name.indexOf(regionString) !== -1) {
+					regionMap[r] = true;
+				}
+			});
 		}
 	});
 
-	if (!isWaiting) {
-		var tourneyName = 'Pickup 8-man tournament '+(++self.lastTourney);
-		self.challongeClient.tournaments.create({
-			tournament: {
-				name: tourneyName,
-				url: tourneyName.replace(/\W/g, ''),
-				signupCap: 8,
-				tournamentType: 'single elimination',
-			},
-			callback: function(err,data){
-				if (err) { console.log(err); return; }
-				self.loadTournaments();
-				self.socketServer.sockets.in('generalChat').emit('chat:message', {
-					room: 'generalChat',
-					user: 'System',
-					msg: 'A new tournament has been created: '+tourneyName
-				});
-			}
-		});
+	for (var region in regionMap) {
+		if (!regionMap[region]) {
+			var tourneyName = self.tournamentsOptions.namePrefix+(++self.lastTourney)+' '+regionPrefix+region+regionSuffix;
+			self.challongeClient.tournaments.create({
+				tournament: {
+					name: tourneyName,
+					url: tourneyName.replace(/\W/g, ''),
+					signupCap: 8,
+					tournamentType: 'single elimination',
+				},
+				callback: function(err,data){
+					if (err) { console.log(err); return; }
+					self.loadTournaments();
+					self.socketServer.sockets.in('generalChat').emit('chat:message', {
+						room: 'generalChat',
+						user: 'System',
+						msg: 'A new tournament has been created: '+tourneyName
+					});
+				}
+			});
+		}
 	}
 };
 
