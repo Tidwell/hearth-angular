@@ -7,12 +7,13 @@ angular.module('hearthApp')
 		$scope.login = user.login;
 
 		$scope.cancel = function() {
+			$('.modal-backdrop').hide();
 			dialog.close('cancel');
 		};
 
 		$scope.$watch('user.user.loggedIn', function() {
 			if ($scope.user.user.loggedIn) {
-				$('.modal-backdrop').remove();
+				$('.modal-backdrop').hide();
 				dialog.close('ok');
 			}
 		})

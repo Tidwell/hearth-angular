@@ -11,7 +11,16 @@ angular.module('hearthApp')
 
 		$scope.showUsers = false;
 
-		$scope.drop = activeTournament.drop;
+		$scope.drop = function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/drop-modal.html',
+				controller: 'DropModalCtrl',
+			});
+			d.open().then(function(result) {});
+		};
 		$scope.sendResult = activeTournament.sendResult;
 
 		function view() {

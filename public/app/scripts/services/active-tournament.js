@@ -68,9 +68,7 @@ angular.module('hearthApp')
 		}
 
 		function drop() {
-			if (confirm('Do you want to drop from '+at.activeTournament.tournament.name)) {
-				socket.emit('tournaments:drop', at.activeTournament.tournament.url);
-			}
+			socket.emit('tournaments:drop', at.activeTournament.tournament.url);
 		}
 
 		function sendResult() {
