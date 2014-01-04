@@ -5,6 +5,7 @@ angular.module('hearthApp')
 			user: {
 				userList: {},
 				userName: '',
+				password: '',
 				loggedIn: false,
 				error: null
 			}
@@ -12,7 +13,10 @@ angular.module('hearthApp')
 
 		function login() {
 			user.user.error = null;
-			socket.emit('login', user.user.userName);
+			socket.emit('user:login', {
+				battleTag: user.user.userName,
+				password: user.user.password
+			});
 		}
 
 		function countUsers() {

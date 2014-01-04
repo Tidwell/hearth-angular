@@ -4,12 +4,17 @@ var path = require('path');
 var fs = require('fs');
 var EventEmitter = require('events').EventEmitter;
 
-var moduleDirectory = '/server/app/';
+var mongoose = require('mongoose');
+
+var modelDirectory = '/server/app/models/';
+var moduleDirectory = '/server/app/modules/';
 
 var modules = [];
+var models = [];
 
 //resolve the path to the module directory
-var absolutePath = path.resolve(path.normalize(process.cwd()+moduleDirectory));
+var modulePath = path.resolve(path.normalize(process.cwd()+moduleDirectory));
+var modelPath = path.resolve(path.normalize(process.cwd()+modelDirectory));
 
 /*
 	Synchronously figure out the modules to load.
@@ -17,28 +22,37 @@ var absolutePath = path.resolve(path.normalize(process.cwd()+moduleDirectory));
 
 	POTENTIAL BOTTLENECK
 */
-function compileModules(path) {
+function compileModules(path, toPush) {
 	var files = fs.readdirSync(path);
 	files.forEach(function(file) {
 		if (file.indexOf('.js') !== -1) {
 			//if it is a .js file, it is a module to load
-			modules.push({
+			toPush.push({
 				path: path + '/' + file,
 				name: file.replace('.js', '').replace(file[0], file[0].toUpperCase())
 			});
 		} else {
 			//otherwise we recurse
-			compileModules(absolutePath+'/'+file);
+			compileModules(modulePath+'/'+file, toPush);
 		}
 	});
 }
-compileModules(absolutePath);
+compileModules(modulePath, modules);
 
 //after we know all the modules, add them to the exports so the user can access them
 modules.forEach(function forEach(part) {
 	var module = part.name;
 	exports[module] = require(part.path)[module];
 });
+
+//compile the models
+compileModules(modelPath, models);
+exports.models = {};
+models.forEach(function forEach(part) {
+	var model = part.name;
+	exports.models[model] = require(part.path)[model];
+});
+
 
 /*
 	exposes: createServer
@@ -49,16 +63,30 @@ modules.forEach(function forEach(part) {
 exports.createServer = function(options) {
 	var server = {
 		modules: {},
+		models: {},
 		options: options,
 		events: new EventEmitter()
 	};
+
+	mongoose.connect(options.db);
+
+	server.events.emit('database:connected', mongoose);
+
+	//require each module in ./app/ and create new instance of each, passing opts
+	models.forEach(function generate(part) {
+		var k = part.name;
+		var model = k.toLowerCase();
+		server.models[model] = new exports.models[k](server.options, mongoose);
+	});
+
+	server.events.emit('models:loaded');
 
 	//require each module in ./app/ and create new instance of each, passing opts
 	modules.forEach(function generate(part) {
 		var k = part.name;
 		var module = k.toLowerCase();
 		// store for user access via serverInstance.modules
-		server.modules[module] = new exports[k](server.options, server.events);
+		server.modules[module] = new exports[k](server.options, server.events, server.models);
 	});
 
 	server.events.emit('modules:loaded');

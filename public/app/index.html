@@ -65,6 +65,11 @@
 									<a href="/play/{{at.activeTournament.tournament.url}}">Active Tournament</a>
 								</li>
 							</ul>
+							<ul class="nav pull-right" ng-show="!user.user.loggedIn">
+								<li>
+									<a href ng-click="showlogin()">Login</a>
+								</li>
+							</ul>
 						</div>
 						<!--/.nav-collapse -->
 					</div>
@@ -86,7 +91,14 @@
 									<input type="text" ng-model="user.user.userName" placeholder="YourName#1234" />
 									<button class="btn btn-primary" ng-click="login()">Start!</button>
 								</form>
-								<span class="alert alert-error" ng-show="user.user.error">{{user.user.error}}</span>
+								<span class="alert alert-error" ng-show="user.user.error">
+									<span ng-show="user.user.error=='Requires Password.' || user.user.error=='Invalid Password.'">
+										BattleTag registered. <a href ng-click="showlogin()">login</a>.
+									</span>
+									<span ng-show="user.user.error!=='Requires Password.' && user.user.error!='Invalid Password.'">
+										{{user.user.error}}
+									</span>
+								</span>
 							</div>
 							<div class="span2"></div>
 						</div>
@@ -173,6 +185,7 @@
 	<script src="scripts/services/chat.js"></script>
 	<script src="scripts/controllers/browse.js"></script>
 	<script src="scripts/controllers/tournament-end-modal.js"></script>
+	<script src="scripts/controllers/login-modal.js"></script>
 	<!-- endbuild -->
 
 	<div class="vendor">

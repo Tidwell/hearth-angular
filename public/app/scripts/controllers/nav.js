@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('NavCtrl', function($scope, user, activeTournament, $location) {
+	.controller('NavCtrl', function($scope, user, activeTournament, $location, $dialog) {
 		$scope.user = user.get();
 
 		$scope.at = activeTournament.get();
@@ -15,5 +15,16 @@ angular.module('hearthApp')
 				return page === currentRoute ? 'active' : '';
 			}
 			return page.indexOf(currentRoute) !== -1 ? 'active' : '';
+		};
+
+		$scope.showlogin = function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/login-modal.html',
+				controller: 'LoginModalCtrl'
+			});
+			d.open().then(function(result) {});
 		};
 	});
