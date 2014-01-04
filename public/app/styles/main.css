@@ -23,7 +23,8 @@ body {
 	background: linear-gradient(to bottom,  rgba(30,87,153,1) 0%,rgba(15,79,153,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#0f4f99',GradientType=0 ); /* IE6-9 */
 }
-.navbar-inverse .brand, .navbar-inverse .nav>li>a {
+.navbar-inverse .brand, .navbar-inverse .nav>li>a,
+.navbar-inverse .nav-collapse .nav>li>a, .navbar-inverse .nav-collapse .dropdown-menu a {
 	color: white;
 }
 
@@ -118,6 +119,7 @@ body {
 	height: 200px;
 	overflow-y: scroll;
 	color: #fff;
+	padding: 5px;
 }
 .chat-interface fieldset .input-append {
 	display: block;
@@ -137,6 +139,9 @@ body {
 	border: 1px solid #2D2D2D;
 }
 
+.chat-interface .nav {
+	margin-bottom: 0;
+}
 .chat-interface .nav-tabs {
 	border-bottom: 1px solid #2D2D2D;
 }
@@ -151,9 +156,11 @@ body {
 overflow: scroll; z-index: 5;
 }
 
-.chat-interface .chat-tab {
+.chat-interface .chat {
 	width:auto;
 	margin-bottom: 0;
+	background: #1d1d1d;
+	color: #ffffff;
 }
 
 
@@ -219,11 +226,16 @@ overflow: scroll; z-index: 5;
 
 /*ACTIVE TOURNAMENT*/
 .round-content {
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 }
 .round-info h3 {
 	margin: 0;
 	color: white;
+	line-height: 24.5px;
+}
+.round-info strong {
+	margin: 10px 0;
+	display: block;
 }
 .active-match strong {
 	font-size: 2em;
@@ -266,6 +278,15 @@ overflow: scroll; z-index: 5;
 }
 .users8clr {
 	color: #f89406;
+}
+
+/*Vendor crap*/
+.vendor {
+	/*display: none;*/
+}
+.mobile-feedback {
+	margin: 10px;
+	display: none;
 }
 
 
@@ -333,5 +354,17 @@ overflow: scroll; z-index: 5;
 
 	.tournament-list li:first-child {
 		margin-top: 10px;
+	}
+
+	.round-info .btn-danger {
+		margin-bottom: 10px;
+	}
+
+	.furjbqy {
+		display: none;
+	}
+
+	.mobile-feedback {
+		display: block;
 	}
 }

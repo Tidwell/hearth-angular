@@ -256,14 +256,16 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 	});
 };
 
-Tournaments.prototype.dropTournament = function(id, pid, socket) {
+Tournaments.prototype.dropTournament = function(id, pid, socket, skipSendSocket) {
 	var self = this;
 	self.challongeClient.participants.destroy({
 		id: id,
 		participantId: pid,
 		callback: function(err,data){
 			if (err) { console.log(err); return; }
-			socket.emit('tournaments:dropped', data);
+			if (!skipSendSocket) {
+				socket.emit('tournaments:dropped', data);
+			}
 			socket.set('participant', null);
 			self.loadTournaments();
 			self.updateSocketTournament(id);
@@ -277,7 +279,8 @@ Tournaments.prototype.dropLoser = function(obj, match) {
 		socket.get('participant', function(err,participant){
 			if (participant && (participant.participant.id == match[0].user || participant.participant.id == match[1].user)) {
 				if (String(participant.participant.id) !== String(obj.winnerId)) {
-					self.dropTournament(obj.tournamentId, participant.participant.id, socket);
+					self.dropTournament(obj.tournamentId, participant.participant.id, socket, true);
+					socket.emit('tournaments:eliminated', obj);
 				}
 			}
 		});

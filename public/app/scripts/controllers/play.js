@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('PlayCtrl', function($scope, activeTournament, user, $location, chat) {
+	.controller('PlayCtrl', function($scope, activeTournament, user, $location, chat, socket, $dialog) {
 		$scope.user = user.get();
 		$scope.at = activeTournament.get();
 		$scope.chat = chat.get();
@@ -25,6 +25,34 @@ angular.module('hearthApp')
 			if (!$scope.at.participant) {
 				$location.path('/tournaments');
 			}
+		});
+
+		socket.on('tournaments:dropped', function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/tournament-end-modal.html',
+				controller: 'TournamentEndModalCtrl',
+				resolve: {
+					state: function() { return 'dropped' }
+				}
+			});
+			d.open().then(function(result) {});
+		});
+
+		socket.on('tournaments:eliminated', function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/tournament-end-modal.html',
+				controller: 'TournamentEndModalCtrl',
+				resolve: {
+					state: function() { return 'eliminated' }
+				}
+			});
+			d.open().then(function(result) {});
 		});
 
 		$scope.$watch('chat.tournamentChatLog.length', function(){

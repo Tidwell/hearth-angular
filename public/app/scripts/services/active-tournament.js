@@ -39,6 +39,11 @@ angular.module('hearthApp')
 			at.participant = null;
 		});
 
+		socket.on('tournaments:eliminated', function(){
+			at.activeTournament = null;
+			at.participant = null;
+		});
+
 		socket.on('tournaments:joined', function(data){
 			at.participant = data;
 		});

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('TournamentsCtrl', function($scope, $location, socket, tournaments, user, activeTournament, chat) {
+	.controller('TournamentsCtrl', function($scope, $location, $dialog, socket, tournaments, user, activeTournament, chat) {
 		$scope.user = user.get();
 		$scope.tournaments = tournaments.get();
 		$scope.at = activeTournament.get();
@@ -39,5 +39,4 @@ angular.module('hearthApp')
 				objDiv.scrollTop = objDiv.scrollHeight;
 			},0)
 		});
-
 	});
