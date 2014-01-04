@@ -65,9 +65,12 @@
 									<a href="/play/{{at.activeTournament.tournament.url}}">Active Tournament</a>
 								</li>
 							</ul>
-							<ul class="nav pull-right" ng-show="!user.user.loggedIn">
-								<li>
+							<ul class="nav pull-right" >
+								<li ng-show="!user.user.loggedIn">
 									<a href ng-click="showlogin()">Login</a>
+								</li>
+								<li ng-show="user.user.loggedIn && !user.user.registered">
+									<a href ng-click="showRegister()">Register your BattleTag!</a>
 								</li>
 							</ul>
 						</div>
@@ -186,7 +189,8 @@
 	<script src="scripts/controllers/browse.js"></script>
 	<script src="scripts/controllers/tournament-end-modal.js"></script>
 	<script src="scripts/controllers/login-modal.js"></script>
-<script src="scripts/controllers/drop-modal.js"></script>
+	<script src="scripts/controllers/drop-modal.js"></script>
+	<script src="scripts/controllers/register-modal.js"></script>
 	<!-- endbuild -->
 
 	<div class="vendor">

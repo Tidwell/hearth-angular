@@ -8,8 +8,6 @@ var util = require('util');
 
 var Module = require('./core/module').Module;
 
-var UserModel = require('../models/user');
-
 var LoggedInUsers = exports.LoggedInUsers = function(options, events, models) {
 	options.userModel = models.user;
 
@@ -29,8 +27,10 @@ var LoggedInUsers = exports.LoggedInUsers = function(options, events, models) {
 	self.events = events;
 
 	events.on('socket:connection', function(socket){
-		socket.emit('user:list', self.allUsers);
 
+		socket.on('user:list', function() {
+			socket.emit('user:list', self.allUsers);
+		});
 		socket.on('user:login', function(data){
 			self.login(socket, data);
 		});
@@ -55,7 +55,7 @@ LoggedInUsers.prototype.login = function(socket,data) {
 		return;
 	}
 
-	self.options.userModel.findOne({battleTag: data.battleTag}, function(err, user){
+	self.options.get('userModel').findOne({battleTag: data.battleTag}, function(err, user){
 		if (user && !data.password) {
 			socket.emit('user:loginerror', 'Requires Password.');
 			return;
@@ -73,13 +73,20 @@ LoggedInUsers.prototype.login = function(socket,data) {
 		}
 		self.allUsers[data.battleTag] = {auth: false};
 		socket.set('userName', data.battleTag);
+		if (user) {
+			socket.set('user', user);
+			data.registered = true;
+			delete data.password;
+		}
 		self.socketServer.sockets.emit('user:login', data.battleTag);
+		socket.emit('user:loggedIn', data);
 		self.events.emit('loggedInUsers:loggedIn', socket);
 	});
 };
 
 LoggedInUsers.prototype.register = function(socket,data) {
 	var self = this;
+	var UserModel = self.options.get('userModel');
 
 	if (!data.battleTag) {
 		socket.emit('user:loginerror', 'Invalid BattleTag.');
@@ -90,15 +97,19 @@ LoggedInUsers.prototype.register = function(socket,data) {
 		return;
 	}
 
-	self.options.userModel.findOne({battleTag: data.battleTag}, function(err, user){
+	UserModel.findOne({battleTag: data.battleTag}, function(err, user){
 		if (user) {
 			socket.emit('user:registererror', 'BattleTag already Registered.');
 		} else {
-			var u = new UserModel;
+			var u = new UserModel();
 			u.battleTag = data.battleTag;
 			u.password = data.password;
-			u.save(function() {
-				self.login(socket, data);
+			u.save(function() {	
+				socket.set('user', u);
+				data.registered = true;
+				delete data.password;
+
+				socket.emit('user:loggedIn', data);
 			});
 		}
 	});

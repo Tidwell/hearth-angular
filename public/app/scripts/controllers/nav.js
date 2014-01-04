@@ -27,4 +27,15 @@ angular.module('hearthApp')
 			});
 			d.open().then(function(result) {});
 		};
+
+		$scope.showRegister = function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/register-modal.html',
+				controller: 'RegisterModalCtrl'
+			});
+			d.open().then(function(result) {});
+		};
 	});

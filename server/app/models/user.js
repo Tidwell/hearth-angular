@@ -10,7 +10,7 @@ var User = exports.User = function(options, mongoose) {
 	var userSchema = new Schema({
 		displayName: String,
 		password: String,
-		battletag: String
+		battleTag: String
 	});
 
 	var UserModel = mongoose.model('Users', userSchema);

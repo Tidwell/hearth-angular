@@ -5,7 +5,7 @@
 	<form class="form-horizontal" ng-submit="login()">
 		<input type="text" ng-model="user.user.userName" placeholder="YourName#1234" />
 		<input type="password" ng-model="user.user.password" placeholder="password"  />
-		<input type="submit" class="btn btn-primary" ng-click="login()" value="Login" />
+		<input type="submit" class="btn btn-primary" value="Login" />
 	</form>
 	<span class="alert alert-error" ng-show="user.user.error">{{user.user.error}}</span>
 </div>

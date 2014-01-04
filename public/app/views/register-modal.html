@@ -1,0 +1,17 @@
+<div class="modal-header">
+	<h3>Register</h3>
+</div>
+<div class="modal-body register">
+	<p>
+		Register your BattleTag for additional security and to prevent others from using your name.
+	</p>
+	<form class="form-horizontal" ng-submit="register()">
+		<input type="text" ng-model="user.user.userName" placeholder="YourName#1234" />
+		<input type="password" ng-model="user.user.password" placeholder="password"  />
+		<input type="submit" class="btn btn-primary" value="Register" />
+	</form>
+	<span class="alert alert-error" ng-show="user.user.registererror">{{user.user.registererror}}</span>
+</div>
+<div class="modal-footer">
+	<button class="btn" ng-click="cancel()">Cancel</button>
+</div>
