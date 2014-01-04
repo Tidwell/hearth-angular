@@ -30,6 +30,10 @@ angular.module('hearthApp')
 			return false;
 		};
 
+		$scope.orderState = function(tournament) {
+			return tournament.tournament.state
+		};
+
 		$scope.$watch('chat.chatLog.length', function(){
 			//TODO make directive
 			var objDiv = document.getElementById('general-chat');

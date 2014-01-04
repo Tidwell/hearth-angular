@@ -2,16 +2,16 @@
 	<div class="row-fluid">
 		<div class="span7">
 			<ul class="tournament-list">
-				<li ng-animate="'animate'" ng-repeat="tournament in tournaments.tournaments" ng-show="isActive(tournament)" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
+				<li ng-animate="'animate'" ng-repeat="tournament in tournaments.tournaments | orderBy:orderState" ng-show="isActive(tournament)" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
 					<div class="row-fluid {{tournament.tournament.state}}">
-						<div class="span9">
+						<div class="span8 heading">
 							<h4 class="name">
 								<img src="/images/icon.png" />
 								<a ng-show="tournament.tournament.state != 'pending'" href="/spectate/{{tournament.tournament.url}}">{{tournament.tournament.name}}</a>
 								<span ng-show="tournament.tournament.state == 'pending'"><a>{{tournament.tournament.name}}</a></span>
 							</h4>
 						</div>
-						<div class="span3 info">
+						<div class="span4 info">
 							<div>{{tournament.tournament.tournamentType}}</div>
 							<div>
 								<span ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn">

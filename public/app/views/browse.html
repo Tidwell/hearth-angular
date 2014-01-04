@@ -1,7 +1,7 @@
-<div class="container main-content">
+ <div class="container main-content">
 	<div class="row-fluid">
 		<ul class="tournament-list">
-			<li ng-animate="'animate'" ng-repeat="tournament in tournaments.tournaments" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
+			<li ng-animate="'animate'" ng-repeat="tournament in tournaments.tournaments | orderBy:orderState" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
 				<div class="row-fluid {{tournament.tournament.state}}">
 					<div class="span9">
 						<h4 class="name">

@@ -215,7 +215,9 @@ overflow: scroll; z-index: 5;
 }
 .tournament-list li.canJoin {
 }
-
+.tournament-list li .info {
+	text-align: right;
+}
 .join-btn {
 	margin-top: 10px;
 }
@@ -294,10 +296,26 @@ overflow: scroll; z-index: 5;
 	/*display: none;*/
 }
 .mobile-feedback {
-	margin: 10px;
+	margin: 0 10px 10px;
 	display: none;
 }
+.mobile-feedback a {
+	color: #d67908;
+}
 
+footer {
+	color: #ccc;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+footer img {
+	height: 22px;
+}
+
+footer img[alt=Challonge] {
+	height: 16px;
+}
 
 @media (max-width: 979px) {
 	body {
@@ -317,6 +335,26 @@ overflow: scroll; z-index: 5;
 		margin: 10px auto;
 		width: auto;
 
+	}
+
+	.tournament-list .heading, .tournament-list .info {
+		width: auto;
+	}
+
+	.tournament-list .heading {
+		float: left;
+	}
+
+	.tournament-list .info {
+		float: right;
+	}
+
+	.tournament-list .name {
+		font-size: 1.2em;
+		line-height: 1.2em;
+	}
+	.tournament-list .name img {
+		height: 20px;
 	}
 }
 
