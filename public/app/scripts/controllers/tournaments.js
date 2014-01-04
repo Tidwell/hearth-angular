@@ -31,7 +31,7 @@ angular.module('hearthApp')
 		};
 
 		$scope.orderState = function(tournament) {
-			return tournament.tournament.state
+			return tournament.tournament.state;
 		};
 
 		$scope.$watch('chat.chatLog.length', function(){

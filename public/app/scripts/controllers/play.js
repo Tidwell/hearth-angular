@@ -58,7 +58,35 @@ angular.module('hearthApp')
 				templateUrl: 'views/tournament-end-modal.html',
 				controller: 'TournamentEndModalCtrl',
 				resolve: {
-					state: function() { return 'eliminated' }
+					state: function() { return 'eliminated'; }
+				}
+			});
+			d.open().then(function(result) {});
+		});
+
+		socket.on('tournaments:won', function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/tournament-end-modal.html',
+				controller: 'TournamentEndModalCtrl',
+				resolve: {
+					state: function() { return 'victory'; }
+				}
+			});
+			d.open().then(function(result) {});
+		});
+
+		socket.on('tournaments:win', function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/tournament-end-modal.html',
+				controller: 'TournamentEndModalCtrl',
+				resolve: {
+					state: function() { return 'victorymatch'; }
 				}
 			});
 			d.open().then(function(result) {});

@@ -1,6 +1,7 @@
 <div class="modal-header">
 	<h3 ng-show="state=='dropped'">Dropped!</h3>
 	<h3 ng-show="state=='eliminated'">Eliminated!</h3>
+	<h3 ng-show="state=='victory' || state=='victorymatch">Victory!</h3>
 </div>
 <div class="modal-body">
 	<div ng-show="state=='dropped'">
@@ -8,6 +9,12 @@
 	</div>
 	<div ng-show="state=='eliminated'">
 		You have been eliminated from the tournament.
+	</div>
+	<div ng-show="state=='victory'">
+		You have won the tournament!
+	</div>
+	<div ng-show="state=='victorymatch'">
+		You have won the round!
 	</div>
 </div>
 <div class="modal-footer">

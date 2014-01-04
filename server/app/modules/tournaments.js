@@ -340,6 +340,18 @@ Tournaments.prototype.report = function(obj, socket) {
 					},
 					callback: function(err,data){
 						if (err) { console.log(err); return; }
+						//tell the winner
+						self.socketServer.sockets.clients().forEach(function(socket){
+							socket.get('participant', function(err,participant){
+								if (participant && participant.participant.id === data.match.winnerId) {
+									if (data.match.round === 3) {
+										socket.emit('tournaments:won');
+										return;
+									}
+									socket.emit('tournaments:win');
+								}
+							});
+						});
 
 						self.dropLoser(obj, match);
 
