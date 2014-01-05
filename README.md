@@ -29,9 +29,7 @@ View:
 ##Config files in ./config/ contains
 
 To Deploy:
-  * grunt build assets
   * ./build.sh
-  * modify scripts.js to have io.connect("http://www.hstrny.com:9007")
   * ```git subtree push --prefix build origin live```
   * ssh into box
   * ```git pull```
