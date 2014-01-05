@@ -68,6 +68,12 @@ angular.module('hearthApp')
 			}
 		});
 
+		socket.on('tournaments:started', function(data){
+			if (data.id === at.activeTournament.tournament.url) {
+				playSound();
+			}
+		});
+
 		function join(tournament) {
 			socket.emit('tournaments:join', tournament.tournament.url);
 		}
@@ -83,6 +89,12 @@ angular.module('hearthApp')
 				winnerId: at.winnerReport
 			});
 		}
+
+		function playSound(){
+			var filename = '/sounds/notify';
+			document.getElementById("sound").innerHTML='<audio autoplay="autoplay"><source src="' + filename + '.wav" type="audio/wav" /><source src="' + filename + '.wav" type="audio/wav" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.wav" /></audio>';
+		}
+
 
 		return {
 			get: function() { return at; },

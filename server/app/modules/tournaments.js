@@ -197,6 +197,9 @@ Tournaments.prototype.checkStart = function() {
 						id: tourney.tournament.url,
 						callback: function(err,data){
 							if (err) { console.log(err); return; }
+							self.socketServer.sockets.emit('tournaments:started', {
+								id: tourney.tournament.url
+							});
 							self.loadTournaments();
 							self.updateSocketTournament(tourney.tournament.url);
 						}
