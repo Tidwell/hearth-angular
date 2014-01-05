@@ -27,3 +27,6 @@ View:
   ```
 
 ##Config files in ./config/ contains
+
+To deploy:
+git subtree push --prefix build origin live
