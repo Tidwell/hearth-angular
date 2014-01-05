@@ -23,7 +23,8 @@
 					<hr />
 				</div>
 				<ul class="nav nav-pills nav-stacked">
-					<li ng-repeat="participant in at.activeTournament.tournament.participants">
+					<li ng-repeat="participant in at.activeTournament.tournament.participants" 
+					ng-class="{disconnect: !isOnline(participant.participant.name)}">
 						<a> <i class="fa fa-user"></i>
 							{{participant.participant.name}}
 						</a>

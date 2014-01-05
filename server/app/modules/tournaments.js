@@ -49,6 +49,8 @@ var Tournaments = exports.Tournaments = function(options, events) {
 
 	self.fullTournaments = {};
 
+	self.pendingDisconnects = {};
+
 	events.on('socket:ready', function(sServer){
 		self.socketServer = sServer;
 		self.loadTournaments();
@@ -68,7 +70,7 @@ var Tournaments = exports.Tournaments = function(options, events) {
 
 		socket.on('tournaments:drop', function(tournamentId){
 			socket.get('participant', function(err,p){
-				self.dropTournament(tournamentId, p.participant.id, socket);
+				self.dropTournament(tournamentId, p.participant.id, socket, false, p);
 			});
 		});
 
@@ -83,6 +85,10 @@ var Tournaments = exports.Tournaments = function(options, events) {
 				socket.emit('tournaments:info', {error: 'No Tournament Found.'});
 			}
 		});
+
+		socket.on('disconnect', function(){
+			self.disconnect(socket);
+		});
 	});
 
 	//reconnect
@@ -96,11 +102,22 @@ var Tournaments = exports.Tournaments = function(options, events) {
 							participant.participant.tournamentUrl = url;
 
 							socket.set('participant', participant);
+
+							//clear disconnect
+							delete self.pendingDisconnects[participant.participant.id];
+							
 							socket.emit('tournaments:joined', participant);
 							events.emit('tournaments:reconnect', {
 								socket: socket,
 								tournamentId: url
 							});
+
+							self.socketServer.sockets.in(url).emit('chat:message', {
+								room: participant.participant.tournamentUrl,
+								user: 'System',
+								msg: participant.participant.name+' has reconnected.'
+							});
+							self.checkStart();
 							self.updateSocketTournament(url);
 						}
 					});
@@ -163,6 +180,15 @@ Tournaments.prototype.checkStart = function() {
 	var self = this;
 	self.tournaments.forEach(function(tourney) {
 		if (tourney.tournament.state === 'pending' && tourney.tournament.participantsCount === tourney.tournament.signupCap) {
+			var pendingDisconnect;
+			if (self.fullTournaments[tourney.tournament.url]) {
+				self.fullTournaments[tourney.tournament.url].tournament.participants.forEach(function(p) {
+					if (self.pendingDisconnects[p.participant.id]) {
+						pendingDisconnect = true;
+					}
+				});
+			}
+			if (pendingDisconnect) { return; }
 			self.challongeClient.participants.randomize({
 				id: tourney.tournament.url,
 				callback: function(err,data){
@@ -244,7 +270,6 @@ Tournaments.prototype.loadTournaments = function() {
 Tournaments.prototype.joinTournament = function(id, name, socket){
 	var self = this;
 
-	//TODO get participant, if exists (already in tournament) refuse join
 	socket.get('participant', function(err,participant){
 		if (participant) {
 			console.log('multi prevented');
@@ -265,6 +290,11 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 					socket: socket,
 					tournamentId: id
 				});
+				self.socketServer.sockets.in(id).emit('chat:message', {
+					room: id,
+					user: 'System',
+					msg: name+' has joined.'
+				});
 				self.loadTournaments();
 				self.updateSocketTournament(data.participant.tournamentUrl);
 			}
@@ -272,7 +302,7 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 	});
 };
 
-Tournaments.prototype.dropTournament = function(id, pid, socket, skipSendSocket) {
+Tournaments.prototype.dropTournament = function(id, pid, socket, skipSendSocket, p) {
 	var self = this;
 	self.challongeClient.participants.destroy({
 		id: id,
@@ -282,7 +312,16 @@ Tournaments.prototype.dropTournament = function(id, pid, socket, skipSendSocket)
 			if (!skipSendSocket) {
 				socket.emit('tournaments:dropped', data);
 			}
-			socket.set('participant', null);
+			if (socket) {
+				socket.set('participant', null);
+			}
+			if (p && !skipSendSocket) {
+				self.socketServer.sockets.in(id).emit('chat:message', {
+					room: p.participant.tournamentUrl,
+					user: 'System',
+					msg: p.participant.name+' has dropped.'
+				});
+			}
 			self.loadTournaments();
 			self.updateSocketTournament(id);
 		}
@@ -370,6 +409,35 @@ Tournaments.prototype.report = function(obj, socket) {
 					msg: 'A reporting conflict has been detected.'
 				});
 			}
+		}
+	});
+};
+
+Tournaments.prototype.disconnect = function(socket) {
+	var self = this;
+	socket.get('participant', function(err,participant){
+		if (participant) {
+			self.pendingDisconnects[participant.participant.id] = function() {
+				self.dropTournament(participant.participant.tournamentUrl, participant.participant.id, false, true);
+				self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
+					room: participant.participant.tournamentUrl,
+					user: 'System',
+					msg: participant.participant.name+' has been dropped.'
+				});
+			};
+
+			setTimeout(function(){
+				if (self.pendingDisconnects[participant.participant.id]) {
+					self.pendingDisconnects[participant.participant.id]();
+					delete self.pendingDisconnects[participant.participant.id];
+				}
+			},self.tournamentsOptions.dropTimeout);
+
+			self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
+				room: participant.participant.tournamentUrl,
+				user: 'System',
+				msg: participant.participant.name+' has disconnected and will be dropped in '+self.tournamentsOptions.dropTimeout/1000/60 +  ' minutes.'
+			});
 		}
 	});
 };

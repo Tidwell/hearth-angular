@@ -3,7 +3,7 @@
 		<ul class="tournament-list">
 			<li ng-animate="'animate'" ng-repeat="tournament in tournaments.tournaments | orderBy:orderState" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
 				<div class="row-fluid {{tournament.tournament.state}}">
-					<div class="span9">
+					<div class="span9 heading">
 						<h4 class="name">
 							<img src="/images/icon.png" />
 							<a ng-show="tournament.tournament.state != 'pending'" href="/spectate/{{tournament.tournament.url}}">{{tournament.tournament.name}}</a>

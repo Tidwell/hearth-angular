@@ -18,7 +18,13 @@
 			<div ng-show="at.match" class="active-match">
 				<h3>Round {{at.match.match.round}}</h3>
 				<p>
-					<strong>{{at.match.player1Name}}</strong><span class="vs"> vs. </span><strong>{{at.match.player2Name}}</strong>
+					<strong ng-class="{disconnect: !isOnline(at.match.player1Name)}">
+						{{at.match.player1Name}}
+					</strong>
+					<span class="vs"> vs. </span>
+					<strong ng-class="{disconnect: !isOnline(at.match.player2Name)}">
+						{{at.match.player2Name}}
+					</strong>
 				</p>
 				<p>
 					Add your opponent's BattleTag to your friends list then play a best of 3 match.  Report the results after!

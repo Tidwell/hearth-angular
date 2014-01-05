@@ -303,6 +303,10 @@ overflow: scroll; z-index: 5;
 	color: #f89406;
 }
 
+.disconnect, .disconnect a {
+	color: red;
+}
+
 /*Vendor crap*/
 .vendor {
 	/*display: none;*/

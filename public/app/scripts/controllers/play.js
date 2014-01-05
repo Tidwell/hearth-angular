@@ -36,6 +36,14 @@ angular.module('hearthApp')
 			}
 		});
 
+		$scope.isOnline = function(userName) {
+			if (!$scope.user) { return; }
+			if ($scope.user.user.userList[userName]) {
+				return true;
+			}
+			return false;
+		};
+
 		socket.on('tournaments:dropped', function() {
 			var d = $dialog.dialog({
 				backdrop: true,
