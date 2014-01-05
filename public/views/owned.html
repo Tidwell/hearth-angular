@@ -1,0 +1,22 @@
+<div class="row-fluid">
+	<button class="btn btn-danger" ng-click="clearData()">Remove All Data</button>
+	<button class="btn" ng-click="ownAll()">Set to max owned</button>
+	<select ng-model="order">
+		<option value="name">Name</option>
+		<option value="mana">Cost</option>
+		<option value="quality">Rarity</option>
+		<option value="id">Id</option>
+	</select>
+	<select ng-model="reverseSort">
+		<option value="false">Ascending</option>
+		<option value="true">Descending</option>
+	</select>
+</div>
+<div class="row-fluid">
+	<ul>
+		<li ng-repeat="card in cardList.cards | orderBy:order:reverseSort" ng-show="realCard(card)">
+			{{card.id}} | {{card.name}} | {{card.mana}} | {{card.quality}}
+			<input type="number" ng-model="owned.cards[card.id]" ng-change="updateOwned({id: card.id, owned: owned.cards[card.id]})">
+		</li>
+	</ul>
+</div>
