@@ -7,7 +7,7 @@ Requires
 
 Install:
   * Clone the repository
-  * ```npm install``` in ./
+  * ```git clone https://github.com/Tidwell/hearth-angular.git```
 
 Build:
   * ```grunt build``` in ./
@@ -28,5 +28,13 @@ View:
 
 ##Config files in ./config/ contains
 
-To deploy:
-git subtree push --prefix build origin live
+To Deploy:
+  * ```git subtree push --prefix build origin live```
+  * ssh into box
+  * ```git pull```
+
+If server needs restart:
+  * Look for the process on port 9000 using: netstat -tulpn
+  * kill #PID
+  * nohup node app &
+  * sudo service apache2 restart
