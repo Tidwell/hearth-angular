@@ -36,5 +36,5 @@ To Deploy:
 If server needs restart:
   * Look for the process on port 9000 using: netstat -tulpn
   * kill #PID
-  * nohup node app &
+  * nohup node app -env=prod &
   * sudo service apache2 restart
