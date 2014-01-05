@@ -1,0 +1,60 @@
+<div class="container main-content {{at.activeTournament.tournament.state}}" ng-show="at.activeTournament">
+	<div class="row-fluid round-info">
+		<div class="pull-left">
+			<h3>{{at.activeTournament.tournament.name}}</h3>
+			<strong>
+				<span class="state">{{at.activeTournament.tournament.state}}</span>
+				<span class="badge users{{at.activeTournament.tournament.participantsCount}}">
+					{{at.activeTournament.tournament.participantsCount}} / {{at.activeTournament.tournament.signupCap}}
+				</span>
+			</strong>
+		</div>
+		<button class="btn btn-danger pull-right" ng-click="drop()">
+			<i class="fa fa-minus-square"> Drop
+		</button>
+	</div>
+	<div class="row-fluid round-content">
+		<div class="span6 well">
+			<div ng-show="at.match" class="active-match">
+				<h3>Round {{at.match.match.round}}</h3>
+				<p>
+					<strong ng-class="{disconnect: !isOnline(at.match.player1Name)}">
+						{{at.match.player1Name}}
+					</strong>
+					<span class="vs"> vs. </span>
+					<strong ng-class="{disconnect: !isOnline(at.match.player2Name)}">
+						{{at.match.player2Name}}
+					</strong>
+				</p>
+				<p>
+					Add your opponent's BattleTag to your friends list then play a best of 3 match.  Report the results after!
+				</p>
+				<h3>Results</h3>
+				<form class="form-horizontal">
+					<label>Winner</label>
+					<select ng-model="at.winnerReport" ng-change="sendResult()">
+						<option value="">-still playing-</option>
+						<option value="{{at.match.match.player1Id}}">{{at.match.player1Name}}</option>
+						<option value="{{at.match.match.player2Id}}">{{at.match.player2Name}}</option>
+					</select>
+				</form>
+				<div ng-show="at.matchError">
+					<p>
+						<strong>{{at.idNameMap[at.matchError.report[0].user]}}</strong> reports <strong>{{at.idNameMap[at.matchError.report[0].winner]}}</strong> won.
+					</p>
+					<p>
+						<strong>{{at.idNameMap[at.matchError.report[1].user]}}</strong> reports <strong>{{at.idNameMap[at.matchError.report[1].winner]}}</strong> won.
+					</p>
+				</div>
+			</div>
+			<div ng-show="!at.match">
+				<strong>You are not currently in any matches.</strong>
+			</div>
+		</div>
+		<div class="span6">
+			<ng-include src="'views/tournament-chat.html'"></ng-include>
+		</div>
+	</div>
+	<div class="active-iframe" ng-show="at.activeTournament.tournament.state=='underway'">
+	</div>
+</div>
