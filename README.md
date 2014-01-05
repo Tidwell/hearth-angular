@@ -37,7 +37,7 @@ To Deploy:
   * ```git pull```
 
 If server needs restart:
-  * Look for the process on port 9000 using: netstat -tulpn
+  * Look for the process on port 9007 using: netstat -tulpn
   * kill #PID
   * nohup node app -env=prod &
   * sudo service apache2 restart
