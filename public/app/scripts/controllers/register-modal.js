@@ -10,11 +10,4 @@ angular.module('hearthApp')
 			$('.modal-backdrop').hide();
 			dialog.close('cancel');
 		};
-
-		$scope.$watch('user.user.registered', function() {
-			if ($scope.user.user.registered) {
-				$('.modal-backdrop').hide();
-				dialog.close('ok');
-			}
-		})
 	});
