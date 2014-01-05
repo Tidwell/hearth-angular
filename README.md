@@ -41,3 +41,6 @@ If server needs restart:
   * kill #PID
   * nohup node app -env=prod &
   * sudo service apache2 restart
+
+Bug Tracking:
+  * http://hstrny.idea.informer.com/
