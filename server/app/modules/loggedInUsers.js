@@ -50,7 +50,7 @@ util.inherits(LoggedInUsers, Module);
 LoggedInUsers.prototype.login = function(socket,data) {
 	var self = this;
 
-	if (!data || !data.battleTag.length) {
+	if (!data || !data.battleTag.length || !self.validBattleTag(data.battleTag)) {
 		socket.emit('user:loginerror', 'Invalid BattleTag.');
 		return;
 	}
@@ -124,4 +124,46 @@ LoggedInUsers.prototype.disconnect = function(socket) {
 			self.socketServer.sockets.emit('user:logout', name);
 		}
 	});
+};
+
+//https://us.battle.net/support/en/article/BattleTagNamingPolicy
+LoggedInUsers.prototype.validBattleTag = function(tag) {
+	//turn off
+	var console = {log: function() {}};
+
+	//The BattleTag must be between 3-12 characters long. (we go to 20 for the #s)
+	if (tag.length < 3 || tag.length > 29) { console.log('bad length'); return false; }
+
+	//Numbers are allowed, but a BattleTag cannot start with a number.
+	if (!isNaN(Number(tag[0]))) { console.log('first not number'); return false; }
+	
+	//Mixed capitals are allowed (ex: TeRrAnMaRiNe).
+	
+	//must contain a #
+	if (tag.indexOf('#') === -1) {
+		console.log('no #')
+		return false;
+	}
+	var tagCpy = tag.replace('#','');
+	//No spaces or symbols are allowed (“, *, #, +, etc.).
+	if (!(/^[a-zA-Z0-9#]*$/).test(tagCpy)) {
+		//todo check to see if only exceptions are accents
+		//Accented characters are allowed.
+		//yea this is broken
+		console.log('no special')
+		return false;
+	}
+	//must contain a digit
+	if (!(/\d/).test(tagCpy)) {
+		console.log('no digit')
+		return false;
+	}
+
+	//has to end with a number
+	if (isNaN(tagCpy[tagCpy.length-1])) {
+		console.log('no ending num')
+		return false;
+	}
+
+	return true;
 }
