@@ -1,0 +1,11 @@
+<div class="row-fluid">
+	<form class="form-inline" role="form">
+		<div class="form-group">
+			<label class="sr-only" for="card-size">Card Size</label>
+			<input type="range" id="card-size" ng-model="cardWidth" min="50" max="300">
+			<a href="/owned">owned</a>
+	</div></form>
+</div>
+<div class="row-fluid">
+	<img ng-repeat="card in cardList.cards" ng-src="{{card.image}}" width="{{cardWidth}}">
+</div>
