@@ -8,7 +8,12 @@ angular.module('hearthApp')
 			match: null,
 			matchError: null,
 			participant: null,
-			idNameMap: {}
+			idNameMap: {},
+			dropped: false,
+			eliminated: false,
+			won: false,
+			win: false
+
 		};
 
 		function updateMatch() {
@@ -37,16 +42,23 @@ angular.module('hearthApp')
 		socket.on('tournaments:dropped', function(){
 			at.activeTournament = null;
 			at.participant = null;
+			at.dropped = true;
 		});
 
 		socket.on('tournaments:eliminated', function(){
 			at.activeTournament = null;
 			at.participant = null;
+			at.eliminated = true;
 		});
 
 		socket.on('tournaments:won', function(){ //end of tournament, player won
 			at.activeTournament = null;
 			at.participant = null;
+			at.won = true;
+		});
+
+		socket.on('tournaments:win', function(){ //end of round
+			at.win = true;
 		});
 
 		socket.on('tournaments:joined', function(data){

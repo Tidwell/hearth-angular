@@ -44,7 +44,8 @@ angular.module('hearthApp')
 			return false;
 		};
 
-		socket.on('tournaments:dropped', function() {
+		$scope.$watch('at.dropped', function() {
+			if (!$scope.at.dropped) { return; }
 			var d = $dialog.dialog({
 				backdrop: true,
 				keyboard: true,
@@ -52,13 +53,15 @@ angular.module('hearthApp')
 				templateUrl: 'views/tournament-end-modal.html',
 				controller: 'TournamentEndModalCtrl',
 				resolve: {
-					state: function() { return 'dropped' }
+					state: function() { return 'dropped'; }
 				}
 			});
 			d.open().then(function(result) {});
+			$scope.at.dropped = false;
 		});
 
-		socket.on('tournaments:eliminated', function() {
+		$scope.$watch('at.eliminated', function() {
+			if (!$scope.at.eliminated) { return; }
 			var d = $dialog.dialog({
 				backdrop: true,
 				keyboard: true,
@@ -70,9 +73,11 @@ angular.module('hearthApp')
 				}
 			});
 			d.open().then(function(result) {});
+			$scope.at.eliminated = false;
 		});
 
-		socket.on('tournaments:won', function() {
+		$scope.$watch('at.won', function() {
+			if (!$scope.at.won) { return; }
 			var d = $dialog.dialog({
 				backdrop: true,
 				keyboard: true,
@@ -84,9 +89,11 @@ angular.module('hearthApp')
 				}
 			});
 			d.open().then(function(result) {});
+			$scope.at.won = false;
 		});
 
-		socket.on('tournaments:win', function() {
+		$scope.$watch('at.win', function() {
+			if (!$scope.at.win) { return; }
 			var d = $dialog.dialog({
 				backdrop: true,
 				keyboard: true,
@@ -98,6 +105,7 @@ angular.module('hearthApp')
 				}
 			});
 			d.open().then(function(result) {});
+			$scope.at.win = false;
 		});
 
 		$scope.$watch('chat.tournamentChatLog.length', function(){
