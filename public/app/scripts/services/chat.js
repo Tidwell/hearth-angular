@@ -21,6 +21,14 @@ angular.module('hearthApp')
 			toAdd.push(obj);
 		});
 
+		function clear() {
+			c.tournamentChatLog = [];
+		}
+
+		socket.on('tournaments:dropped', clear);
+		socket.on('tournaments:won', clear);
+		socket.on('tournaments:eliminated', clear);
+
 		
 
 		function sendChat(room, msg) {
