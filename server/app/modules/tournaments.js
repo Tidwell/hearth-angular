@@ -325,6 +325,11 @@ Tournaments.prototype.dropTournament = function(id, pid, socket, skipSendSocket,
 					msg: p.participant.name+' has dropped.'
 				});
 			}
+			self.events.emit('tournaments:dropped', {
+				id: id,
+				socket: socket,
+				participant: p
+			});
 			self.loadTournaments();
 			self.updateSocketTournament(id);
 		}
@@ -388,6 +393,11 @@ Tournaments.prototype.report = function(obj, socket) {
 								if (participant && participant.participant.id === data.match.winnerId) {
 									if (data.match.round === 3) {
 										socket.emit('tournaments:won');
+										self.events.emit('tournaments:won', {
+											id: obj.tournamentId,
+											socket: socket,
+											participant: participant
+										});
 										return;
 									}
 									socket.emit('tournaments:win');
