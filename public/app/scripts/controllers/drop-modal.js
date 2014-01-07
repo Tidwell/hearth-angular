@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('DropModalCtrl', function LoginCtrl($scope, dialog, activeTournament) {
+	.controller('DropModalCtrl', function DropCtrl($scope, dialog, activeTournament) {
 		$scope.at = activeTournament.get();
 
 		$scope.drop = function() {

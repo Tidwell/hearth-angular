@@ -248,6 +248,40 @@ overflow: scroll; z-index: 5;
 	margin: 10px;
 }
 
+.join-trny h3 {
+	margin-top: 0;
+}
+.join-trny p:first-child {
+	margin-top: 0;
+}
+.join-trny img {
+	height: 4em;
+	margin: 0px 1.7em 10px 0;
+}
+.join-trny p, .join-trny section{
+	clear: both;
+	margin: 0 10px 20px;
+}
+.join-trny .iconcontainer {
+	width: 4em;
+	margin: 0 10px 10px 0;
+	display: block;
+	float: left;
+}
+
+.join-trny button {
+	width: 200px;
+	height: 50px;
+	clear: both;
+	margin: 0 auto;
+	display: block;
+}
+
+.join-trny ul {
+	margin: 0 0 10px 1.2em;
+	float: left;
+	max-width: 80%;
+}
 
 /*ACTIVE TOURNAMENT*/
 .round-content {
@@ -436,5 +470,8 @@ footer img[alt=Challonge] {
 
 	.mobile-feedback {
 		display: block;
+	}
+	.join-trny ul {
+		max-width: 65%;
 	}
 }

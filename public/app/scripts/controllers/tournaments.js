@@ -8,7 +8,25 @@ angular.module('hearthApp')
 		$scope.chat = chat.get();
 
 		$scope.sendChat = chat.sendChat;
-		$scope.join = activeTournament.join;
+		$scope.join = function(tournament) {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/join-modal.html',
+				controller: 'JoinModalCtrl',
+				resolve: {
+					tournament: function() {
+						return tournament;
+					}
+				}
+			});
+			d.open().then(function(result) {
+				if (result) {
+					activeTournament.join(tournament);
+				}
+			});
+		};
 		$scope.countUsers = user.countUsers;
 
 		$scope.showUsers = false;

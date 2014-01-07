@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('hearthApp')
-  .controller('JoinModalCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+	.controller('JoinModalCtrl', function JoinCtrl($scope, dialog, tournament) {
+		$scope.tournament = tournament;
+
+		$scope.join = function() {
+			dialog.close(true);
+		};
+
+		$scope.cancel = function() {
+			dialog.close(false);
+		};
+	});
