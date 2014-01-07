@@ -234,20 +234,6 @@ overflow: scroll; z-index: 5;
 	margin-top: 10px;
 }
 
-/*VIEW PAGE*/
-.active-iframe, .view-iframe {
-	height: 500px;
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
-}
-.view-match {
-	color: #fff;
-}
-.view-match .fa-times-circle {
-	cursor: pointer;
-	margin: 10px;
-}
-
 .join-trny h3 {
 	margin-top: 0;
 }
@@ -256,7 +242,6 @@ overflow: scroll; z-index: 5;
 }
 .join-trny img {
 	height: 4em;
-	margin: 0px 1.7em 10px 0;
 }
 .join-trny p, .join-trny section{
 	clear: both;
@@ -267,6 +252,7 @@ overflow: scroll; z-index: 5;
 	margin: 0 10px 10px 0;
 	display: block;
 	float: left;
+	text-align: center;
 }
 
 .join-trny button {
@@ -281,6 +267,20 @@ overflow: scroll; z-index: 5;
 	margin: 0 0 10px 1.2em;
 	float: left;
 	max-width: 80%;
+}
+
+/*VIEW PAGE*/
+.active-iframe, .view-iframe {
+	height: 500px;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.view-match {
+	color: #fff;
+}
+.view-match .fa-times-circle {
+	cursor: pointer;
+	margin: 10px;
 }
 
 /*ACTIVE TOURNAMENT*/
