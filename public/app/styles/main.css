@@ -475,9 +475,11 @@ footer img[alt=Challonge] {
 		max-width: 65%;
 	}
 }
-
+@media (max-width: 480px) {
+	
+}
 /*http://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media (max-width: 480px) and (-webkit-min-device-pixel-ratio:0) { 
 	select:focus, textarea:focus, input:focus {
 		font-size: 16px;
 	}
