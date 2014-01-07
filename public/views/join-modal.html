@@ -1,1 +1,37 @@
-<p>This is the join-modal view.</p>
+<div class="modal-header">
+	<h3>{{tournament.tournament.name}}</h3>
+</div>
+<div class="modal-body join-trny">
+	<p class="clear-fix">
+		<span class="iconcontainer pull-left">
+			<i class="fa fa-trophy fa-4x"></i>
+		</span>
+		This is a {{tournament.tournament.signupCap}}-player {{tournament.tournament.tournamentType}} tournament.  If you lose a round, your are eliminated.
+	</p>
+	<p class="clear-fix">
+		<span class="iconcontainer">
+			<i class="fa fa-list-ol fa-4x"></i>
+		</span>
+		Each round is played best-of-three games (the first player to win 2 games wins the round).
+	</p>
+	<p class="clear-fix time-info">
+		<span class="iconcontainer">
+			<i class="fa fa-clock-o fa-4x"></i>
+		</span>
+		Depending on how far you advance, this tournament could take anywhere between 45 minutes and 2 hours.  Please ensure you have enough time to complete the tournament.
+	</p>
+	<section class="clear-fix">
+		<span class="iconcontainer">
+			<img src="/images/964cc3f6.pack.png">
+		</span>
+		<ul>
+			<li><strong>Players may change their hero/deck between rounds.</strong></li>
+			<li><strong>Players may not change their hero during a round.</strong><br></li>
+			<li><strong>Players may change the contents of their deck between games during a round.</strong></li>
+		</ul>
+	</section>
+	<button class="btn btn-success" ng-click="join()">Join the tournament</button>
+</div>
+<div class="modal-footer">
+	<button class="btn" ng-click="cancel()">Cancel</button>
+</div>
