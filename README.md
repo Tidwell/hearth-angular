@@ -8,6 +8,7 @@ Requires
 Install:
   * Clone the repository
   * ```git clone https://github.com/Tidwell/hearth-angular.git```
+  * ```npm install``` in ./
 
 Build:
   * ```./build.sh``` in ./
