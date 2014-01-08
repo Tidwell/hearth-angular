@@ -62,6 +62,7 @@ body {
 }
 .hero-unit .begin {
 	margin-top: 50px;
+	position: relative;
 	color: white;
 	text-align: center;
 	background: rgba(30,87,153,1); /* Old browsers */
@@ -84,6 +85,13 @@ body {
 }
 .hero-unit .begin h2 {
 	text-shadow: 4px 4px 2px #3d3d3d;
+}
+
+.hero-unit .begin i {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
 }
 
 

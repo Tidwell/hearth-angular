@@ -27,6 +27,7 @@ angular.module('hearthApp')
 				}
 			});
 		};
+
 		$scope.countUsers = user.countUsers;
 
 		$scope.showUsers = false;

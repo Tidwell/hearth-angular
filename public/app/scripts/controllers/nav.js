@@ -38,4 +38,15 @@ angular.module('hearthApp')
 			});
 			d.open().then(function(result) {});
 		};
+
+		$scope.btHelp = function() {
+			var d = $dialog.dialog({
+				backdrop: true,
+				keyboard: true,
+				backdropClick: true,
+				templateUrl: 'views/battletag-modal.html',
+				controller: 'BattletagModalCtrl'
+			});
+			d.open();
+		};
 	});
