@@ -369,6 +369,17 @@ footer img[alt=Challonge] {
 	height: 16px;
 }
 
+.contact h2, .contact p,
+.faq h2, .faq p, .faq strong {
+	color: white;
+}
+
+.faq strong {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	display: block;
+}
+
 @media (max-width: 979px) {
 	body {
 		padding: 0;
@@ -473,6 +484,9 @@ footer img[alt=Challonge] {
 	}
 	.join-trny ul {
 		max-width: 65%;
+	}
+	.contact, .faq {
+		padding: 10px;
 	}
 }
 @media (max-width: 480px) {

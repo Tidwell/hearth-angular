@@ -65,6 +65,9 @@
 								<li ng-show="at.activeTournament" ng-class="navClass('play')">
 									<a href="/play/{{at.activeTournament.tournament.url}}">Active Tournament</a>
 								</li>
+								<li ng-class="navClass(['faq'])">
+									<a href="/faq">FAQ</a>
+								</li>
 							</ul>
 							<ul class="nav pull-right" >
 								<li ng-show="!user.user.loggedIn">
@@ -130,7 +133,7 @@
 
 	<footer class="container">
 		<hr />
-		©HSTRNY 2014, all <a href="http://us.battle.net/hearthstone/en/" target="_new"><img src="/images/hearth-logo.png" alt="Hearthstone" /></a> Images and Content ©Blizzard. This site is not affiliated with or endorsed by Blizzard in any way.  Tournament services provided by <a href="http://www.challonge.com" target="_new"><img src="/images/challonge-logo.png" alt="Challonge" /></a>	
+		©HSTRNY 2014, all <a href="http://us.battle.net/hearthstone/en/" target="_new"><img src="/images/hearth-logo.png" alt="Hearthstone" /></a> Images and Content ©Blizzard. This site is not affiliated with or endorsed by Blizzard in any way.  Tournament services provided by <a href="http://www.challonge.com" target="_new"><img src="/images/challonge-logo.png" alt="Challonge" /></a>
 	</footer>
 	<div id="sound"></div>
 
@@ -201,7 +204,9 @@
 	<script src="scripts/controllers/login-modal.js"></script>
 	<script src="scripts/controllers/drop-modal.js"></script>
 	<script src="scripts/controllers/register-modal.js"></script>
-<script src="scripts/controllers/join-modal.js"></script>
+	<script src="scripts/controllers/join-modal.js"></script>
+	<script src="scripts/controllers/faq.js"></script>
+	<script src="scripts/controllers/contact.js"></script>
 	<!-- endbuild -->
 
 	<div class="vendor">

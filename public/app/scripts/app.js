@@ -46,6 +46,10 @@ angular.module('hearthApp', [
 			  templateUrl: 'views/browse.html',
 			  controller: 'BrowseCtrl'
 			})
+			.when('/faq', {
+			  templateUrl: 'views/faq.html',
+			  controller: 'FaqCtrl'
+			})
 			.otherwise({
 				redirectTo: '/tournaments'
 			});

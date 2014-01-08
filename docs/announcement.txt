@@ -27,7 +27,7 @@ For anything that can't be resolved between players, contact me in general chat 
 
 *****
 
-I tried to make the process as painless as possible, but if anyone runs into issues or can't get something to work, please let me know by using the "Leave Feedback" tab on the left of the screen, or if you are on mobile, the "Leave Feedback" link above the footer.
+I tried to make the process as painless as possible, but if anyone runs into issues or can't get something to work, please let me know by using the "Leave Feedback" tab on the left of the screen, or if you are on mobile, the "Leave Feedback" link below the footer.
 
 Any bug reports, feature requests, questions, comments, or hate mail can be posted here, sent via email to Aaron.Tidwell@gmail.com or sent to [@Tidwell](http://www.twitter.com/tidwell) on twitter.
 
