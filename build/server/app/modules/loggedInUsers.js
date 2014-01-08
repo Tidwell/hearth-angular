@@ -131,12 +131,9 @@ LoggedInUsers.prototype.validBattleTag = function(tag) {
 	//turn off
 	var console = {log: function() {}};
 
-	//The BattleTag must be between 3-12 characters long. (we go to 20 for the #s)
-	if (tag.length < 3 || tag.length > 29) { console.log('bad length'); return false; }
-
 	//Numbers are allowed, but a BattleTag cannot start with a number.
 	if (!isNaN(Number(tag[0]))) { console.log('first not number'); return false; }
-	
+
 	//Mixed capitals are allowed (ex: TeRrAnMaRiNe).
 	
 	//must contain a #
@@ -144,24 +141,26 @@ LoggedInUsers.prototype.validBattleTag = function(tag) {
 		console.log('no #')
 		return false;
 	}
-	var tagCpy = tag.replace('#','');
-	//No spaces or symbols are allowed (“, *, #, +, etc.).
-	if (!(/^[a-zA-Z0-9#]*$/).test(tagCpy)) {
-		//todo check to see if only exceptions are accents
-		//Accented characters are allowed.
-		//yea this is broken
-		console.log('no special')
-		return false;
-	}
-	//must contain a digit
-	if (!(/\d/).test(tagCpy)) {
-		console.log('no digit')
+
+	//everything after the hash has to be a number
+	var battleTagPrefix = tag.split('#')[0];
+	var battleTagSuffix = Number(tag.split('#')[1]);
+	if (isNaN(battleTagSuffix) || !battleTagSuffix) {
+		console.log('invalid suffix')
 		return false;
 	}
 
-	//has to end with a number
-	if (isNaN(tagCpy[tagCpy.length-1])) {
-		console.log('no ending num')
+	//The BattleTag must be between 3-12 characters long.
+	if (battleTagPrefix.length < 3 || battleTagPrefix.length > 12) { console.log('bad length'); return false; }
+
+	
+	//	No spaces or symbols are allowed (“, *, #, +, etc.).
+	//	todo check to see if only exceptions are accents
+	//	Accented characters are allowed.
+	//	yea this is broken
+	
+	if (!(/^[a-zA-Z0-9#]*$/).test(battleTagPrefix)) {
+		console.log('no special')
 		return false;
 	}
 

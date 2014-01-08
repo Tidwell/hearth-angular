@@ -1,0 +1,38 @@
+Hey Guys, I'm really excited to announce [HSTRNY.com](http://www.hstrny.com), a website that I've been working on for the last few weeks.  It seems pretty clear that Blizzard won't be adding in-game tournaments for a little while, yet many many players want something competitive, but more structured than the ladder system.
+
+Browsing forums, meeting at set times, or joining a league doesn't really work for my play schedule, but I do have an hour or two that I could dedicate to a tournament at sporadic times, and I imagine a lot of you are in the same boat.  HSTRNY makes short work of all this, automating the entire join/drop process and providing an intuitive interface to report your matches, chat with other players, browse completed tournaments, and resolve any issues.
+
+Currently it supports North American and European regions - as soon as 8 players join a tournament, it begins and a new tournament is created for more players to join.
+
+*****
+
+###[HSTRNY.com](http://www.hstrny.com)
+####Automated Hearthstone Pickup Tournaments.
+
+North American and European single-elimination tournaments automated to begin as soon as 8 players join.
+
+* Players may change their hero/deck between rounds.
+* Players may not change their hero during a round.
+* Players may change the contents of their deck between games during a round.
+
+*****
+
+To join a tournament, enter your BattleTag and click the +Join button for the tournament labeled "pending" in your region.  Once 8 players join, the tournament will begin and your current match will be displayed, along with the bracket for the current tournament.
+
+Players add their opponent's BattleTag to their friends list, and after playing a best-of-three match, both players enter the results.  As each match ends, the app will update both the bracket and your current match in real time.  Continue until you are eliminated, or crowned the champion!
+
+Conflicts in reporting will notify the other players via chat.  The system automatically handles players who disconnect from the HSTRNY site, and will drop anyone who doesn't reconnect in 4 minutes.  If you close the tab, you will be dropped.
+
+For anything that can't be resolved between players, contact me in general chat (look for Tidwell).  If the site gets much use, I will eventually add more admins that can also resolve conflicts between players.
+
+*****
+
+I tried to make the process as painless as possible, but if anyone runs into issues or can't get something to work, please let me know by using the "Leave Feedback" tab on the left of the screen, or if you are on mobile, the "Leave Feedback" link above the footer.
+
+Any bug reports, feature requests, questions, comments, or hate mail can be posted here, sent via email to Aaron.Tidwell@gmail.com or sent to [@Tidwell](http://www.twitter.com/tidwell) on twitter.
+
+*****
+
+Technical notes can be found on the [FAQ](http://www.hstrny.com/faq).  The tournament behavior is provided through the [CHALLONGE](http://www.challonge.com) API.
+
+I'm trying to ensure that the site works well on every device it can - I know some players may prefer not to alt-tab to report their matches, and would rather use their phone or tablet - so let me know if you are using a mobile device and see anything weird.
