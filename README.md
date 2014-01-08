@@ -10,7 +10,7 @@ Install:
   * ```git clone https://github.com/Tidwell/hearth-angular.git```
 
 Build:
-  * ```grunt build``` in ./
+  * ```./build.sh``` in ./
 
 Run:
   * ```node app``` in ./
