@@ -49,10 +49,14 @@ var Chat = exports.Chat = function(options, events) {
 	});
 
 	events.on('tournaments:dropped', function(obj){
-		obj.socket.leave(obj.id);
+		if (obj.socket) {
+			obj.socket.leave(obj.id);
+		}
 	});
 	events.on('tournaments:won', function(obj){
-		obj.socket.leave(obj.id);
+		if (obj.socket) {
+			obj.socket.leave(obj.id);
+		}
 	});
 };
 
