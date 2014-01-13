@@ -12,7 +12,7 @@
 		<div ng-show="!tournamentId || error || !found">
 			<h3>{{error || 'No Tournament Found'}}</h3>
 		</div>
-		<div ng-show="tournamentId">
+		<div ng-show="tournamentId && !error && found">
 			<div class="row-fluid">
 				<h3 class="span8">{{tournament.tournament.name}}</h3>
 				<div class="span4 {{tournament.tournament.state}}" style="text-align: right">

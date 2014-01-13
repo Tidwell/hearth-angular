@@ -37,6 +37,8 @@ var Server = exports.Server = function(options, events) {
 		//tell the modules other modules to bind their routes
 		events.emit('server:routes', app);
 
+		events.emit('server:genericRoutes', app);
+
 		var serverOptions = self.options.get('server');
 		//create server
 		httpServer.listen(serverOptions.port, function() {

@@ -27,7 +27,7 @@ var AngularServer = exports.AngularServer = function(options, events) {
     });
 	
 	//add the routes
-	events.on('server:routes', function(app){
+	events.on('server:genericRoutes', function(app){
 		app.get(serverOptions.uriPath + '*', function(req,res) { //serve all /uriPath/* routes
 			self.serve(req,res);
 		});
