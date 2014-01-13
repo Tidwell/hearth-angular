@@ -392,6 +392,14 @@ footer img[alt=Challonge] {
 	display: block;
 }
 
+.breadcrumb {
+	padding: 0;
+	background-color: transparent;
+}
+.breadcrumb li {
+	text-shadow: none;
+}
+
 @media (max-width: 979px) {
 	body {
 		padding: 0;
