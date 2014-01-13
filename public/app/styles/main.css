@@ -253,6 +253,8 @@ overflow: scroll; z-index: 5;
 }
 .join-trny p, .join-trny section{
 	clear: both;
+}
+.modal .join-trny p, .modal .join-trny section {
 	margin: 0 10px 20px;
 }
 .join-trny .iconcontainer {
@@ -260,6 +262,8 @@ overflow: scroll; z-index: 5;
 	margin: 0 10px 10px 0;
 	display: block;
 	float: left;
+}
+.modal .join-trny .iconcontainer {
 	text-align: center;
 }
 
