@@ -1,0 +1,30 @@
+<div class="{{tournament.tournament.state}}" ng-controller="TournamentInfoCtrl" ng-init="init(tournament)">
+	<div>{{tournament.tournament.tournamentType}}</div>
+	<div>
+		<span ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn">
+			
+			<span class="users{{tournament.tournament.participantsCount}}clr">
+				<span ng-show="at.activeTournament.tournament.id==tournament.tournament.id">Registered</span>
+				<span ng-show="at.activeTournament.tournament.id!=tournament.tournament.id">Not Registered</span>
+			</span>
+		</span>
+		<span class="state" ng-show="tournament.tournament.state != 'pending' || !user.user.loggedIn">
+			{{tournament.tournament.state}}
+		</span>
+	</div>
+	<div>
+		<span ng-show="tournament.tournament.state == 'pending'">
+			<span class="badge users{{tournament.tournament.participantsCount}}">
+				{{tournament.tournament.participantsCount}} / {{tournament.tournament.signupCap}}
+			</span>
+		</span>
+	</div>
+	<div>
+		<span class="time" ng-show="tournament.tournament.state == 'underway'">
+			started: {{tournament.tournament.startedAt | date:'h:mm a'}}
+		</span>
+	</div>
+	<button ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn && !at.activeTournament" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
+		<i class="fa fa-plus"></i> Join
+	</button>
+</div>

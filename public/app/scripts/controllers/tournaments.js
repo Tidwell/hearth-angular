@@ -1,45 +1,15 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('TournamentsCtrl', function($scope, $location, $dialog, socket, tournaments, user, activeTournament, chat) {
-		$scope.user = user.get();
+	.controller('TournamentsCtrl', function($scope, socket, tournaments, user, chat) {
 		$scope.tournaments = tournaments.get();
-		$scope.at = activeTournament.get();
 		$scope.chat = chat.get();
 
 		$scope.sendChat = chat.sendChat;
-		$scope.join = function(tournament) {
-			var d = $dialog.dialog({
-				backdrop: true,
-				keyboard: true,
-				backdropClick: true,
-				templateUrl: 'views/join-modal.html',
-				controller: 'JoinModalCtrl',
-				resolve: {
-					tournament: function() {
-						return tournament;
-					}
-				}
-			});
-			d.open().then(function(result) {
-				if (result) {
-					activeTournament.join(tournament);
-				}
-			});
-		};
 
 		$scope.countUsers = user.countUsers;
 
 		$scope.showUsers = false;
-
-		socket.on('tournaments:joined', function(data) {
-			if (!data) { return; }
-			$location.path('/play/'+data.participant.tournamentUrl);
-		});
-
-		socket.on('tournaments:multijoin', function() {
-			alert('You are already in a tournament.');
-		});
 
 		$scope.isActive = function(tournament) {
 			if (!tournament || !tournament.tournament) { return false; }

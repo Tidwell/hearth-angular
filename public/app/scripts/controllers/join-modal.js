@@ -1,19 +1,12 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('JoinModalCtrl', function JoinCtrl($scope, dialog, tournament) {
+	.controller('JoinModalCtrl', function JoinCtrl($scope, dialog, tournament, user) {
+		$scope.user = user.get();
 		$scope.tournament = tournament;
 
-		$scope.region = function(name) {
-			if (name.indexOf('[NA]') !== -1) {
-				return 'North American';
-			} else {
-				return 'European';
-			}
-		};
-
-		$scope.join = function() {
-			dialog.close(true);
+		$scope.confirmJoin = function(tournament) {
+			dialog.close(tournament);
 		};
 
 		$scope.cancel = function() {
