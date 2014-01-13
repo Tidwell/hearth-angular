@@ -4,6 +4,7 @@ angular.module('hearthApp')
 	.controller('TournamentsCtrl', function($scope, socket, tournaments, user, chat) {
 		$scope.tournaments = tournaments.get();
 		$scope.chat = chat.get();
+		$scope.user = user.get();
 
 		$scope.sendChat = chat.sendChat;
 
