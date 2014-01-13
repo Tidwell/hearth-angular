@@ -47,8 +47,18 @@
 					</p>
 				</div>
 			</div>
-			<div ng-show="!at.match">
+			<div ng-show="!at.match && at.activeTournament.tournament.state!='pending'">
 				<strong>You are not currently in any matches.</strong>
+			</div>
+			<div ng-show="at.activeTournament.tournament.state=='pending'">
+				<strong>The tournament will begin as soon as 8 players have joined.</strong>
+				<br>
+				<strong>Currently Registered</strong>
+				<ul>
+					<li ng-repeat="user in at.activeTournament.tournament.participants">
+						{{user.participant.name}}
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="span6">
