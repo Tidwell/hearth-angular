@@ -2,7 +2,7 @@
 	<div class="row-fluid">
 		<div class="span7">
 			<ul class="tournament-list">
-				<li ng-repeat="tournament in tournaments.tournaments | orderBy:orderState" ng-show="isActive(tournament)" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
+				<li ng-repeat="tournament in tournaments.tournaments | orderBy:orderState | filter:isActive" ng-class="{canJoin: tournament.tournament.state == 'pending'}">
 					<div class="row-fluid {{tournament.tournament.state}}">
 						<div class="span8 heading">
 							<h4 class="name">
