@@ -51,6 +51,16 @@ var Tournaments = exports.Tournaments = function(options, events) {
 
 	self.pendingDisconnects = {};
 
+	events.on('server:routes', function(app){
+		app.get('/admin/reloadTournaments', function(req,res) {
+			self.loadTournaments({forceReload: true});
+			res.json({ok: true});
+			setTimeout(function() {
+				self.socketServer.sockets.emit('tournaments:list', self.tournaments);
+			}, 10000);
+		});
+	});
+
 	events.on('socket:ready', function(sServer){
 		self.socketServer = sServer;
 		self.loadTournaments();
@@ -235,6 +245,11 @@ Tournaments.prototype.updateSocketTournament = function(id) {
 		callback: function(err,data){
 			if (err) { console.log(err); return; }
 			self.fullTournaments[id] = data; //cache it
+			self.tournaments.forEach(function(t){
+				if (t.tournament.url === id) {
+					t.tournament.participants = data.tournament.participants;
+				}
+			});
 			self.socketServer.sockets.clients().forEach(function(socket){
 				socket.get('participant', function(err,participant){
 					if (participant && participant.participant.tournamentUrl === id && participant.participant.active) {
@@ -247,31 +262,25 @@ Tournaments.prototype.updateSocketTournament = function(id) {
 	});
 };
 
-Tournaments.prototype.loadTournaments = function() {
+Tournaments.prototype.loadTournaments = function(opt) {
 	var self = this;
 	self.challongeClient.tournaments.index({
 		callback: function(err,data){
 			if (err) { console.log(err); return; }
 			self.tournaments = data;
 			self.lastTourney = data.length;
-			self.socketServer.sockets.emit('tournaments:list', self.tournaments);
 			self.checkCreate();
 			self.checkStart();
 			self.checkFinalize();
 
-			//get full data for active tournaments on first call
+			//get full data for active tournaments on first call or force reload
 			self.tournaments.forEach(function(tournament){
 				var t = tournament.tournament;
-				if (t.state === 'underway' || t.state === 'pending' && !self.fullTournaments[t.url]) {
+				if (!self.fullTournaments[t.url] || (opt && opt.forceReload)) {
 					self.updateSocketTournament(t.url);
 				}
 			});
-			self.tournaments.forEach(function(tournament){
-				var t = tournament.tournament;
-				if (self.fullTournaments[t.url]) {
-					tournament.tournament.participants = self.fullTournaments[t.url].tournament.participants;
-				}
-			});
+			self.socketServer.sockets.emit('tournaments:list', self.tournaments);
 		}
 	});
 };
