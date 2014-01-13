@@ -6,7 +6,6 @@ angular.module('hearthApp', [
 	'ngSanitize',
 	'ngRoute',
 	'angularLocalStorage',
-	'ngAnimate',
 	'ui.bootstrap'
 ])
 	.config(function($routeProvider, $locationProvider) {

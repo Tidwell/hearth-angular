@@ -21,10 +21,13 @@
 			</div>
 			<ul class="nav nav-tabs" id="myTab">
 				<li class="active">
-					<a href="#info" data-toggle="tab">Info</a>
+					<a href="#info" data-toggle="tab">Rules</a>
 				</li>
 				<li>
 					<a href="#bracket" data-toggle="tab">Bracket</a>
+				</li>
+				<li>
+					<a href="#players" data-toggle="tab">Players</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -38,6 +41,13 @@
 					<div class="join-trny">
 						<ng-include src="'views/trny-info.html'"></ng-include>
 					</div>
+				</div>
+				<div class="tab-pane" id="players">
+					<ul>
+						<li ng-repeat="player in tournament.tournament.participants">
+							<i class="fa fa-user"></i>
+							{{player.participant.name}}
+					</li>
 				</div>
 			</div>
 		</div>
