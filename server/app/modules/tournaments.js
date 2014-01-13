@@ -266,6 +266,12 @@ Tournaments.prototype.loadTournaments = function() {
 					self.updateSocketTournament(t.url);
 				}
 			});
+			self.tournaments.forEach(function(tournament){
+				var t = tournament.tournament;
+				if (self.fullTournaments[t.url]) {
+					tournament.tournament.participants = self.fullTournaments[t.url].tournament.participants;
+				}
+			});
 		}
 	});
 };
