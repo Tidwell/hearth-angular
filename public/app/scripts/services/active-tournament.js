@@ -70,6 +70,7 @@ angular.module('hearthApp')
 			updateMatch();
 			if (at.activeTournament.tournament.state === 'complete') {
 				at.activeTournament = null;
+				at.participant = null;
 			}
 		});
 
