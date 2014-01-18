@@ -281,7 +281,7 @@ overflow: scroll; z-index: 5;
 	max-width: 80%;
 }
 
-.modal-body .join-trny i {
+.modal-body.join-trny i {
 	color: rgb(30,87,153);
 }
 
