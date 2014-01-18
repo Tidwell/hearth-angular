@@ -4,6 +4,8 @@ var server = require('./server/app');
 
 var env = require('./server/config/local');
 
+var fs = require('fs');
+
 //process cmd-line args for environment
 var args = process.argv.splice(2);
 args.forEach(function(arg) {
@@ -23,3 +25,12 @@ s.events.on('server:ready', function() {
 	s.modules.server.log('Server is ready');
 	s.modules.server.log(s);
 });
+
+if (env.env === 'prod') {
+	process.on('uncaughtException', function(err) {
+		console.log(err);
+		fs.appendFile('error.log', err, function(err) {
+			console.log('error writting error log');
+		});
+	})
+}
