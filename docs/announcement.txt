@@ -1,4 +1,4 @@
-Hey Guys, I'm really excited to announce [HSTRNY.com](http://www.hstrny.com), a website that I've been working on for the last few weeks.  It seems pretty clear that Blizzard won't be adding in-game tournaments for a little while, yet many many players want something competitive, but more structured than the ladder system.
+Hey Guys, I'm really excited to announce [HSTRNY.com](http://www.hstrny.com), a website that I've been working on for the last few weeks.  It seems pretty clear that Blizzard won't be adding in-game tournaments for a little while, yet many players want something competitive, but more structured than the ladder system.
 
 Browsing forums, meeting at set times, or joining a league doesn't really work for my play schedule, but I do have an hour or two that I could dedicate to a tournament at sporadic times, and I imagine a lot of you are in the same boat.  HSTRNY makes short work of all this, automating the entire join/drop process and providing an intuitive interface to report your matches, chat with other players, browse completed tournaments, and resolve any issues.
 
@@ -35,4 +35,4 @@ Any bug reports, feature requests, questions, comments, or hate mail can be post
 
 Technical notes can be found on the [FAQ](http://www.hstrny.com/faq).  The tournament behavior is provided through the [CHALLONGE](http://www.challonge.com) API.
 
-I'm trying to ensure that the site works well on every device it can - I know some players may prefer not to alt-tab to report their matches, and would rather use their phone or tablet - so let me know if you are using a mobile device and see anything weird.
+I'm trying to ensure that the site works well on every device it can - I know some players may prefer not to alt-tab to report their matches, and would rather use their phone or tablet - so let me know if you are using a mobile device and see anything weird.  There is a known bug where mobile device that go to sleep will count as a disconnect and drop you from the tournament, I'd recommend using a desktop browser or disabling sleep on your mobile device while in a tournament - I'll have a fix for this soon.

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.service('chat', function Chat(socket, user) {
+	.service('chat', function Chat(socket, user, $http) {
 		var u = user.get();
 		var c = {
 			generalChat: '',
@@ -10,8 +10,14 @@ angular.module('hearthApp')
 			tournamentChatLog: []
 		};
 
-			
-		socket.on('chat:message', function(obj){
+		var banList = [];
+
+
+		socket.on('chat:message', function(obj) {
+			console.log(obj.user)
+			if (banList.indexOf(obj.user) !== -1) {
+				return;
+			}
 			var toAdd;
 			if (obj.room === 'generalChat') {
 				toAdd = c.chatLog;
@@ -29,10 +35,12 @@ angular.module('hearthApp')
 		socket.on('tournaments:won', clear);
 		socket.on('tournaments:eliminated', clear);
 
-		
+
 
 		function sendChat(room, msg) {
-			if (!msg) { return; }
+			if (!msg) {
+				return;
+			}
 			var toAdd;
 			if (room === 'generalChat') {
 				toAdd = c.chatLog;
@@ -47,7 +55,18 @@ angular.module('hearthApp')
 				msg: msg,
 				user: u.user.userName
 			});
-		};
+		}
+
+		function pollBan() {
+			$http({
+				url: '/banlist.json',
+				method: 'GET'
+			}).success(function(data) {
+				banList = data;
+				setTimeout(pollBan, 15000);
+			});
+		}
+		pollBan();
 
 		return {
 			get: function() {
