@@ -34,7 +34,7 @@ module.exports = {
   },
   tournaments: {
     key: 'S6e1RskMPjjQyEYFXmGu1IZ178hISWxtlVNC3yQn',
-    subdomain: 'hs_tourney',
+    subdomain: 'HSTRNY',
     regions: ['NA', 'EU'],
     regionPrefix: '[',
     regionSuffix: ']',
