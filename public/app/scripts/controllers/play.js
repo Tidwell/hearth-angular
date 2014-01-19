@@ -107,8 +107,7 @@ angular.module('hearthApp')
 			d.open().then(function(result) {});
 			$scope.at.win = false;
 		});
-
-		$scope.$watch('chat.tournamentChatLog.length', function(){
+		function scrollChat() {
 			//TODO make directive
 			var objDiv = document.getElementById('tournament-chat');
 			if (!objDiv) { return; }
@@ -116,5 +115,7 @@ angular.module('hearthApp')
 			setTimeout(function() {
 				objDiv.scrollTop = objDiv.scrollHeight;
 			},0)
-		});
+		}
+		$scope.$watch('chat.tournamentChatLog.length', scrollChat);
+		setTimeout(scrollChat,500); //hack
 	});

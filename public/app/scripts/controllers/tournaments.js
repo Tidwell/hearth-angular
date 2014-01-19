@@ -23,8 +23,7 @@ angular.module('hearthApp')
 		$scope.orderState = function(tournament) {
 			return tournament.tournament.state;
 		};
-
-		$scope.$watch('chat.chatLog.length', function(){
+		function scrollChat(){
 			//TODO make directive
 			var objDiv = document.getElementById('general-chat');
 			if (!objDiv) { return; }
@@ -32,5 +31,7 @@ angular.module('hearthApp')
 			setTimeout(function() {
 				objDiv.scrollTop = objDiv.scrollHeight;
 			},0)
-		});
+		}
+		$scope.$watch('chat.chatLog.length', scrollChat);
+		setTimeout(scrollChat,500); //hack
 	});
