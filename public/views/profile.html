@@ -1,0 +1,10 @@
+<div class="container profile">
+	<h2>Tournaments</h2>
+	<ul>
+		<li ng-repeat="t in myTournaments">
+			<strong><a href="/spectate/{{t.tournament.url}}">{{t.tournament.name}}</a></strong>
+			<p ng-show="t.tournament.state == 'complete'">Rank: {{t.rank}}</p>
+			<p ng-show="t.tournament.state != 'complete'">Pending</p>
+		</li>
+	</ul>
+</div>
