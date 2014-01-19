@@ -13,6 +13,7 @@ angular.module('hearthApp')
 		function fetch() {
 			var toCheck = $scope.battleTag ? $scope.battleTag : $scope.user.user.userName;
 			$scope.myTournaments = [];
+			if (!$scope.tournaments.tournaments) { return; }
 			$scope.tournaments.tournaments.forEach(function(t){
 				if (!t.tournament.participants) { return; }
 				t.tournament.participants.forEach(function(p) {
