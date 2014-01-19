@@ -287,6 +287,7 @@ Tournaments.prototype.loadTournaments = function(opt) {
 
 Tournaments.prototype.joinTournament = function(id, name, socket){
 	var self = this;
+	if (!name) { console.log('null entry prevented'); return; }
 
 	socket.get('participant', function(err,participant){
 		if (participant) {
@@ -412,6 +413,11 @@ Tournaments.prototype.report = function(obj, socket) {
 											id: obj.tournamentId,
 											socket: socket,
 											participant: participant
+										});
+										self.socketServer.sockets.in('generalChat').emit('chat:message', {
+											room: 'generalChat',
+											user: 'System',
+											msg: 'All hail '+participant.participant.name+' - winner of '+self.fullTournaments[obj.tournamentId].tournament.name
 										});
 										return;
 									}
