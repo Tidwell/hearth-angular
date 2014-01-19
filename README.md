@@ -6,9 +6,44 @@ Requires
   * Yeoman
 
 Install:
-  * Clone the repository
+  * Clone the repos
   * ```git clone https://github.com/Tidwell/hearth-angular.git```
-  * ```npm install``` in ./
+  * ```git clone https://github.com/Tidwell/node-challonge```
+  * Link node-challonge for hearth-angular
+  * ```cd node-challonge; npm link;
+  * ```cd ../; cd hearth-angular```
+  * ```npm link challonge```
+  * Install hearth-angular
+  * ```npm install```
+  * Create config
+  * mkdir server/config
+  * vi server/config/local.js
+
+```javascript
+module.exports = {
+  env: 'local',
+  server: {
+    port: 8080
+  },
+  angularServer: {
+    staticDirectory: '/public/app',
+    uriPath: '/'
+  },
+  socket: {
+    log: false
+  },
+  tournaments: {
+    key: 'S6e1RskMPjjQyEYFXmGu1IZ178hISWxtlVNC3yQn',
+    subdomain: 'hs_tourney',
+    regions: ['NA', 'EU'],
+    regionPrefix: '[',
+    regionSuffix: ']',
+    namePrefix: '8 Player Tournament ',
+    dropTimeout: 60000
+  },
+  db: 'mongodb://localhost/hearth-angular'
+};
+```
 
 Build:
   * ```./build.sh``` in ./
