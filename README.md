@@ -10,14 +10,14 @@ Install:
   * ```git clone https://github.com/Tidwell/hearth-angular.git```
   * ```git clone https://github.com/Tidwell/node-challonge```
   * Link node-challonge for hearth-angular
-  * ```cd node-challonge; npm link;
+  * ```cd node-challonge; npm link;```
   * ```cd ../; cd hearth-angular```
   * ```npm link challonge```
   * Install hearth-angular
   * ```npm install```
   * Create config
-  * mkdir server/config
-  * vi server/config/local.js
+  * ```mkdir server/config```
+  * ```vi server/config/local.js```
 
 ```javascript
 module.exports = {
