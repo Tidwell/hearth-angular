@@ -9,7 +9,6 @@ angular.module('hearthApp')
 		function fetch() {
 			$scope.rankHash = {};
 			$scope.allRatings = [];
-			console.log($scope.tournaments.tournaments);
 			$scope.tournaments.tournaments.forEach(function(t){
 				if (!t.tournament.participants) { return; }
 				t.tournament.participants.forEach(function(p) {
@@ -45,7 +44,6 @@ angular.module('hearthApp')
 					played: $scope.rankHash[user].played
 				});
 			}
-			console.log($scope.allRatings);
 		}
 
 		$scope.$watch('tournaments.tournaments.length', fetch);
