@@ -14,7 +14,6 @@ angular.module('hearthApp')
 
 
 		socket.on('chat:message', function(obj) {
-			console.log(obj.user)
 			if (banList.indexOf(obj.user) !== -1) {
 				return;
 			}
