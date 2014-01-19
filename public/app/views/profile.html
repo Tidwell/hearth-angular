@@ -1,10 +1,20 @@
-<div class="container profile">
-	<h2>Tournaments</h2>
-	<ul>
+<div class="container profile" ng-show="user.user.loggedIn || battleTag">
+	<h1 ng-show="!battleTag">{{user.user.userName}}</h1>
+	<h1 ng-show="battleTag">{{battleTag}}</h1>
+	<hr />
+	<strong>Tournaments Played: {{myTournaments.length}}</strong>
+	<ul ng-show="myTournaments.length">
 		<li ng-repeat="t in myTournaments">
 			<strong><a href="/spectate/{{t.tournament.url}}">{{t.tournament.name}}</a></strong>
 			<p ng-show="t.tournament.state == 'complete'">Rank: {{t.rank}}</p>
 			<p ng-show="t.tournament.state != 'complete'">Pending</p>
 		</li>
 	</ul>
+	<p ng-show="!myTournaments.length">
+		That user has not played in any tournaments.
+	</p>
+</div>
+
+<div class="container profile" ng-show="!user.user.loggedIn && !battleTag">
+	<strong>No user found.</strong>
 </div>

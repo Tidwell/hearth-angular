@@ -65,6 +65,11 @@
 								<li ng-show="at.activeTournament" ng-class="navClass('play')">
 									<a href="/play/{{at.activeTournament.tournament.url}}">Active Tournament</a>
 								</li>
+								<li ng-class="navClass('leaderboards')">
+									<a href="/leaderboards">
+										Leaderboard
+									</a>
+								</li>
 								<li ng-class="navClass(['faq'])">
 									<a href="/faq">FAQ</a>
 								</li>
@@ -124,7 +129,7 @@
 						<span class="user-count">{{countUsers()}}</span>
 					</li>
 					<li class="pull-right" ng-show="user.user.loggedIn">
-						<span class="user-name">{{user.user.userName}}</span>
+						<span class="user-name"><a href="/profile">{{user.user.userName}}</a></span>
 					</div>
 				</ul>
 			</div>
@@ -209,6 +214,9 @@
 	<script src="scripts/directives/region.js"></script>
 	<script src="scripts/controllers/tournament-info.js"></script>
 <script src="scripts/controllers/profile.js"></script>
+<script src="scripts/controllers/leaderboard.js"></script>
+<script src="scripts/filters/order-object-by.js"></script>
+<script src="scripts/controllers/leaderboards.js"></script>
 	<!-- endbuild -->
 
 	<div class="vendor">

@@ -49,9 +49,17 @@ angular.module('hearthApp', [
 			  templateUrl: 'views/faq.html',
 			  controller: 'FaqCtrl'
 			})
-.when('/profile', {
-  templateUrl: 'views/profile.html',
-  controller: 'ProfileCtrl'
+			.when('/profile', {
+			  templateUrl: 'views/profile.html',
+			  controller: 'ProfileCtrl'
+			})
+			.when('/profile/:battleTag', {
+			  templateUrl: 'views/profile.html',
+			  controller: 'ProfileCtrl'
+			})
+.when('/leaderboards', {
+  templateUrl: 'views/leaderboards.html',
+  controller: 'LeaderboardsCtrl'
 })
 			.otherwise({
 				redirectTo: '/tournaments'

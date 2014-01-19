@@ -71,6 +71,7 @@ angular.module('hearthApp')
 			get: function() {
 				return c;
 			},
-			sendChat: sendChat
+			sendChat: sendChat,
+			encode: function(s) { return encodeURIComponent(s); }
 		};
 	});

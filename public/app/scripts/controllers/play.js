@@ -7,6 +7,7 @@ angular.module('hearthApp')
 		$scope.chat = chat.get();
 
 		$scope.sendChat = chat.sendChat;
+		$scope.encode = chat.encode;
 		$scope.countUsers = user.countUsers;
 
 		$scope.showUsers = false;

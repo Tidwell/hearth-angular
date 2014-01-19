@@ -143,6 +143,10 @@ body {
 	font-size: 1em;
 }
 
+.sep .user-name a {
+	color: white;
+}
+
 /*CHAT*/
 .chat-windows .chat {
 	height: 200px;
@@ -190,6 +194,10 @@ overflow: scroll; z-index: 5;
 	margin-bottom: 0;
 	background: #1d1d1d;
 	color: #ffffff;
+}
+
+.chat-interface .users-list li>a.name-link {
+	display: inline;
 }
 
 /*PROFILE*/
@@ -405,6 +413,14 @@ footer img[alt=Challonge] {
 }
 .breadcrumb li {
 	text-shadow: none;
+}
+
+.leaderboard {
+	color: white;
+}
+
+.leaderboard li {
+	list-style-type: none;
 }
 
 @media (max-width: 979px) {

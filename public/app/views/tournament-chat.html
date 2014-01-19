@@ -25,7 +25,7 @@
 				<ul class="nav nav-pills nav-stacked">
 					<li ng-repeat="participant in at.activeTournament.tournament.participants" 
 					ng-class="{disconnect: !isOnline(participant.participant.name)}">
-						<a> <i class="fa fa-user"></i>
+						<a href="/profile/{{encode(participant.participant.name)}}"> <i class="fa fa-user"></i>
 							{{participant.participant.name}}
 						</a>
 					</li>
