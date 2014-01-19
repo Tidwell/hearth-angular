@@ -273,11 +273,14 @@ Tournaments.prototype.loadTournaments = function(opt) {
 			self.checkStart();
 			self.checkFinalize();
 
-			//get full data for active tournaments on first call or force reload
 			self.tournaments.forEach(function(tournament){
 				var t = tournament.tournament;
+				//get full data for active tournaments on first call or force reload
 				if (!self.fullTournaments[t.url] || (opt && opt.forceReload)) {
 					self.updateSocketTournament(t.url);
+				} else if (self.fullTournaments[t.url] && self.fullTournaments[t.url].tournament.participants) {
+					//copy over what u have
+					tournament.tournament.participants = self.fullTournaments[t.url].tournament.participants;
 				}
 			});
 			self.socketServer.sockets.emit('tournaments:list', self.tournaments);
