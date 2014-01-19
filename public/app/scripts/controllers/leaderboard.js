@@ -7,7 +7,7 @@ angular.module('hearthApp')
 		$scope.allRatings = [];
 
 		function fetch() {
-			$scope.rankHash = {}
+			$scope.rankHash = {};
 			$scope.allRatings = [];
 			$scope.tournaments.tournaments.forEach(function(t){
 				if (!t.tournament.participants) { return; }
@@ -29,7 +29,6 @@ angular.module('hearthApp')
 						} else if (p.participant.finalRank === 5) {
 							pts = 1;
 						} else {
-							console.log('nopts', p.participant.finalRank)
 							pts = 0;
 						}
 						$scope.rankHash[p.participant.name].rating += pts;
