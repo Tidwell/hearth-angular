@@ -135,6 +135,13 @@
 			</div>
 		</div>
 	
+	<div class="container">
+		<div class="alert alert-info top-alert" ng-show="flashMsg.msg && flashMsg.show" ng-controller="FlashMsgCtrl">
+			<a class="close" ng-click="flashMsg.show = false">&times;</a>
+			<span ng-bind-html="flashMsg.msg"></span>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 	<div class="" ng-view=""></div>
 
 	<footer class="container">
@@ -162,7 +169,7 @@
 
 	<script src="scripts/18bc7ae7.modules.js"></script>
 
-	<script src="scripts/e31975dc.scripts.js"></script>
+	<script src="scripts/5a934233.scripts.js"></script>
 
 	<div class="vendor">
 		<script type="text/javascript">
