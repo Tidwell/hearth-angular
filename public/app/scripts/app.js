@@ -61,6 +61,10 @@ angular.module('hearthApp', [
   templateUrl: 'views/leaderboards.html',
   controller: 'LeaderboardsCtrl'
 })
+.when('/changelog', {
+  templateUrl: 'views/changelog.html',
+  controller: 'ChangelogCtrl'
+})
 			.otherwise({
 				redirectTo: '/tournaments'
 			});
