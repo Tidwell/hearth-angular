@@ -22,7 +22,7 @@
 	<base href="/">
 	<link href="http://fonts.googleapis.com/css?family=Cantora+One" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
-	<link rel="stylesheet" href="styles/55a8845a.main.css">
+	<link rel="stylesheet" href="styles/b3f4f362.main.css">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body ng-app="hearthApp" ng-cloak="">
@@ -62,6 +62,11 @@
 								</li>
 								<li ng-show="at.activeTournament" ng-class="navClass('play')">
 									<a href="/play/{{at.activeTournament.tournament.url}}">Active Tournament</a>
+								</li>
+								<li ng-class="navClass('leaderboards')">
+									<a href="/leaderboards">
+										Leaderboard
+									</a>
 								</li>
 								<li ng-class="navClass(['faq'])">
 									<a href="/faq">FAQ</a>
@@ -122,7 +127,7 @@
 						<span class="user-count">{{countUsers()}}</span>
 					</li>
 					<li class="pull-right" ng-show="user.user.loggedIn">
-						<span class="user-name">{{user.user.userName}}</span>
+						<span class="user-name"><a href="/profile">{{user.user.userName}}</a></span>
 					</li></ul></div>
 				
 			</div>
@@ -155,7 +160,7 @@
 
 	<script src="scripts/18bc7ae7.modules.js"></script>
 
-	<script src="scripts/8b82be62.scripts.js"></script>
+	<script src="scripts/bd23f836.scripts.js"></script>
 
 	<div class="vendor">
 		<script type="text/javascript">

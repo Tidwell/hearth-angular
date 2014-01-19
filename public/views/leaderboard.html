@@ -1,0 +1,19 @@
+<div class="row-fluid leaderboard" ng-controller="LeaderboardCtrl">
+	<h2>Leaderboard</h2>
+	<p ng-show="showInfo">
+		Players are given 6 pts for a 1st place finish, 4 pts for a 2nd place finish, 3 pts for 3rd or fourth and 1pt for all other results.
+	</p>
+	<table class="table table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th>Rank</th>
+				<th>BattleTag</th>
+				<th>Points</th>
+				<th>Played</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="user in allRatings | orderBy:'rating':true | limitTo:leaderboardLimit">
+			<td>{{$index+1}}</td><td><a href="/profile/{{encode(user.name)}}">{{user.name}}</a></td><td>{{user.rating}}</td><td>{{user.played}}</td>
+		</tr>
+	</table>
+</div>
