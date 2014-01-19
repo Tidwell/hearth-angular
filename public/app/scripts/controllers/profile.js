@@ -14,6 +14,7 @@ angular.module('hearthApp')
 			var toCheck = $scope.battleTag ? $scope.battleTag : $scope.user.user.userName;
 			$scope.myTournaments = [];
 			$scope.tournaments.tournaments.forEach(function(t){
+				if (!t.tournament.participants) { return; }
 				t.tournament.participants.forEach(function(p) {
 					if (p.participant.name == toCheck) {
 						t.rank = p.participant.finalRank;
