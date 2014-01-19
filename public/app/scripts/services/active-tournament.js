@@ -82,6 +82,7 @@ angular.module('hearthApp')
 		});
 
 		socket.on('tournaments:started', function(data){
+			if (!at.activeTournament || at.activeTournament.tournament) { return; }
 			if (data.id === at.activeTournament.tournament.url) {
 				playSound();
 			}
