@@ -44,6 +44,7 @@ angular.module('hearthApp')
 					played: $scope.rankHash[user].played
 				});
 			}
+			console.log($scope.allRatings);
 		}
 
 		$scope.$watch('tournaments.tournaments.length', fetch);
