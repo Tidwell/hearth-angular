@@ -14,7 +14,7 @@
 			</tr>
 		</thead>
 		<tr ng-repeat="user in allRatings | orderBy:'rating':true | limitTo:leaderboardLimit">
-			<td>{{$index+1}}</td><td><a href="/profile/{{encode(user.name)}}">{{user.name}}</a></td><td>{{user.rating}}</td><td>{{user.played}}</td>
+			<td>{{$index+1}}</td><td><a href="/profile/{{encode(user.name)}}">{{strip(user.name)}}</a></td><td>{{user.rating}}</td><td>{{user.played}}</td>
 		</tr>
 	</table>
 </div>

@@ -6,6 +6,10 @@ angular.module('hearthApp')
 		$scope.rankHash = {};
 		$scope.allRatings = [];
 
+		$scope.strip = function(s) {
+			return s.split('#')[0];
+		};
+
 		function fetch() {
 			$scope.rankHash = {};
 			$scope.allRatings = [];
