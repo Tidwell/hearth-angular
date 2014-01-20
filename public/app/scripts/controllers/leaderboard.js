@@ -38,11 +38,13 @@ angular.module('hearthApp')
 			});
 
 			for (var user in $scope.rankHash) {
-				$scope.allRatings.push({
-					name: user,
-					rating: $scope.rankHash[user].rating,
-					played: $scope.rankHash[user].played
-				});
+				if (user !== 'Tidwell#1482') {
+					$scope.allRatings.push({
+						name: user,
+						rating: $scope.rankHash[user].rating,
+						played: $scope.rankHash[user].played
+					});
+				}
 			}
 		}
 

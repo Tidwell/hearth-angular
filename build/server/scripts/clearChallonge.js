@@ -1,3 +1,4 @@
+/*
 var challonge = require('challonge');
 
 var opts = require('../config/local');
@@ -25,3 +26,4 @@ client.tournaments.index({
 		})
 	}
 });
+*/
