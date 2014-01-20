@@ -48,8 +48,10 @@
 					</div>
 					<ul>
 						<li ng-repeat="player in tournament.tournament.participants">
-							<i class="fa fa-user"></i>
-							{{player.participant.name}}
+							<a href="/profile/{{encode(player.participant.name)}}">
+								<i class="fa fa-user"></i>
+								{{player.participant.name}}
+							</a>
 					</li>
 				</ul></div>
 			</div>

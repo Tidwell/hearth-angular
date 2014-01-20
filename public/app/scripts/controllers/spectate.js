@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('SpectateCtrl', function($scope,$routeParams, tournaments, activeTournament) {
+	.controller('SpectateCtrl', function($scope,$routeParams, tournaments, activeTournament,chat) {
 		$scope.tournamentId = $routeParams.id;
 		$scope.t = tournaments.get();
+		$scope.encode = chat.encode;
 		$scope.found = true;
 
 		function view() {

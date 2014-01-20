@@ -56,7 +56,7 @@
 				<strong>Currently Registered</strong>
 				<ul>
 					<li ng-repeat="user in at.activeTournament.tournament.participants">
-						{{user.participant.name}}
+						<a href="/profile/{{encode(user.participant.name)}}">{{user.participant.name}}</a>
 					</li>
 				</ul>
 			</div>

@@ -200,6 +200,17 @@ overflow: scroll; z-index: 5;
 	display: inline;
 }
 
+.chat p strong a {
+	text-decoration: none;
+	color: white;
+}
+.chat p strong a:hover {
+	text-decoration: underline;
+}
+.chat p.system strong a {
+	color: #0088cc;
+}
+
 /*PROFILE*/
 .profile {
 	color: white;
