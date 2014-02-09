@@ -8,7 +8,7 @@
 			</ul>
 			<div class="tab-content chat-windows">
 				<div id="general-chat" class="general-chat chat">
-					<p ng-repeat="msg in chat.chatLog" ng-class="{system: msg.user=='System'}">
+					<p ng-repeat="msg in chat.chatLog" ng-class="{system: msg.user=='System', chatadmin: isAdmin(msg.user)}">
 						<strong><a href="/profile/{{encode(msg.user)}}">{{msg.user}}</a></strong>: {{msg.msg}}
 					</p>
 				</div>
