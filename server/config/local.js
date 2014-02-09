@@ -12,7 +12,7 @@ module.exports = {
 	},
 	tournaments: {
 		key: 'S6e1RskMPjjQyEYFXmGu1IZ178hISWxtlVNC3yQn',
-		subdomain: 'HSTRNY',
+		subdomain: 'nodeapitest',
 		regions: ['NA', 'EU'],
 		regionPrefix: '[',
 		regionSuffix: ']',
