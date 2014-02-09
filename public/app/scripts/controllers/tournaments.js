@@ -9,6 +9,8 @@ angular.module('hearthApp')
 		$scope.sendChat = chat.sendChat;
 		$scope.encode = chat.encode;
 
+		$scope.isAdmin = chat.isAdmin;
+
 		$scope.leaderboardLimit = 10;
 
 		$scope.countUsers = user.countUsers;

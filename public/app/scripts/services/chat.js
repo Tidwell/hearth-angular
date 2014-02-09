@@ -11,6 +11,7 @@ angular.module('hearthApp')
 		};
 
 		var banList = [];
+		var adminList = ['Tidwell#1482', 'zzyx#1198', 'Zzyx#1198'];
 
 
 		socket.on('chat:message', function(obj) {
@@ -72,6 +73,7 @@ angular.module('hearthApp')
 				return c;
 			},
 			sendChat: sendChat,
-			encode: function(s) { return encodeURIComponent(s); }
+			encode: function(s) { return encodeURIComponent(s); },
+			isAdmin: function(s) { return adminList.indexOf(s) > -1; }
 		};
 	});
