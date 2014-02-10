@@ -57,6 +57,7 @@ var Tournaments = exports.Tournaments = function(options, events) {
 			res.json({ok: true});
 			setTimeout(function() {
 				self.socketServer.sockets.emit('tournaments:list', self.tournaments);
+
 			}, 10000);
 		});
 	});
@@ -80,6 +81,7 @@ var Tournaments = exports.Tournaments = function(options, events) {
 
 		socket.on('tournaments:drop', function(tournamentId){
 			socket.get('participant', function(err,p){
+				if (!p || !p.participant) { console.log('drop called without participant'); return; }
 				self.dropTournament(tournamentId, p.participant.id, socket, false, p);
 			});
 		});
@@ -108,6 +110,10 @@ var Tournaments = exports.Tournaments = function(options, events) {
 				var tournament = self.fullTournaments[url].tournament;
 				if (tournament.state === 'underway' || tournament.state === 'pending') {
 					tournament.participants.forEach(function(participant){
+						if (!participant || !participant.participant) {
+							console.log('reconnect called without a valid user');
+							return;
+						}
 						if (participant.participant.name === name && participant.participant.active) {
 							participant.participant.tournamentUrl = url;
 
@@ -252,7 +258,7 @@ Tournaments.prototype.updateSocketTournament = function(id) {
 			});
 			self.socketServer.sockets.clients().forEach(function(socket){
 				socket.get('participant', function(err,participant){
-					if (participant && participant.participant.tournamentUrl === id && participant.participant.active) {
+					if (participant && participant.participant && participant.participant.tournamentUrl === id && participant.participant.active) {
 						socket.emit('tournaments:activeTournament', data);
 						socket.set('tournament', data);
 					}
@@ -304,7 +310,8 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 				name: name
 			},
 			callback: function(err,data){
-				if (err) { console.log(err); return; }
+				if (err || !data) { console.log(err); return; }
+				if (!data.participant) { console.log('no participant returned from challonge create call'); return; }
 				data.participant.tournamentUrl = id;
 				socket.set('participant', data);
 				socket.emit('tournaments:joined', data);
@@ -337,7 +344,7 @@ Tournaments.prototype.dropTournament = function(id, pid, socket, skipSendSocket,
 			if (socket) {
 				socket.set('participant', null);
 			}
-			if (p && !skipSendSocket) {
+			if (p && !skipSendSocket && p.participant) {
 				self.socketServer.sockets.in(id).emit('chat:message', {
 					room: p.participant.tournamentUrl,
 					user: 'System',
@@ -359,7 +366,7 @@ Tournaments.prototype.dropLoser = function(obj, match) {
 	var self = this;
 	self.socketServer.sockets.clients().forEach(function(socket){
 		socket.get('participant', function(err,participant){
-			if (participant && (participant.participant.id == match[0].user || participant.participant.id == match[1].user)) {
+			if (participant && participant.participant && (participant.participant.id == match[0].user || participant.participant.id == match[1].user)) {
 				if (String(participant.participant.id) !== String(obj.winnerId)) {
 					self.dropTournament(obj.tournamentId, participant.participant.id, socket, true);
 					socket.emit('tournaments:eliminated', obj);
@@ -374,7 +381,7 @@ var activeReports = {};
 Tournaments.prototype.report = function(obj, socket) {
 	var self = this;
 	socket.get('participant', function(err,participant){
-		if (!participant) { return; } //do nothing if they arent in a tourney
+		if (!participant || !participant.participant) { return; } //do nothing if they arent in a tourney
 		if (!activeReports[obj.tournamentId]) {
 			activeReports[obj.tournamentId] = {};
 		}
@@ -409,7 +416,7 @@ Tournaments.prototype.report = function(obj, socket) {
 						//tell the winner
 						self.socketServer.sockets.clients().forEach(function(socket){
 							socket.get('participant', function(err,participant){
-								if (participant && participant.participant.id === data.match.winnerId) {
+								if (participant && participant.participant && participant.participant.id === data.match.winnerId) {
 									if (data.match.round === 3) {
 										socket.emit('tournaments:won');
 										self.events.emit('tournaments:won', {
@@ -453,7 +460,7 @@ Tournaments.prototype.report = function(obj, socket) {
 Tournaments.prototype.disconnect = function(socket) {
 	var self = this;
 	socket.get('participant', function(err,participant){
-		if (participant) {
+		if (participant && participant.participant) {
 			self.pendingDisconnects[participant.participant.id] = function() {
 				self.dropTournament(participant.participant.tournamentUrl, participant.participant.id, false, true);
 				self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
