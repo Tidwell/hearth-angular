@@ -42,10 +42,14 @@ var Chat = exports.Chat = function(options, events) {
 	});
 
 	events.on('tournaments:connect', function(obj){
-		obj.socket.join(obj.tournamentId);
+		if (obj.socket) {
+			obj.socket.join(obj.tournamentId);
+		}
 	});
 	events.on('tournaments:reconnect', function(obj){
-		obj.socket.join(obj.tournamentId);
+		if (obj.socket){
+			obj.socket.join(obj.tournamentId);
+		}
 	});
 
 	events.on('tournaments:dropped', function(obj){
