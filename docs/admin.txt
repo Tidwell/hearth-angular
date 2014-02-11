@@ -1,0 +1,24 @@
+Hey Luna-
+
+I really appreciate the reddit thread you posted - thank you very much for that.  I was a little surprised to see how quickly the traffic dropped off after my initial launch post, and was very satisfied to realize that a bit of promotion and awareness can make a big difference.  I put out a message to the r/hearthstone mods and they have agreed to add a link to the site in the sidebar, but I have as yet been able to find the time to design a graphic for it.  I've also been in a few talks with some of the major hearthstone-related sites about cross-promototion and such, but its been rather tricky trying to stay on top of work, hstrny, and my unexpected injury, so thats moving a bit more slowly than I would like.  I’d also really like to create content to help new players through the experience - it would be great to find a youtuber/streamer who would be willing to do a short 2 or 3 minute video run-through of the entire process that could be used on the front page promo.
+
+In addition I’m contemplating monthly leagues, larger weekend-only tournaments or maybe even finding some way to get prizes involved - but those are all a bit more “big picture” and I really need to focus on things like making sure the site doesn’t crash when it breaks 50 users and building a community that could support those kinds of events.
+
+So enough about promotional things, as far as admin stuff goes, theres only two main responsibilities.
+
+1) Explaining and being helpful to any players who may have questions/concerns/complaints, updating ban lists, etc, in chat (general community stuff)
+
+2) Manually resolving any issues with specific tournament brackets or matches.  Because I use an API to talk to the challonge.com system, all of the administration tools available there can be used to manage tournaments on hstrny (everything from manually setting winners, resetting brackets, dropping players, etc).  For this, you need a challonge account.  In general, this manual fixing only happens when a player goes AFK or reports something incorrectly.
+
+To register a challonge account (if you don’t already have one) please visit: https://challonge.com/users/new - If you haven’t administered any challonge tournaments before, I’d suggest messing around with controls a bit and getting a feel for some of the more frequent tasks (setting winners, dropping players, resetting brackets, etc)
+
+Once you have registered an account, I can grant you access to manage the group that holds all of the automated tournaments.  Theres two things to be very careful of here - never delete a tournament or reset a tournament unless you know you have documented the previous results and know you can restore it to the proper state.
+
+I wish I could offer compensation for your time other than my humble gratitude, but as it stands this entire project hasn’t really been able to even sustain the costs for the servers it runs on (not to worry, I have a lot of projects, many of which subsidize the others).  However, if possibilities for revenues streams come along in the future, I wouldn’t be adverse to pursuing them.
+
+If you are still interested, let me know your challonge username, the battle tag you use on hstrny, and if you are more interested in administration/promotion or both.  If you choose to join, there are a few other relevant details (secret admin URLs for messing with things, the admin group mailing list, and an @hstrny.com email address should you desire one).
+
+Look forward to hearing from you,
+-Aaron
+
+(BTW, the best way to get in touch with me going forward would be via email: tidwell@hstrny.com or Aaron.Tidwell@gmail.com)
