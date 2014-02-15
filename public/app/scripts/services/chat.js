@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.service('chat', function Chat(socket, user, $http) {
+	.service('chat', function Chat(socket, user, $http, admins) {
 		var u = user.get();
 		var c = {
 			generalChat: '',
@@ -11,8 +11,7 @@ angular.module('hearthApp')
 		};
 
 		var banList = [];
-		var adminList = ['Tidwell#1482', 'zzyx#1198', 'Zzyx#1198'];
-
+		var adminList = admins.get();
 
 		socket.on('chat:message', function(obj) {
 			if (banList.indexOf(obj.user) !== -1) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('TournamentsCtrl', function($scope, socket, tournaments, user, chat) {
+	.controller('TournamentsCtrl', function($scope, socket, tournaments, user, chat, admins) {
 		$scope.tournaments = tournaments.get();
 		$scope.chat = chat.get();
 		$scope.user = user.get();
@@ -16,6 +16,23 @@ angular.module('hearthApp')
 		$scope.countUsers = user.countUsers;
 
 		$scope.showUsers = false;
+
+		var adminList = admins.get();
+
+		$scope.adminsOnline = function() {
+			var activeAdminList = [];
+			for (var u in $scope.user.user.userList) {
+				if (adminList.indexOf(u) !== -1) {
+					activeAdminList.push(u);
+				}
+			}
+			if (activeAdminList.length) {
+				return activeAdminList.join(', ');
+			} else {
+				return false;
+			}
+		};
+
 
 		$scope.isActive = function(tournament) {
 			if (!tournament || !tournament.tournament) { return false; }
