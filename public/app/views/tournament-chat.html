@@ -9,7 +9,7 @@
 			<div class="tab-content chat-windows">
 				<div id="tournament-chat" class="tournament-chat chat">
 					<p ng-repeat="msg in chat.tournamentChatLog" ng-class="{system: msg.user=='System'}">
-						<strong><a href="/profile/{{encode(msg.user)}}">{{msg.user}}</a></strong>: {{msg.msg}}
+						<strong><a href="/profile/{{encode(msg.user)}}">[{{msg.time | date:'shortTime'}}] {{msg.splitUser}}</a></strong>: {{msg.msg}}
 					</p>
 				</div>
 			</div>

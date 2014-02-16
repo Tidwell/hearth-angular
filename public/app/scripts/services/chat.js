@@ -17,6 +17,8 @@ angular.module('hearthApp')
 			if (banList.indexOf(obj.user) !== -1) {
 				return;
 			}
+			obj.splitUser = obj.user.split('#')[0]; //strip off the battletag
+			obj.time = new Date();
 			var toAdd;
 			if (obj.room === 'generalChat') {
 				toAdd = c.chatLog;
@@ -52,7 +54,9 @@ angular.module('hearthApp')
 			});
 			toAdd.push({
 				msg: msg,
-				user: u.user.userName
+				user: u.user.userName,
+				splitUser: u.user.userName.split('#')[0],
+				time: new Date()
 			});
 		}
 
