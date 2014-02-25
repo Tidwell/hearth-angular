@@ -70,9 +70,14 @@ View:
   * ```git pull```
 
 If server needs restart:
+  * OLD
   * Look for the process on port 9007 using: netstat -tulpn
   * kill #PID
   * nohup node app -env=prod &
+  * sudo service apache2 restart
+
+  * NEW
+  * Use ```forever start app.js -env=prod &```
   * sudo service apache2 restart
 
 Bug Tracking:

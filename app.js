@@ -28,9 +28,8 @@ s.events.on('server:ready', function() {
 
 if (env.env === 'prod') {
 	process.on('uncaughtException', function(err) {
-		console.log(err);
 		fs.appendFile('error.log', err, function(err) {
-			console.log('error writting error log');
+			console.log('error writting error log ', err);
 		});
-	})
+	});
 }
