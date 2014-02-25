@@ -122,6 +122,8 @@ LoggedInUsers.prototype.disconnect = function(socket) {
 		if (!err && name && self.allUsers[name]) {
 			delete self.allUsers[name];
 			self.socketServer.sockets.emit('user:logout', name);
+		} else {
+			console.log('failed to disconnect user on disconnect', name, err)
 		}
 	});
 };
