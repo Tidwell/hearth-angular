@@ -1,32 +1,61 @@
-HSTRNY presents "Humpday Hearthstone" $50 North American Cash Tournaments - Wednesday Nights 8PM EST
+So here is the recap - hows this sound (very rough outline for the press release)
 
-32-man max to start
+HSTRNY presents "Humpday Hearthstone" $50 North American Cash Tournament - Wednesday Nights @ 8PM EST
 
-$25 / $15 / $10
+camel logo (something like http://i.imgur.com/9pH1ptG.png)
 
-first 2 rounds BO3 - 60 mins
-round 3 BO5 - 60 mins
-finals/3rd place BO5 - 60mins
+32-man max, $50 payout (payout to be adjusted if less than 16 players show up)
 
-3 hrs / 4 top
+prize payouts 1st/2nd/3rd $25 / $15 / $10
 
-6:00pm PST / 7:00pm Central / 8:00pm EST
+start time: 5:00pm PST / 7:00pm Central / 8:00pm EST
 
-signup opens 1hr before the start - must confirm present at start time or be dropped (do this via chat) - if we have more than 32, bring in someone that wants in (from waitlist), otherwise there will just have to be byes
+every wednesday starting 2/26
 
-managrind structure - you play what you bring, top 8 MUST submit a decklist (screenshot is fine), no modification at any time (at least for the first tournament)
+signup opens 30 minutes before the start (this is when I will manually create the tournament on the main hstrny challonge account and it will show up on the HSTRNY site for ppl to click to join).  Players use the regular controls on the site (like the 8-mans) throughout the tournament
 
-payout via paypal
+demo bracket: http://challonge.com/test32hstrny
 
-request screenshots of games just in case - if there is a conflict, we go with whoever has screenshots
+Round 1/2 - Bo3 - 60 mins
+Round 3 (top 8) - Bo5 - 60 mins
+Round 4 (top 4) - Bo5 - 60 mins
+Finals/3rd place playoff - Bo5 - 60mins
 
-admins can play, I won't just to ensure at least 1 totally impartial judge (plus i have a feeling we will have to resolve some issues mid-tourney anyway)
+ideal length: 3.5 - 4.5 hrs (no actual time limits, these are just estimates)
 
-press release to be created with the info
-logo and banner to be created
+similar to managrind rules - you play what you bring for the entire tournament - no sideboards, no swapping, no changes, no modification at any time (at least for the first tournament)
 
-wrap up we will add a tab to the browse page, but cross-post to other forums
+Top 8 MUST submit a decklist (screenshot is fine).
 
-I'm thinking monthly $100 invitational (info TBD) - but in general, top 8 from all Wednesday tourneys automatic entry, plus top 10/20 on the leaderboard - something to keep ppl invested.
+Top 4 players agree to respond to interview questions and publish deck lists.
+
+Payout via paypal
+
+Players should take screenshots of games in case of conflict, we go with the result from whoever has screenshots.  If nobody has em, coin flip.
+
+Admins can play - I won't just to ensure at least 1 totally impartial judge (plus i have a feeling we will have to resolve some issues mid-tourney anyway)
+
+TODO
+- press release to be created with this info (i’ll write this up)
+- contact list to be created (who we send the release to, i can either compile this list from what u guys send me or whoever wants to be responsible for this can collect the list of contacts)
 
 
+
+- logo and promo banner to be created (i’ve got my graphics guy on it - xxyz - if your GF has some time and wouldn’t mind, she’s more than welcome to take a stab as well) - 2 sizes, one for the sidebar of reddit, one for the hstrny main page.
+
+- write code to prevent auto-start on humpday tournaments
+- write code for modified rules to show when clicking join button for humpday
+- write code to add a tab to the browse page for the wrap-up, but cross-post to other forums (can be done after)
+- add press release page to hstrny
+
+- test that a 32 man will go off correctly
+
+- submit to reddit press release hosted on hstrny & send out to contacts ASAP - by 2/21 (Friday) at the latest - if the above stuff isn’t ready by friday, we push the first tournament to the first wednesday in march
+
+
+FUTURE
+Starting at the end of March, I'm thinking we do a monthly $100 invitational (info TBD, probably a saturday or sunday tournament) - but in general, top 8 from all of the previous month’s Humpday tourneys guarentee entry, plus top 10 on the leaderboard - something to keep ppl invested.  I’ll include this in the press release with the note that info is TBD.
+
+
+Whatcha guys think?
+-A
