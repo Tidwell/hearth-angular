@@ -16,7 +16,8 @@ angular.module('hearthApp')
 			'Likkyzero#1227',
 			'Zhulander#1652',
 			'mightypants7#1310',
-			'Zeus#2680'
+			'Zeus#2680',
+			'Violentce#1391'
 		];
 
 		return {
