@@ -65,7 +65,7 @@ View:
 ##Deploy
 
   * ./build.sh
-  * ```git subtree push --prefix build origin live```
+  * ```git subtree push --prefix build origin live2```
   * ssh into box
   * ```git pull```
 

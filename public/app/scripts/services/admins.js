@@ -10,7 +10,13 @@ angular.module('hearthApp')
 			'noah#1105',
 			'CookMySock#2517',
 			'cookMySock#2517',
-			'bakazero#2330'
+			'bakazero#2330',
+			'Bakazero#2330',
+			'likkyzero#1227',
+			'Likkyzero#1227',
+			'Zhulander#1652',
+			'mightypants7#1310',
+			'Zeus#2680'
 		];
 
 		return {
