@@ -24,7 +24,9 @@ angular.module('hearthApp')
 
 		function logout() {
 			user.user.error = null;
+			var ulist = angular.copy(user.user.userList);
 			user.user = angular.copy(defaultUser);
+			user.user.userList = ulist;
 			$cookies.hstbattleTag = '';
 			$cookies.hstpw = '';
 			socket.emit('user:logout');
