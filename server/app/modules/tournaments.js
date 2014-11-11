@@ -120,7 +120,9 @@ var Tournaments = exports.Tournaments = function(options, events) {
 							socket.set('participant', participant);
 
 							//clear disconnect
-							delete self.pendingDisconnects[participant.participant.id];
+							if (self.pendingDisconnects[participant.participant.id]) {
+								delete self.pendingDisconnects[participant.participant.id];
+							}
 							
 							socket.emit('tournaments:joined', participant);
 							events.emit('tournaments:reconnect', {
@@ -460,28 +462,45 @@ Tournaments.prototype.report = function(obj, socket) {
 Tournaments.prototype.disconnect = function(socket) {
 	var self = this;
 	socket.get('participant', function(err,participant){
-		if (participant && participant.participant) {
-			self.pendingDisconnects[participant.participant.id] = function() {
-				self.dropTournament(participant.participant.tournamentUrl, participant.participant.id, false, true);
-				self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
-					room: participant.participant.tournamentUrl,
-					user: 'System',
-					msg: participant.participant.name+' has been dropped.'
-				});
-			};
-
-			setTimeout(function(){
-				if (self.pendingDisconnects[participant.participant.id]) {
-					self.pendingDisconnects[participant.participant.id]();
-					delete self.pendingDisconnects[participant.participant.id];
-				}
-			},self.tournamentsOptions.dropTimeout);
-
+		//dont drop if they arent in anything
+		if (!participant || !participant.participant) {
+			return;
+		}
+		//dont drop if its started
+		var tourney = self.fullTournaments[participant.participant.tournamentUrl].tournament;
+		if (tourney.state === 'underway') {
+			//just tell chat
 			self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
 				room: participant.participant.tournamentUrl,
 				user: 'System',
-				msg: participant.participant.name+' has disconnected and will be dropped in '+self.tournamentsOptions.dropTimeout/1000/60 +  ' minutes.'
+				msg: participant.participant.name+' has disconnected.'
 			});
+			return;
 		}
+
+		//set up a disconnect function for the player
+		self.pendingDisconnects[participant.participant.id] = function() {
+			self.dropTournament(participant.participant.tournamentUrl, participant.participant.id, false, true);
+			self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
+				room: participant.participant.tournamentUrl,
+				user: 'System',
+				msg: participant.participant.name+' has been dropped.'
+			});
+		};
+
+		//set the function to run in the timeout
+		setTimeout(function(){
+			if (self.pendingDisconnects[participant.participant.id]) {
+				self.pendingDisconnects[participant.participant.id]();
+				delete self.pendingDisconnects[participant.participant.id];
+			}
+		},self.tournamentsOptions.dropTimeout);
+
+		//tell chat
+		self.socketServer.sockets.in(participant.participant.tournamentUrl).emit('chat:message', {
+			room: participant.participant.tournamentUrl,
+			user: 'System',
+			msg: participant.participant.name+' has disconnected and will be dropped in '+self.tournamentsOptions.dropTimeout/1000/60 +  ' minutes.'
+		});
 	});
 };
