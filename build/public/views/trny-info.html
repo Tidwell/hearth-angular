@@ -5,32 +5,18 @@
 		</span>
 		This is a {{tournament.tournament.signupCap}}-player {{tournament.tournament.tournamentType}} tournament.  If you lose a round, your are eliminated. <strong>This is a <span region="{{tournament.tournament.name}}"></span> region tournament.</strong>
 	</p>
-	<p class="clear-fix">
+	<section class="clear-fix">
 		<span class="iconcontainer">
-			<i class="fa fa-list-ol fa-4x"></i>
+			<i class="fa fa-gavel fa-4x"></i>
 		</span>
-		Each round is played best-of-three games (the first player to win 2 games wins the round).
-	</p>
+		<ng-include src="'views/rules-summary.html'"></ng-include>
+	</section>
 	<p class="clear-fix time-info">
 		<span class="iconcontainer">
 			<i class="fa fa-clock-o fa-4x"></i>
 		</span>
 		Depending on how far you advance, this tournament could take anywhere between 45 minutes and 2 hours.  Please ensure you have enough time to complete the tournament.
 	</p>
-	<section class="clear-fix">
-		<span class="iconcontainer">
-			<img src="/images/5a450cb9.pack.png">
-		</span>
-		<ul>
-			<li><strong>You should have decks for at least three classes</strong></li>
-			<li><strong>Players choose a deck at the beginning of the round</strong></li>
-			<li><strong>The winning player continues with the same deck</strong></li>
-			<li><strong>The losing player must switch class</strong></li>
-		</ul>
-	</section>
-	<section>
-		<strong>If you close the HSTRNY site and do not reconnect within 4 minutes you will be dropped from the tournament.</strong>
-	</section>
 	<button class="btn btn-success" ng-click="confirmJoin(tournament)" ng-show="user.user.loggedIn && tournament.tournament.state === 'pending' && !at.activeTournament && tournament.tournament.participantsCount < tournament.tournament.signupCap">
 		Join the tournament
 	</button>

@@ -1,3 +1,6 @@
+<div ng-show="!at.activeTournament.tournament" class="loader">
+	<i class="fa fa-refresh fa-spin"></i> Loading Active Tournament
+</div>
 <div class="container main-content {{at.activeTournament.tournament.state}}" ng-show="at.activeTournament">
 	<div class="row-fluid round-info">
 		<div class="pull-left">
@@ -26,14 +29,15 @@
 						{{at.match.player2Name}}
 					</strong>
 				</p>
+				<ng-include src="'views/rules-summary.html'"></ng-include>
+
 				<p>
-					Add your opponent's BattleTag to your friends list then play a best of 3 match.  Report the results after!
+					Add your opponent's BattleTag to your friends list then play a best of 3 match, then select the winner below.  Contact an admin in general chat if you have any issues.
 				</p>
 				<h3>Results</h3>
 				<form class="form-horizontal">
-					<label>Winner</label>
 					<select ng-model="at.winnerReport" ng-change="sendResult()">
-						<option value="">-still playing-</option>
+						<option value="">SELECT WINNER</option>
 						<option value="{{at.match.match.player1Id}}">{{at.match.player1Name}}</option>
 						<option value="{{at.match.match.player2Id}}">{{at.match.player2Name}}</option>
 					</select>
@@ -59,6 +63,7 @@
 						<a href="/profile/{{encode(user.participant.name)}}">{{user.participant.name}}</a>
 					</li>
 				</ul>
+				<ng-include src="'views/rules-summary.html'"></ng-include>
 			</div>
 		</div>
 		<div class="span6">

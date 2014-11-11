@@ -313,9 +313,6 @@ overflow: scroll; z-index: 5;
 	display: block;
 	float: left;
 }
-.modal .join-trny .iconcontainer {
-	text-align: center;
-}
 
 .join-trny button {
 	width: 200px;
@@ -326,12 +323,16 @@ overflow: scroll; z-index: 5;
 }
 
 .join-trny ul {
-	margin: 0 0 10px 1.2em;
+	margin: 0 0 10px 0em;
 	float: left;
 	max-width: 80%;
 }
+.join-trny ul li {
+	list-style-type: none;
+}
 
 .modal-body.join-trny i {
+	text-shadow: 0px 2px 3px #555;
 	color: rgb(30,87,153);
 }
 
@@ -364,6 +365,9 @@ overflow: scroll; z-index: 5;
 }
 .active-match strong {
 	font-size: 1.2em;
+}
+.active-match ul li strong {
+	font-size: 1em;
 }
 .active-match .vs {
 	line-height: 2em;
@@ -436,14 +440,20 @@ footer img[alt=Challonge] {
 }
 
 .contact h2, .contact p,
-.faq h2, .faq p, .faq strong {
-	color: white;
+.faq, .changelog {
+	padding: 20px;
+	background: white;
+	color: black;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
-
 .faq strong {
 	font-size: 1.5em;
 	margin-bottom: 10px;
 	display: block;
+}
+.faq ul li strong {
+	font-size: 1em;
 }
 
 .breadcrumb {

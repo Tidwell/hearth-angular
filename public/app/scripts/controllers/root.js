@@ -9,7 +9,7 @@
  */
 angular.module('hearthApp')
 	.controller('RootCtrl', function($scope, socket) {
-		$scope.connectionStatus = 'disconnected';
+		$scope.connectionStatus = 'connected';
 		socket.on('reconnecting', function() {
 			$scope.connectionStatus = 'reconnecting';
 		});

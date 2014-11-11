@@ -25,6 +25,8 @@ angular.module('hearthApp')
 		function logout() {
 			user.user.error = null;
 			user.user = angular.copy(defaultUser);
+			$cookies.hstbattleTag = '';
+			$cookies.hstpw = '';
 			socket.emit('user:logout');
 			$('.hero-unit').removeClass('loggedIn');
 		}
