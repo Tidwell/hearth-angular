@@ -24,7 +24,7 @@
 			started: {{tournament.tournament.startedAt | date:'h:mm a'}}
 		</span>
 	</div>
-	<button ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn && !at.activeTournament" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
-		<i class="fa fa-plus"></i> Join
+	<button ng-show="tournament.tournament.state == 'pending' && user.user.loggedIn && !at.activeTournament && tournament.tournament.participantsCount < tournament.tournament.signupCap" class="pull-right btn btn-small btn-success join-btn" ng-click="join(tournament)">
+			<i class="fa fa-plus"></i> Join
 	</button>
 </div>

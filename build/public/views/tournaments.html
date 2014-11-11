@@ -1,4 +1,7 @@
-<div class="container main-content">
+<div ng-show="!tournaments.tournaments.length" class="loader">
+	<i class="fa fa-refresh fa-spin"></i> Loading Tournaments
+</div>
+<div class="container main-content" ng-show="tournaments.tournaments.length">
 	<div class="row-fluid">
 		<div class="span7">
 			<ul class="tournament-list">

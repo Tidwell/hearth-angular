@@ -1,16 +1,17 @@
 'use strict';
 angular.module('hearthApp')
-	.service('user', function User(socket) {
+	.service('user', function User(socket, $cookies) {
+		var defaultUser = {
+			userList: {},
+			userName: '',
+			password: '',
+			loggedIn: false,
+			error: null,
+			registererror: '',
+			registered: false
+		};
 		var user = {
-			user: {
-				userList: {},
-				userName: '',
-				password: '',
-				loggedIn: false,
-				error: null,
-				registererror: '',
-				registered: false
-			}
+			user: angular.copy(defaultUser)
 		};
 
 		function login() {
@@ -19,6 +20,13 @@ angular.module('hearthApp')
 				battleTag: user.user.userName,
 				password: user.user.password
 			});
+		}
+
+		function logout() {
+			user.user.error = null;
+			user.user = angular.copy(defaultUser);
+			socket.emit('user:logout');
+			$('.hero-unit').removeClass('loggedIn');
 		}
 
 		function register() {
@@ -48,6 +56,8 @@ angular.module('hearthApp')
 		socket.on('user:loggedIn', function(data){
 			user.user.loggedIn = true;
 			user.user.registered = data.registered;
+			$cookies.hstbattleTag = user.user.userName;
+			$cookies.hstpw = user.user.password;
 			$('.hero-unit').addClass('loggedIn');
 		});
 
@@ -64,11 +74,22 @@ angular.module('hearthApp')
 
 		socket.emit('user:list');
 
+		socket.on('reconnect', function(){
+			login();
+		});
+
+		if ($cookies.hstbattleTag) {
+			user.user.userName = $cookies.hstbattleTag;
+			user.user.password = $cookies.hstpw || '';
+			login();
+		}
+
 		return {
 			get: function() {
 				return user;
 			},
 			login: login,
+			logout: logout,
 			register: register,
 			countUsers: countUsers
 		};

@@ -7,6 +7,11 @@ angular.module('hearthApp')
 		$scope.at = activeTournament.get();
 
 		$scope.login = user.login;
+		$scope.logout = function() {
+			user.logout();
+			$location.url('/');
+			$scope.at = activeTournament.reset();
+		}
 		$scope.countUsers = user.countUsers;
 
 		$scope.navClass = function(page) {

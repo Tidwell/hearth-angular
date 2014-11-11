@@ -19,7 +19,6 @@ var LoggedInUsers = exports.LoggedInUsers = function(options, events, models) {
 
 	self.allUsers = {};
 	//get a reference to the socket server
-	self.socketServer;
 	events.on('socket:ready', function(sServer){
 		self.socketServer = sServer;
 	});
@@ -33,6 +32,10 @@ var LoggedInUsers = exports.LoggedInUsers = function(options, events, models) {
 		});
 		socket.on('user:login', function(data){
 			self.login(socket, data);
+		});
+
+		socket.on('user:logout', function(data){
+			self.disconnect(socket);
 		});
 
 		socket.on('user:register', function(data){
@@ -123,7 +126,7 @@ LoggedInUsers.prototype.disconnect = function(socket) {
 			delete self.allUsers[name];
 			self.socketServer.sockets.emit('user:logout', name);
 		} else {
-			console.log('failed to disconnect user on disconnect', name, err)
+			//fail silently
 		}
 	});
 };
@@ -161,10 +164,9 @@ LoggedInUsers.prototype.validBattleTag = function(tag) {
 	//	Accented characters are allowed.
 	//	yea this is broken
 	
-	if (!(/^[a-zA-Z0-9#]*$/).test(battleTagPrefix)) {
-		console.log('no special')
-		return false;
-	}
+	// if (!(/^[a-zA-Z0-9#]*$/).test(battleTagPrefix)) {
+	// 	return false;
+	// }
 
 	return true;
 }

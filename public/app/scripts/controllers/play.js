@@ -24,13 +24,6 @@ angular.module('hearthApp')
 		};
 		$scope.sendResult = activeTournament.sendResult;
 
-		function view() {
-			if(!$scope.at.activeTournament || !$scope.at.activeTournament.tournament) { return; }
-			$('.active-iframe').challonge($scope.at.activeTournament.tournament.url, {subdomain: 'hs_tourney', theme: '2', multiplier: '1.0', match_width_multiplier: '1.0', show_final_results: '0', show_standings: '0'});
-		}
-
-		$scope.$watch('at.activeTournament.tournament', view);
-
 		$scope.$watch('at.participant', function() {
 			if (!$scope.at.participant) {
 				$location.path('/tournaments');

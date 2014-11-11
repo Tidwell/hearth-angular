@@ -33,6 +33,30 @@ body {
 	padding-right: 0
 }
 
+.loader {
+	text-align: center;
+	font-size: 4em;
+	margin: 0 auto;
+	color: white;
+}
+
+i.fa-signal.connected {
+	color: green;
+}
+i.fa-signal.disconnected {
+	color: red;
+}
+i.fa-signal.reconnecting {
+	color: yellow;
+	animation: blink 1s steps(5, start) infinite;
+	-webkit-animation: blink 1s steps(5, start) infinite;
+}
+@keyframes blink {
+	to { visibility: hidden; }
+}
+@-webkit-keyframes blink {
+	to { visibility: hidden; }
+}
 
 /*HERO*/
 .hero-unit {

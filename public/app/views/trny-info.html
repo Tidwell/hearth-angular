@@ -31,7 +31,7 @@
 	<section>
 		<strong>If you close the HSTRNY site and do not reconnect within 4 minutes you will be dropped from the tournament.</strong>
 	</section>
-	<button class="btn btn-success" ng-click="confirmJoin(tournament)" ng-show="user.user.loggedIn && tournament.tournament.state === 'pending' && !at.activeTournament">
+	<button class="btn btn-success" ng-click="confirmJoin(tournament)" ng-show="user.user.loggedIn && tournament.tournament.state === 'pending' && !at.activeTournament && tournament.tournament.participantsCount < tournament.tournament.signupCap">
 		Join the tournament
 	</button>
 	<button class="btn btn-danger" disabled ng-show="!user.user.loggedIn && tournament.tournament.state === 'pending' && !at.activeTournament">

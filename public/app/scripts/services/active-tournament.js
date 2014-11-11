@@ -2,7 +2,7 @@
 
 angular.module('hearthApp')
 	.service('activeTournament', function ActiveTournament(socket) {
-		var at = {
+		var atTemplate = {
 			activeTournament: null,
 			winnerReport: '',
 			match: null,
@@ -15,6 +15,8 @@ angular.module('hearthApp')
 			win: false
 
 		};
+
+		var at = angular.copy(atTemplate);
 
 		function updateMatch() {
 			at.activeTournament.tournament.participants.forEach(function(p) {
@@ -112,6 +114,10 @@ angular.module('hearthApp')
 
 		return {
 			get: function() { return at; },
+			reset: function() {
+				at = angular.copy(atTemplate);
+				return at;
+			},
 			join: join,
 			drop: drop,
 			sendResult: sendResult

@@ -29,7 +29,7 @@
 
 	<meta name="google-site-verification" content="HV35lLceTAEGeEmelQQfVKRmxd7qsOygowZYqpAO-3I" />
 </head>
-<body ng-app="hearthApp" ng-cloak>
+<body ng-app="hearthApp" ng-cloak ng-controller="RootCtrl">
 	<!--[if lt IE 7]>
 	<p class="browsehappy">
 		You are using an <strong>outdated</strong>
@@ -77,11 +77,17 @@
 								</li>
 							</ul>
 							<ul class="nav pull-right" >
+								<li>
+									<a><i class="fa fa-signal" ng-class="connectionStatus"></i></a>
+								</li>
 								<li ng-show="!user.user.loggedIn">
 									<a href ng-click="showlogin()">Login</a>
 								</li>
 								<li ng-show="user.user.loggedIn && !user.user.registered">
 									<a href ng-click="showRegister()">Register your BattleTag!</a>
+								</li>
+								<li ng-show="user.user.loggedIn">
+									<a href ng-click="logout()">Logout</a>
 								</li>
 							</ul>
 						</div>
@@ -225,11 +231,13 @@
 	<script src="scripts/controllers/profile.js"></script>
 	<script src="scripts/controllers/leaderboard.js"></script>
 	<script src="scripts/controllers/leaderboards.js"></script>
-<script src="scripts/controllers/flash-msg.js"></script>
-<script src="scripts/services/flash-msg.js"></script>
-<script src="scripts/controllers/changelog.js"></script>
-<script src="scripts/controllers/positions.js"></script>
-<script src="scripts/services/admins.js"></script>
+	<script src="scripts/controllers/flash-msg.js"></script>
+	<script src="scripts/services/flash-msg.js"></script>
+	<script src="scripts/controllers/changelog.js"></script>
+	<script src="scripts/controllers/positions.js"></script>
+	<script src="scripts/services/admins.js"></script>
+	<script src="scripts/directives/challonge.js"></script>
+<script src="scripts/controllers/root.js"></script>
 	<!-- endbuild -->
 
 	<div class="vendor">
