@@ -6,12 +6,19 @@
 	</p>
 
 	<strong>How does this all work?</strong>
-	<p>
-		To join a tournament, enter your BattleTag and click the +Join button for the tournament labeled "pending" in your region.  Once 8 players join, the tournament will begin and your current match will be displayed, along with the bracket for the current tournament.
-	</p>
-	<p>
-		Players add their opponent's BattleTag to their friends list, and after playing a best-of-three match, both players enter the results.  As each match ends, the app will update both the bracket and your current match in real time.  Continue until you are eliminated, or crowned the champion!
-	</p>
+	<ul>
+		<li><strong>To join a tournament, enter your BattleTag and click the +Join button for the tournament labeled "pending" in your region.</strong></li>
+		<li><strong>Once 8 players join, the tournament will begin and your current match will be displayed, along with the bracket for the current tournament.</strong></li>
+	
+		<li><strong>Players add their opponent's BattleTag to their friends list, and play a best-of-three match</strong></li>
+		<li><strong>Afterwards, both players enter the results on the HSTRNY site</strong></li>
+		<li><strong>As each match ends, the app will update both the bracket and your current match in real time.  Continue until you are eliminated, or crowned the champion!</strong></li>
+	</ul>
+
+	<hr>
+
+	<strong>What are the rules for the matches?</strong>
+	<ng-include src="'views/rules-summary.html'"></ng-include>
 
 	<hr>
 
@@ -24,8 +31,13 @@
 
 	<strong>How do drops/disconnects work</strong>
 	<p>
-		The system automatically handles players who disconnect from the HSTRNY site, and will drop anyone who doesn't reconnect in 4 minutes.  If you close the tab, you will be dropped.
+		The system automatically handles players who disconnect from the HSTRNY site before a tournament starts, and will drop them if they do not reconnect within 4 minutes.  Once a tournament has started, report an AFK player in general chat.  In tournament chat, disconnected players will show in red in the user dropdown.
 	</p>
+
+	<hr>
+
+	<strong>How do Leaderboard points work?</strong>
+	<p>Players are given 6 pts for a 1st place finish, 4 pts for a 2nd place finish, 3 pts for 3rd or fourth and 1pt for all other results.</p>
 
 	<hr>
 
