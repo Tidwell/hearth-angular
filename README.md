@@ -33,7 +33,7 @@ module.exports = {
     log: false
   },
   tournaments: {
-    key: 'S6e1RskMPjjQyEYFXmGu1IZ178hISWxtlVNC3yQn',
+    key: 'YOUR CHALLONGE API KEY HERE',
     subdomain: 'HSTRNY',
     regions: ['NA', 'EU'],
     regionPrefix: '[',
