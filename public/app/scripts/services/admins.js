@@ -18,7 +18,8 @@ angular.module('hearthApp')
 			'mightypants7#1310',
 			'Zeus#2680',
 			'Violentce#1391',
-			'Legimos#1246'
+			'Legimos#1246',
+			'ShadowGrif#2798'
 		];
 
 		return {
