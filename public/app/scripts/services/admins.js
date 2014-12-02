@@ -21,7 +21,8 @@ angular.module('hearthApp')
 			'Legimos#1246',
 			'ShadowGrif#2798',
 			'QuantaCondor#1142',
-			'RhumMonkey#1347'
+			'RhumMonkey#1347',
+			'Ludgan#1956'
 		];
 
 		return {
