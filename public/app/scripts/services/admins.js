@@ -19,7 +19,9 @@ angular.module('hearthApp')
 			'Zeus#2680',
 			'Violentce#1391',
 			'Legimos#1246',
-			'ShadowGrif#2798'
+			'ShadowGrif#2798',
+			'QuantaCondor#1142',
+			'RhumMonkey#1347'
 		];
 
 		return {
