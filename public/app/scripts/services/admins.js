@@ -23,6 +23,7 @@ angular.module('hearthApp')
 			'QuantaCondor#1142',
 			'RhumMonkey#1347',
 			'Rhummonkey#1347',
+			'rhummonkey#1347',
 			'Ludgan#1956'
 		];
 
