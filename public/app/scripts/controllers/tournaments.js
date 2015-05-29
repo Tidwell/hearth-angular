@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('hearthApp')
-	.controller('TournamentsCtrl', function($scope, socket, tournaments, user, chat, admins) {
+	.controller('TournamentsCtrl', function($scope, socket, tournaments, user, chat, admins, TwitchStreams) {
 		$scope.tournaments = tournaments.get();
 		$scope.chat = chat.get();
 		$scope.user = user.get();
+
+		$scope.twitch = TwitchStreams.get();
 
 		$scope.sendChat = chat.sendChat;
 		$scope.encode = chat.encode;

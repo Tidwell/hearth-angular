@@ -1,6 +1,27 @@
 <div ng-show="!tournaments.tournaments.length" class="loader">
 	<i class="fa fa-refresh fa-spin"></i> Loading Tournaments
 </div>
+<div class="container promo" ng-show="twitch.active">
+	<div class="row-fluid">
+		<div class="twitch-promo span12">
+			
+			<a href="{{twitch.url}}" target="_new"><img src="{{twitch.logo}}" /></a>
+			<strong>
+				<a href="{{twitch.url}}" target="_new">
+					<i class="fa fa-twitch"></i> Active Stream
+				</a>
+			</strong>
+			<p>
+				<a href="{{twitch.url}}" target="_new">{{twitch.displayName}} - {{twitch.status}}</a>
+			</p>
+			<a href="{{twitch.url}}" target="_new">
+				<div class="live-logo">
+					<span></span> LIVE
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
 <div class="container main-content" ng-show="tournaments.tournaments.length">
 	<div class="row-fluid">
 		<div class="span7">

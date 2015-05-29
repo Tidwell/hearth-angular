@@ -248,7 +248,7 @@ overflow: scroll; z-index: 5;
 .tournament-list {
 	margin: 0;
 }
-.tournament-list li {
+.tournament-list li, .twitch-promo {
 	background: rgb(76,76,76); /* Old browsers */
 	background: rgb(38,38,38); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(38,38,38,1) 0%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%); /* FF3.6+ */
@@ -472,6 +472,59 @@ footer img[alt=Challonge] {
 	list-style-type: none;
 }
 
+
+.twitch-promo {
+	position: relative;
+	font-size: 20px;
+	overflow: hidden;
+	height: auto;
+	background: #1d1d1d;
+	color: #fff;
+	max-height: 100px;
+	background-image: url('/images/xeno.png');
+	background-position: right top;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.twitch-promo img {
+	max-height: 100px;
+	position: relative;
+	top: -10px;
+	left: -10px;
+	float: left;
+	border-right: 4px solid rgba(30,87,153,1);
+}
+.twitch-promo a {
+	color: #fff;
+}
+
+.twitch-promo .live-logo {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #131313;
+	line-height: 25px;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 5px;
+}
+.twitch-promo .live-logo span {
+	display: inline-block;
+	background-color: rgb(228,0,0);
+	border-radius: 50px;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 3px;
+}
+.twitch-promo strong {
+	margin-bottom: .5em;
+	display: block;
+}
+.twitch-promo p {
+	padding-left: 128px;
+}
+
 @media (max-width: 979px) {
 	body {
 		padding: 0;
@@ -537,7 +590,7 @@ footer img[alt=Challonge] {
 	.sep ul li {
 		padding: 0 10px;
 	}
-	.main-content {
+	.main-content, .promo {
 		padding: 10px;
 	}
 
@@ -586,9 +639,26 @@ footer img[alt=Challonge] {
 	.well {
 		padding: 19px;
 	}
+	.twitch-promo {
+		height: auto;
+	}
+	.twitch-promo strong {
+		max-width: 80%;
+	}
 }
-@media (max-width: 480px) {
-	
+@media (max-width: 500px) {
+	.twitch-promo {
+		max-height: 200px;
+		background-image: none;
+	}
+	.twitch-promo img {
+		border-bottom: 4px solid rgba(30,87,153,1);
+		border-radius-right: 5px;
+		border-radius-bottom: 5px;
+	}
+	.twitch-promo p {
+		padding-left: 0;
+	}
 }
 /*http://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone*/
 @media (max-width: 480px) and (-webkit-min-device-pixel-ratio:0) { 
