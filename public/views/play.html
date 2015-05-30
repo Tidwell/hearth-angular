@@ -35,14 +35,19 @@
 					Add your opponent's BattleTag to your friends list then play a best of 3 match, then select the winner below.  Contact an admin in general chat if you have any issues.
 				</p>
 				<h3>Results</h3>
-				<form class="form-horizontal">
-					<select ng-model="at.winnerReport" ng-change="sendResult()">
+				<form class="form-horizontal" ng-show="needsSubmit || at.matchError">
+					<select ng-model="at.winnerReport">
 						<option value="">SELECT WINNER</option>
 						<option value="{{at.match.match.player1Id}}">{{at.match.player1Name}}</option>
 						<option value="{{at.match.match.player2Id}}">{{at.match.player2Name}}</option>
 					</select>
+					<button class="btn btn-primary" ng-click="sendResult()" ng-disabled="!at.winnerReport">Submit Result</button>
 				</form>
+				<div ng-show="!needsSubmit && !at.matchError">
+					You have submitted {{getReportedWinner()}} won the match.  Waiting for your opponent to submit the result.  If your opponent does not submit, please notify an admin in general chat.
+				</div>
 				<div ng-show="at.matchError">
+					<strong style="color: red">REPORTING CONFLICT</strong>
 					<p>
 						<strong>{{at.idNameMap[at.matchError.report[0].user]}}</strong> reports <strong>{{at.idNameMap[at.matchError.report[0].winner]}}</strong> won.
 					</p>
