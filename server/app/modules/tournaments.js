@@ -312,8 +312,9 @@ Tournaments.prototype.joinTournament = function(id, name, socket){
 				name: name
 			},
 			callback: function(err,data){
-				if (err || !data) { console.log(err); return; }
+				if (err || !data) { console.log('error', err); return; }
 				if (!data.participant) { console.log('no participant returned from challonge create call'); return; }
+				console.log('participant created', data)
 				data.participant.tournamentUrl = id;
 				socket.set('participant', data);
 				socket.emit('tournaments:joined', data);
@@ -431,6 +432,7 @@ Tournaments.prototype.report = function(obj, socket) {
 											user: 'System',
 											msg: 'All hail '+participant.participant.name+' - winner of '+self.fullTournaments[obj.tournamentId].tournament.name
 										});
+										socket.set('participant', null);
 										return;
 									}
 									socket.emit('tournaments:win');

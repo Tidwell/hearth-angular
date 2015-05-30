@@ -9,8 +9,18 @@ angular.module('hearthApp')
 		$scope.sendChat = chat.sendChat;
 		$scope.encode = chat.encode;
 		$scope.countUsers = user.countUsers;
+		$scope.needsSubmit = true;
 
 		$scope.showUsers = false;
+
+		$scope.getReportedWinner = function() {
+			if (!$scope.at.winnerReport) { return; }
+			if (Number($scope.at.winnerReport) === Number($scope.at.match.match.player1Id)) {
+				return $scope.at.match.player1Name;
+			} else {
+				return $scope.at.match.player2Name;
+			}
+		}
 
 		$scope.drop = function() {
 			var d = $dialog.dialog({
@@ -22,7 +32,10 @@ angular.module('hearthApp')
 			});
 			d.open().then(function(result) {});
 		};
-		$scope.sendResult = activeTournament.sendResult;
+		$scope.sendResult = function() {
+			activeTournament.sendResult();
+			$scope.needsSubmit = false;
+		};
 
 		$scope.$watch('at.participant', function() {
 			if (!$scope.at.participant) {
@@ -84,6 +97,10 @@ angular.module('hearthApp')
 			});
 			d.open().then(function(result) {});
 			$scope.at.won = false;
+			$scope.needsSubmit = true;
+			$scope.at.winnerReport = '';
+			$scope.at.matchError = false;
+
 		});
 
 		$scope.$watch('at.win', function() {
@@ -100,6 +117,9 @@ angular.module('hearthApp')
 			});
 			d.open().then(function(result) {});
 			$scope.at.win = false;
+			$scope.needsSubmit = true;
+			$scope.at.winnerReport = '';
+			$scope.at.matchError = false;
 		});
 		function scrollChat() {
 			//TODO make directive

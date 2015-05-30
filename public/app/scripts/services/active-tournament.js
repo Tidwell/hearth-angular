@@ -22,6 +22,7 @@ angular.module('hearthApp')
 			at.activeTournament.tournament.participants.forEach(function(p) {
 				at.idNameMap[p.participant.id] = p.participant.name;
 			});
+			if (!at || !at.participant || !at.participant.participant) { at.match = null; return; }
 			var pid = at.participant.participant.id;
 			var activeMatch = false;
 			at.activeTournament.tournament.matches.forEach(function(match){
